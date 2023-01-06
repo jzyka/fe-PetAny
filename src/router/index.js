@@ -5,6 +5,7 @@ import VueRouter from "vue-router";
 // import HelloWorldLayout from "../components/HelloWorld.vue";
 import FormLayout from "../components/formLayout.vue";
 import LoginView from "../views/LoginView.vue";
+import RegisterView from "../views/RegisterView.vue";
 
 Vue.use(VueRouter);
 
@@ -28,14 +29,19 @@ const routes = [
   // },
 
   {
-    path: "/login",
+    path: "/",
     name: "",
     component: FormLayout,
     children: [
       {
-        path: "/login-login",
-        name: "home",
+        path: "/login",
+        name: "login",
         component: LoginView,
+      },
+      {
+        path: "/register",
+        name: "register",
+        component: RegisterView,
       },
     ],
   },

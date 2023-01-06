@@ -1,13 +1,12 @@
 <template>
   <div class="form--logreg">
-    <p class="title-form">Masuk</p>
+    <p class="title-form">Daftar</p>
     <div class="form--logreg__group">
       <p>Email</p>
       <v-text-field
         label="Email"
         single-line
         outlined
-        v-model="email"
         :rules="emailRules"
       ></v-text-field>
     </div>
@@ -18,10 +17,12 @@
         single-line
         outlined
         :append-icon="show4 ? 'mdi-eye' : 'mdi-eye-off'"
-        :rules="[rules.required, rules.emailMatch]"
+        :rules="[rules.required]"
         :type="show4 ? 'text' : 'password'"
         name="input-10-2"
+        hint=""
         value=""
+        error
         @click:append="show4 = !show4"
       ></v-text-field>
     </div>
@@ -31,25 +32,21 @@
 
 <script>
 export default {
-  name: "LoginView",
+  name: "RegisterView",
   data: () => ({
     showPassword: false,
-    password: null,
+    // password: null,
     // title: "Preliminary report",
     show4: false,
     // password: "Password",
     email: "",
-    emailRules: [
-      (v) => !!v || "E-mail is required",
-      (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
-    ],
     rules: {
       required: (value) => !!value || "Required.",
-      email: (value) => {
-        const pattern =
-          /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return pattern.test(value) || "Invalid e-mail.";
-      },
+      emailRules: [
+        (v) => !!v || "E-mail is required",
+        (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
+      ],
+      //   emailMatch: () => `The email and password you entered don't match`,
     },
   }),
 };
@@ -100,16 +97,6 @@ export default {
       border-width: 2px;
       border-color: $primary-color !important;
       border-radius: 10px;
-    }
-  }
-  &__details {
-    padding: 0 !important;
-  }
-
-  .mdi-eye-off,
-  .mdi-eye {
-    &::before {
-      color: $black;
     }
   }
 }
