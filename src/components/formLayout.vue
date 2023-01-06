@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <div class="background">
+    <div class="logreg">
       <v-container>
         <v-row>
           <v-col cols="7" class="d-flex align-center login-image">
@@ -22,12 +22,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.background {
+.logreg {
   background-color: $secondary-color;
-  height: 100vh;
+  min-height: 100vh;
+  position: relative;
+  display: flex;
 
-  .login-image {
-    height: 100vh;
+  .container {
+    margin: auto;
   }
 }
 </style>

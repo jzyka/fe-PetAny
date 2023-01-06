@@ -2,12 +2,26 @@
   <div class="form--logreg">
     <p class="title-form">Daftar</p>
     <div class="form--logreg__group">
+      <p>Nama</p>
+      <v-text-field label="Nama" single-line outlined></v-text-field>
+    </div>
+    <div class="form--logreg__group">
       <p>Email</p>
       <v-text-field
         label="Email"
         single-line
         outlined
+        v-model="email"
         :rules="emailRules"
+      ></v-text-field>
+    </div>
+    <div class="form--logreg__group">
+      <p>Nomor HP</p>
+      <v-text-field
+        label="Nomor HP"
+        single-line
+        outlined
+        :rules="numberRules"
       ></v-text-field>
     </div>
     <div class="form--logreg__group">
@@ -17,12 +31,27 @@
         single-line
         outlined
         :append-icon="show4 ? 'mdi-eye' : 'mdi-eye-off'"
-        :rules="[rules.required]"
+        :rules="[rules.required, rules.min]"
         :type="show4 ? 'text' : 'password'"
-        name="input-10-2"
-        hint=""
+        name="MakePass"
+        v-model="password"
         value=""
-        error
+        @click:append="show4 = !show4"
+      ></v-text-field>
+    </div>
+    <div class="form--logreg__group">
+      <p>Password</p>
+      <v-text-field
+        label="Password"
+        single-line
+        outlined
+        :append-icon="show4 ? 'mdi-eye' : 'mdi-eye-off'"
+        :type="show4 ? 'text' : 'password'"
+        name="confirmPass"
+        value=""
+        v-model="confirmPassword"
+        :rules="[required, matchingPasswords]"
+        required
         @click:append="show4 = !show4"
       ></v-text-field>
     </div>
@@ -35,69 +64,39 @@ export default {
   name: "RegisterView",
   data: () => ({
     showPassword: false,
-    // password: null,
-    // title: "Preliminary report",
     show4: false,
-    // password: "Password",
     email: "",
+    confirmPassword: "",
+    numberRules: [
+      (v) => !!v || "Please fill out this field!",
+      (v) => Number.isInteger(Number(v)) || "Please enter numbers only!",
+    ],
+    emailRules: [
+      (v) => !!v || "E-mail is required",
+      (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
+    ],
     rules: {
       required: (value) => !!value || "Required.",
-      emailRules: [
-        (v) => !!v || "E-mail is required",
-        (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
-      ],
+      min: (v) => v.length >= 8 || "Min 8 characters",
       //   emailMatch: () => `The email and password you entered don't match`,
     },
   }),
+  methods: {
+    matchingPasswords: function () {
+      if (this.password === this.confirmPassword) {
+        return true;
+      } else {
+        return "Password tidak cocok";
+      }
+    },
+  },
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .form {
   &--logreg {
-    background-color: $white;
-    border-radius: 30px;
-    padding: 3rem;
-    width: 100%;
-
-    .title-form {
-      font-size: 1.5rem;
-      font-weight: 600;
-      margin-bottom: 30px;
-    }
-
-    &__group {
-      p {
-        margin-bottom: 5px;
-        font-size: 14px;
-        color: $primary-color;
-      }
-    }
-
-    .login-btn {
-      height: auto !important;
-      padding: 15px !important;
-      background-color: $primary-color !important;
-      border-radius: 10px !important;
-      margin-top: 20px;
-
-      span {
-        color: $white;
-        font-weight: $font-weight-reg;
-        font-size: 18px;
-        letter-spacing: 0;
-      }
-    }
-  }
-}
-
-.v-text-field {
-  &--outlined {
-    fieldset {
-      border-width: 2px;
-      border-color: $primary-color !important;
-      border-radius: 10px;
-    }
+    margin: 40px 0;
   }
 }
 </style>

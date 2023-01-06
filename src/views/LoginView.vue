@@ -35,9 +35,7 @@ export default {
   data: () => ({
     showPassword: false,
     password: null,
-    // title: "Preliminary report",
     show4: false,
-    // password: "Password",
     email: "",
     emailRules: [
       (v) => !!v || "E-mail is required",
