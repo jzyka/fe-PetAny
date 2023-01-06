@@ -1,0 +1,49 @@
+$test: red;
+// VARIABLES
+
+// Colors
+$primary-color: #112D4E !default;
+$secondary-color: #DBE2EF !default;
+$white: #FFF !default;
+$black: #252525 !default;
+$granite-gray: #656565 !default;
+$light-grey: #F4F4F4 !default;
+$dark-grey: #C4C4C4 !default;
+$link-color: #1EAEDB !default;
+$font-color: #111 !default;
+$black-coral: #605770 !default;
+$bright-gray: #ECEFF7 !default;
+$dark-purple: #2A1F3E !default;
+$fire-opal: #F0574F !default;
+$lilac: #E8E5F7 !default;
+$lilac-dark: #E1DFF4 !default;
+$lotion: #FDFDFD !default;
+$pale-lavender: #D8D5F0 !default;
+$mantis: #6BCE6B !default;
+$spartan-crimson: #9A1E16 !default;
+$tiffany-blue: #04C6AE !default;
+$pale-silver: #C9BEBD !default;
+$vivid-red-tangelo: #D8582D !default;
+$soap: #D6D3EE !default;
+$bright-gray: #EAEAEA !default;
+$cultured: #F8F8F8 !default;
+
+
+// Typography
+$font-family: 'Montserrat',
+sans-serif !default;
+$font-weight-bold: 700 !default;
+$font-weight-semibold: 600 !default;
+$font-weight-medium: 500 !default;
+$font-weight-reg: 400 !default;
+$font-weight-light: 300 !default;
+
+
+// Breakpoints
+$bp-xxs: 375px !default;
+$bp-xs: 575px !default;
+$bp-sm: 767px !default;
+$bp-md: 992px !default;
+$bp-lg: 1200px !default;
+$bp-xl: 1366px !default;
+$bp-xxl: 1440px !default;
