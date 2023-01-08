@@ -1,7 +1,17 @@
 <template>
   <v-app>
     <section class="register-clinic-form">
-      <p>kfhdh</p>
+      <v-container>
+        <v-row>
+          <div class="clinic-form-all">
+            <h1>Daftar sebagai klinik hewan</h1>
+
+            <div class="form--register-clinic">
+              <div class="form--register-clinic__half"></div>
+            </div>
+          </div>
+        </v-row>
+      </v-container>
     </section>
   </v-app>
 </template>

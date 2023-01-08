@@ -18,7 +18,7 @@ const routes = [
     component: DefaultV1,
     children: [
       {
-        path: "/home",
+        path: "/",
         name: "home",
         component: HomeView,
       },
