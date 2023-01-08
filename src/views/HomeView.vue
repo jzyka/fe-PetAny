@@ -1,34 +1,9 @@
 <template>
-  <div>
-    <h1 class="yellow">Testing</h1>
-    <h1 class="yellow">Testing</h1>
-    <h1 class="yellow">Testing</h1>
-    <h1 class="yellow">Testing</h1>
-    <h1 class="yellow">Testing</h1>
-    <h1 class="yellow">Testing</h1>
-    <h1 class="yellow">Testing</h1>
-    <h1 class="yellow">Testing</h1>
-    <h1 class="yellow">Testing</h1>
-    <h1 class="yellow">Testing</h1>
-    <h1 class="yellow">Testing</h1>
-    <h1 class="yellow">Testing</h1>
-    <h1 class="yellow">Testing</h1>
-    <h1 class="yellow">Testing</h1>
-    <h1 class="yellow">Testing</h1>
-  </div>
+  <h1>fkhbgfhbhb</h1>
 </template>
 
 <script>
-  // import HelloWorld from '../components/HelloWorld'
-
-  export default {
-    name: 'HomeView',
-
-  }
+export default {};
 </script>
 
-<style lang="scss" scoped>
-h1 {
-  color: $test;
-}
-</style>
+<style></style>
