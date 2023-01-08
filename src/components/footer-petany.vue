@@ -82,15 +82,18 @@ footer {
         flex-direction: column;
 
         .logo-footer {
-          width: 145px;
+          height: 45px;
+          object-fit: contain;
+          margin-right: auto;
           margin-bottom: 20px;
         }
 
         .content-title {
           margin-bottom: 20px;
-          font-size: 20px;
+          font-size: 18px;
           font-weight: $font-weight-semibold;
           color: $primary-color;
+          margin-top: 15px;
         }
 
         .links {
@@ -98,11 +101,23 @@ footer {
           color: $granite-gray;
           font-weight: $font-weight-medium;
           margin-bottom: 10px;
+          font-size: 14px;
+
+          &:last-child {
+            margin-bottom: 0;
+          }
         }
 
         .social-media {
           display: flex;
           gap: 10px;
+
+          a {
+            img {
+              width: 20px;
+              object-fit: contain;
+            }
+          }
         }
 
         .to-register {
@@ -113,11 +128,13 @@ footer {
           font-weight: $font-weight-medium;
           width: fit-content;
           border-radius: 10px;
+          font-size: 14px;
         }
 
         .more-info {
           color: $primary-color;
           margin-top: 5px;
+          font-size: 14px;
         }
       }
     }
@@ -129,7 +146,7 @@ footer {
     p {
       margin: auto;
       color: $white;
-      font-weight: $font-weight-medium;
+      font-size: 15px;
     }
   }
 }
