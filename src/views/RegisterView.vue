@@ -56,6 +56,12 @@
       ></v-text-field>
     </div>
     <v-btn block class="text-capitalize login-btn">Masuk</v-btn>
+    <div class="have-account">
+      <p>Sudah punya akun?</p>
+      <router-link to="/register" class="register-or-login">
+        Masuk
+      </router-link>
+    </div>
   </div>
 </template>
 

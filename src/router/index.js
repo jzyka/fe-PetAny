@@ -7,6 +7,7 @@ import FormLayout from "../components/formLayout.vue";
 import LoginView from "../views/LoginView.vue";
 import RegisterView from "../views/RegisterView.vue";
 import RegisterClinicView from "../views/RegisterClinicView.vue";
+import RegisterClinicProcessView from "../views/RegisterClinicProcessView.vue";
 import VerificationView from "../views/VerificationView.vue";
 
 Vue.use(VueRouter);
@@ -51,6 +52,11 @@ const routes = [
         path: "/register-clinic",
         name: "register-clinic",
         component: RegisterClinicView,
+      },
+      {
+        path: "/register-clinic-process",
+        name: "register-clinic-process",
+        component: RegisterClinicProcessView,
       },
     ],
   },
