@@ -26,6 +26,12 @@
       ></v-text-field>
     </div>
     <v-btn block class="text-capitalize login-btn">Masuk</v-btn>
+    <div class="have-account">
+      <p>Belum punya akun?</p>
+      <router-link to="/register" class="register-or-login">
+        Daftar
+      </router-link>
+    </div>
   </div>
 </template>
 
@@ -89,6 +95,21 @@ export default {
         letter-spacing: 0;
       }
     }
+  }
+}
+
+.have-account {
+  display: flex;
+  gap: 5px;
+  margin-top: 5px;
+
+  p {
+    font-size: 14px;
+  }
+
+  .register-or-login {
+    color: $steel-blue;
+    font-size: 14px;
   }
 }
 
