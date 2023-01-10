@@ -104,7 +104,7 @@ export default {
   margin-top: 5px;
 
   p {
-    font-size: 14px;
+    font-size: 14px !important;
   }
 
   .register-or-login {
