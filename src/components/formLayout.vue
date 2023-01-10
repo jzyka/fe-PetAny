@@ -1,12 +1,12 @@
 <template>
   <v-app>
-    <div class="background">
+    <div class="logreg">
       <v-container>
         <v-row>
-          <v-col cols="7">
+          <v-col cols="7" class="d-flex align-center login-image">
             <v-img src="@/assets/login-vector.png"></v-img>
           </v-col>
-          <v-col cols="5">
+          <v-col cols="5" class="d-flex align-center">
             <router-view />
           </v-col>
         </v-row>
@@ -22,8 +22,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.background {
+.logreg {
   background-color: $secondary-color;
-  height: 100vh;
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+
+  .container {
+    margin: auto;
+  }
 }
 </style>
