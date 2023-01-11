@@ -62,11 +62,12 @@ section {
     display: flex;
     flex-direction: column;
     height: 205px;
+    box-shadow: 0px 1px 10px 1px rgba(0, 0, 0, 0.1);
 
     &__image {
       width: 100%;
       height: 130px;
-      object-fit: fill;
+      object-fit: cover;
       border-radius: 10px 10px 0 0;
     }
 
