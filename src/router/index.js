@@ -9,6 +9,7 @@ import RegisterView from "../views/RegisterView.vue";
 import RegisterClinicView from "../views/RegisterClinicView.vue";
 import RegisterClinicProcessView from "../views/RegisterClinicProcessView.vue";
 import VerificationView from "../views/VerificationView.vue";
+import PetListEmptyView from "../views/PetListEmptyView.vue";
 
 Vue.use(VueRouter);
 
@@ -22,6 +23,11 @@ const routes = [
         path: "/",
         name: "home",
         component: HomeView,
+      },
+      {
+        path: "/pet-list-empty",
+        name: "pet-list-empty",
+        component: PetListEmptyView,
       },
     ],
   },
