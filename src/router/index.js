@@ -13,6 +13,7 @@ import VerificationView from "../views/VerificationView.vue";
 import PetListEmptyView from "../views/PetListEmptyView.vue";
 import CustPetListView from "../views/CustPetListView.vue";
 import RegStatusSuccessView from "../views/RegStatusSuccessView.vue";
+import RegStatusRejectedView from "../views/RegStatusRejectedView.vue";
 
 Vue.use(VueRouter);
 
@@ -80,9 +81,14 @@ const routes = [
     component: ProfileLayout,
     children: [
       {
-        path: "/registration-status",
-        name: "registration-status",
+        path: "/registration-status-success",
+        name: "registration-status-success",
         component: RegStatusSuccessView,
+      },
+      {
+        path: "/registration-status-rejected",
+        name: "registration-status-rejected",
+        component: RegStatusRejectedView,
       },
     ],
   },
