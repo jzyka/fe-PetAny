@@ -7,10 +7,10 @@
             <h1>Pendaftaran klinik anda sedang di proses</h1>
             <img src="@/assets/clinic-process.png" alt="" />
             <div class="buttons">
-              <router-link to="/" class="btn to-home">
+              <router-link to="/" class="btn white">
                 Kembali ke Beranda
               </router-link>
-              <router-link to="/register" class="btn to-register-detail">
+              <router-link to="/register" class="btn blue-deep">
                 Cek Pendaftaran
               </router-link>
             </div>
@@ -71,12 +71,12 @@ section {
           font-weight: $font-weight-medium;
         }
 
-        .to-home {
+        .white {
           background-color: $white;
           color: $primary-color;
         }
 
-        .to-register-detail {
+        .blue-deep {
           background-color: $primary-color;
           color: $white;
         }

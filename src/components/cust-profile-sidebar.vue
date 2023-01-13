@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <nav class="cust-profile-sidebar">
-      <h1>jdj</h1>
+      <h1>jd</h1>
     </nav>
   </v-app>
 </template>
