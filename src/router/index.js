@@ -8,6 +8,7 @@ import LoginView from "../views/LoginView.vue";
 import RegisterView from "../views/RegisterView.vue";
 import RegisterClinicView from "../views/RegisterClinicView.vue";
 import VerificationView from "../views/VerificationView.vue";
+import PetListView from "../views/PetListView.vue";
 
 Vue.use(VueRouter);
 
@@ -58,6 +59,18 @@ const routes = [
     path: "/verification",
     name: "verification",
     component: VerificationView,
+  },
+  {
+    path: "/",
+    name: "",
+    component: DefaultV1,
+    children: [
+      {
+        path: "/petlist",
+        name: "petlist",
+        component: PetListView,
+      },
+    ],
   },
 ];
 
