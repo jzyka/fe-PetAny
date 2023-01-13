@@ -13,6 +13,7 @@ import VerificationView from "../views/VerificationView.vue";
 import PetListEmptyView from "../views/PetListEmptyView.vue";
 import CustPetListView from "../views/CustPetListView.vue";
 import RegStatusSuccessView from "../views/RegStatusSuccessView.vue";
+import NotificationView from "../views/NotificationView.vue";
 
 Vue.use(VueRouter);
 
@@ -36,6 +37,11 @@ const routes = [
         path: "/pet-list",
         name: "pet-list",
         component: CustPetListView,
+      },
+      {
+        path: "/notifications",
+        name: "notifications",
+        component: NotificationView,
       },
     ],
   },
