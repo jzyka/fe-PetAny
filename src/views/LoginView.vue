@@ -19,7 +19,6 @@
         v-model="password"
         single-line
         clearable
-        outlined
         :append-icon="show4 ? 'mdi-eye' : 'mdi-eye-off'"
         :rules="[rules.required, rules.emailMatch]"
         :type="show4 ? 'text' : 'password'"
@@ -75,8 +74,9 @@ export default {
           email: this.email,
           password: this.password,
         });
-        console.log(res.status);
+        console.log(res.data);
         if (res.status == 200) {
+          localStorage.setItem("data", JSON.stringify(res.data));
           this.$router.push({ name: "home" });
         }
       } catch (error) {
