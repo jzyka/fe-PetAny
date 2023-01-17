@@ -4,6 +4,7 @@ import HomeView from "../views/HomeView.vue";
 import DefaultV1 from "../components/default-v1-layout.vue";
 import DefaultV2 from "../components/default-v2-layout.vue";
 import ProfileLayout from "../components/profile-layout.vue";
+import ClinicDashboardLayout from "../components/clinic-dashboard-layout.vue";
 import FormLayout from "../components/formLayout.vue";
 import LoginView from "../views/LoginView.vue";
 import RegisterView from "../views/RegisterView.vue";
@@ -13,6 +14,8 @@ import VerificationView from "../views/VerificationView.vue";
 import PetListEmptyView from "../views/PetListEmptyView.vue";
 import CustPetListView from "../views/CustPetListView.vue";
 import RegStatusSuccessView from "../views/RegStatusSuccessView.vue";
+import ClinicProductListView from "../views/ClinicProductListView.vue";
+import StaffSettingView from "../views/StaffSettingView.vue";
 
 Vue.use(VueRouter);
 
@@ -83,6 +86,23 @@ const routes = [
         path: "/registration-status",
         name: "registration-status",
         component: RegStatusSuccessView,
+      },
+    ],
+  },
+  {
+    path: "/",
+    name: "",
+    component: ClinicDashboardLayout,
+    children: [
+      {
+        path: "/clinic-product-list",
+        name: "clinic-product-list",
+        component: ClinicProductListView,
+      },
+      {
+        path: "/staff-setting",
+        name: "staff-setting",
+        component: StaffSettingView,
       },
     ],
   },
