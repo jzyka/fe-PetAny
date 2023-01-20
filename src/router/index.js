@@ -16,6 +16,7 @@ import CustPetListView from "../views/CustPetListView.vue";
 import RegStatusSuccessView from "../views/RegStatusSuccessView.vue";
 import ClinicProductListView from "../views/ClinicProductListView.vue";
 import StaffSettingView from "../views/StaffSettingView.vue";
+import AppointmentLobbyView from "../views/AppointmentLobbyView.vue";
 
 Vue.use(VueRouter);
 
@@ -103,6 +104,11 @@ const routes = [
         path: "/staff-setting",
         name: "staff-setting",
         component: StaffSettingView,
+      },
+      {
+        path: "/appointment-lobby",
+        name: "appointment-lobby",
+        component: AppointmentLobbyView,
       },
     ],
   },

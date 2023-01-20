@@ -19,7 +19,9 @@
               >
               <router-link to="/staff-setting" class="menu">Staff</router-link>
               <router-link to="/" class="menu">Data Hewan</router-link>
-              <router-link to="/" class="menu">Klinik</router-link>
+              <router-link to="/appointment-lobby" class="menu"
+                >Klinik</router-link
+              >
               <router-link to="/" class="menu">Pesanan</router-link>
               <router-link to="/" class="menu">Kasir</router-link>
               <router-link to="/" class="menu">Profil</router-link>
