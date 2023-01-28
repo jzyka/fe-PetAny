@@ -22,6 +22,7 @@
         single-line
         outlined
         :rules="numberRules"
+        v-model="phoneNum"
       ></v-text-field>
     </div>
     <div class="form--logreg__group">
@@ -40,7 +41,7 @@
       ></v-text-field>
     </div>
     <div class="form--logreg__group">
-      <p>Password</p>
+      <p>Confirm Password</p>
       <v-text-field
         label="Password"
         single-line

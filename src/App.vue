@@ -3,12 +3,18 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "App",
 
-  data: () => ({
-    //
-  }),
+  data: () => ({}),
+
+  mounted() {
+    var data = JSON.parse(localStorage.getItem("data"));
+    axios.defaults.headers.common = {
+      Authorization: `Bearer ${data.access_token}`,
+    };
+  },
 };
 </script>
 <style>

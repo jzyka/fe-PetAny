@@ -8,129 +8,123 @@
 
             <div class="form--register-clinic">
               <div class="form--register-clinic__half">
-                <div class="form--logreg__group">
-                  <p>Nama klinik</p>
-                  <v-text-field
-                    label="Nama klinik"
-                    single-line
-                    outlined
-                  ></v-text-field>
-                </div>
-                <div class="form--logreg__group">
-                  <p>Nama perusahaan</p>
-                  <v-text-field
-                    label="Nama perusahaan"
-                    single-line
-                    outlined
-                  ></v-text-field>
-                </div>
-                <div class="form--logreg__group">
-                  <p>Nama pemilik</p>
-                  <v-text-field
-                    label="Nama pemilik"
-                    single-line
-                    outlined
-                  ></v-text-field>
-                </div>
-                <div class="form--logreg__group">
-                  <p>Nomor telepon klinik</p>
-                  <v-text-field
-                    label="Nomor telepon klinik"
-                    single-line
-                    outlined
-                  ></v-text-field>
-                </div>
-                <div class="form--logreg__group">
-                  <p>Email klinik</p>
-                  <v-text-field
-                    label="Email klinik"
-                    single-line
-                    outlined
-                  ></v-text-field>
-                </div>
-                <div class="form--logreg__group">
-                  <p>Surat Izin Usaha Klinik Hewan</p>
-                  <label for="input-permit" class="custom-file-upload">
-                    <img src="@/assets/upload.png" alt="" />
-                  </label>
-                  <input
-                    type="file"
-                    multiple
-                    @change="onFileChange"
-                    id="input-permit"
-                  />
+                <div v-for="(model, i) in formData" :key="i">
+                  <div
+                    class="form--logreg__group"
+                    v-if="
+                      model.name !== 'postal_code' &&
+                      model.name !== 'petshop_address' &&
+                      model.name !== 'province' &&
+                      model.name !== 'city' &&
+                      model.name !== 'district'
+                    "
+                  >
+                    <p>{{ model.label }}</p>
+                    <v-text-field
+                      v-model="models[model.name]"
+                      v-if="
+                        model.name == 'petshop_name' ||
+                        model.name == 'company_name' ||
+                        model.name == 'owner' ||
+                        model.name == 'phone_number' ||
+                        model.name == 'petshop_email'
+                      "
+                      :label="model.label"
+                      single-line
+                      outlined
+                    ></v-text-field>
+                  </div>
+
+                  <div class="form--logreg__group">
+                    <v-file-input
+                      v-model="models[model.name]"
+                      class="custom-file-upload"
+                      v-if="model.name == 'permit'"
+                      type="file"
+                      multiple
+                      id="input-permit"
+                    />
+                  </div>
                 </div>
               </div>
+
               <div class="form--register-clinic__half">
-                <div class="form--logreg__group">
-                  <p>Provinsi</p>
-                  <v-select
-                    :items="province"
-                    :menu-props="{ top: true, offsetY: true }"
-                    label="Pilih provinsi"
-                    single-line
-                    outlined
+                <div v-for="(model, i) in formData" :key="i">
+                  <div
+                    class="form--logreg__group"
+                    v-if="
+                      model.name !== 'petshop_name' &&
+                      model.name !== 'company_name' &&
+                      model.name !== 'owner' &&
+                      model.name !== 'phone_number' &&
+                      model.name !== 'petshop_email' &&
+                      model.name !== 'permit'
+                    "
                   >
-                    ></v-select
-                  >
-                </div>
-                <div class="form--logreg__group">
-                  <p>Kota</p>
-                  <v-select
-                    :items="city"
-                    :menu-props="{ top: true, offsetY: true }"
-                    label="Pilih kota"
-                    single-line
-                    outlined
-                  >
-                    ></v-select
-                  >
-                </div>
-                <div class="form--logreg__group">
-                  <p>Kecamatan</p>
-                  <v-select
-                    :items="district"
-                    :menu-props="{ top: true, offsetY: true }"
-                    label="Pilih kecamatan"
-                    single-line
-                    outlined
-                  >
-                    ></v-select
-                  >
-                </div>
-                <div class="form--logreg__group">
-                  <p>Kode pos</p>
-                  <v-text-field
-                    label="Kode pos"
-                    single-line
-                    outlined
-                  ></v-text-field>
-                </div>
-                <div class="form--logreg__group">
-                  <p>Detil alamat</p>
-                  <v-textarea
-                    color="teal"
-                    single-line
-                    outlined
-                    hide-details="true"
-                  >
-                    <template v-slot:label>
-                      <div>
-                        Detil alamat
-                        <small>(Nama jalan, blok, nomor bangunan)</small>
-                      </div>
-                    </template>
-                  </v-textarea>
+                    <p>{{ model.label }}</p>
+                    <v-select
+                      v-model="models[model.name]"
+                      :items="province"
+                      single-line
+                      outlined
+                      :label="model.label"
+                      v-if="model.name == 'province'"
+                      :menu-props="{ top: true, offsetY: true }"
+                    ></v-select>
+
+                    <v-select
+                      v-model="models[model.name]"
+                      :items="province"
+                      single-line
+                      outlined
+                      :label="model.label"
+                      v-if="model.name == 'city'"
+                      :menu-props="{ top: true, offsetY: true }"
+                    ></v-select>
+
+                    <v-select
+                      v-model="models[model.name]"
+                      :items="province"
+                      single-line
+                      outlined
+                      :label="model.label"
+                      v-if="model.name == 'district'"
+                      :menu-props="{ top: true, offsetY: true }"
+                    ></v-select>
+
+                    <v-text-field
+                      v-if="model.name == 'postal_code'"
+                      :label="model.label"
+                      single-line
+                      outlined
+                      v-model="models[model.name]"
+                    ></v-text-field>
+
+                    <v-textarea
+                      color="teal"
+                      single-line
+                      outlined
+                      :label="model.label"
+                      hide-details="true"
+                      v-if="model.name == 'petshop_address'"
+                      v-model="models[model.name]"
+                    >
+                      <template v-slot:label>
+                        <div>
+                          Detil alamat
+                          <small>(Nama jalan, blok, nomor bangunan)</small>
+                        </div>
+                      </template>
+                    </v-textarea>
+                  </div>
                 </div>
               </div>
             </div>
-            <div v-for="(image, key) in images" :key="image.id">
-              <div class="file-name" :id="key">
-                {{ image.name }}
-                <button type="button" @click="removeImage(key)">&times;</button>
-              </div>
-            </div>
-            <v-btn block class="text-capitalize btn-clinic-register"
+
+            <v-btn
+              @click="regClinic"
+              block
+              class="text-capitalize btn-clinic-register"
               >Daftar</v-btn
             >
           </div>
@@ -141,27 +135,64 @@
 </template>
 
 <script>
+import Axios from "axios";
 export default {
   name: "RegisterClinic",
   data() {
     return {
       images: [],
+      data: [],
+      formData: [],
+      models: {},
+      src: "",
       province: ["Foo", "Bar", "Fizz", "Buzz"],
     };
   },
+
+  async mounted() {
+    await this.getRegClinicById();
+    await this.getFormData();
+  },
   methods: {
-    onFileChange(e) {
-      var selectedFiles = e.target.files;
-      for (let i = 0; i < selectedFiles.length; i++) {
-        this.images.push(selectedFiles[i]);
+    async getRegClinic() {
+      try {
+        const regClinic = await Axios.get(`${this.$api}/get-petshop`);
+        const clinicData = regClinic.data;
+        this.data = clinicData;
+      } catch (error) {
+        console.log(error);
       }
-
-      // console.log(this.images);
     },
-    removeImage(i) {
-      // alert(i);
 
-      this.images.splice(i, 1);
+    async getRegClinicById() {
+      try {
+        const clinicByIdData = await Axios.get(`${this.$api}/get-petshop/4`);
+        const actualIdData = clinicByIdData.data.data;
+        this.models = actualIdData;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+    async regClinic() {
+      try {
+        const obj = this.models;
+        const register = await Axios.post(`${this.$api}/create-petshop`, obj);
+
+        console.log(register);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+    async getFormData() {
+      try {
+        const formData = await Axios.get(`${this.$api}/petshop-form`);
+        const fixedFormData = formData.data;
+        this.formData = fixedFormData;
+      } catch (error) {
+        console.log(error);
+      }
     },
   },
 };

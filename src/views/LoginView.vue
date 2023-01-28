@@ -5,6 +5,7 @@
       <p>Email</p>
       <v-text-field
         label="Email"
+        clearable
         single-line
         outlined
         v-model="email"
@@ -15,8 +16,9 @@
       <p>Password</p>
       <v-text-field
         label="Password"
+        v-model="password"
         single-line
-        outlined
+        clearable
         :append-icon="show4 ? 'mdi-eye' : 'mdi-eye-off'"
         :rules="[rules.required, rules.emailMatch]"
         :type="show4 ? 'text' : 'password'"
@@ -25,7 +27,13 @@
         @click:append="show4 = !show4"
       ></v-text-field>
     </div>
-    <v-btn block class="text-capitalize login-btn">Masuk</v-btn>
+    <v-btn
+      block
+      class="text-capitalize login-btn"
+      @submit.prevent
+      @click="login"
+      >Masuk</v-btn
+    >
     <div class="have-account">
       <p>Belum punya akun?</p>
       <router-link to="/register" class="register-or-login">
@@ -36,13 +44,15 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "LoginView",
   data: () => ({
     showPassword: false,
-    password: null,
     show4: false,
     email: "",
+    password: "",
     emailRules: [
       (v) => !!v || "E-mail is required",
       (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
@@ -56,6 +66,24 @@ export default {
       },
     },
   }),
+
+  methods: {
+    async login() {
+      try {
+        const res = await axios.post(`${this.$api}/login`, {
+          email: this.email,
+          password: this.password,
+        });
+        console.log(res.data);
+        if (res.status == 200) {
+          localStorage.setItem("data", JSON.stringify(res.data));
+          this.$router.push({ name: "home" });
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+  },
 };
 </script>
 
