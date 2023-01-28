@@ -23,4 +23,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+#app {
+  background-color: $cultured;
+}
+</style>

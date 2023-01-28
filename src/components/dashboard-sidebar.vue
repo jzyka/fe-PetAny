@@ -18,7 +18,9 @@
                 >Produk</router-link
               >
               <router-link to="/staff-setting" class="menu">Staff</router-link>
-              <router-link to="/" class="menu">Data Hewan</router-link>
+              <router-link to="/vet-pet-list" class="menu"
+                >Data Hewan</router-link
+              >
               <router-link to="/appointment-lobby" class="menu"
                 >Klinik</router-link
               >
