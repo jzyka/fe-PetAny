@@ -19,6 +19,7 @@ import StaffSettingView from "../views/StaffSettingView.vue";
 import AppointmentLobbyView from "../views/AppointmentLobbyView.vue";
 import VetPetLIstView from "../views/VetPetLIstView.vue";
 import BookAppoinmentListView from "../views/BookAppoinmentListView.vue";
+import StaffListView from "../views/StaffListView.vue";
 
 Vue.use(VueRouter);
 
@@ -121,6 +122,11 @@ const routes = [
         path: "/vet-pet-list",
         name: "vet-pet-list",
         component: VetPetLIstView,
+      },
+      {
+        path: "/staff",
+        name: "staff",
+        component: StaffListView,
       },
     ],
   },
