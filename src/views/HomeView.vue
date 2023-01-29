@@ -21,7 +21,9 @@
         <v-row>
           <div class="slider--cards__title">
             <p class="slider-title">Buat janji dengan dokter hewan terdekat</p>
-            <router-link to="/" class="see-more">Lihat Semua</router-link>
+            <router-link to="/book-appoinment" class="see-more"
+              >Lihat Semua</router-link
+            >
           </div>
           <v-slide-group
             v-model="VetCard"

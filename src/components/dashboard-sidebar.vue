@@ -17,7 +17,7 @@
               <router-link to="/clinic-product-list" class="menu"
                 >Produk</router-link
               >
-              <router-link to="/staff-setting" class="menu">Staff</router-link>
+              <router-link to="/staff" class="menu">Staff</router-link>
               <router-link to="/vet-pet-list" class="menu"
                 >Data Hewan</router-link
               >

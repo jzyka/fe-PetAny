@@ -39,7 +39,7 @@
               </div>
               <div class="footer-content">
                 <p class="content-title">Anda memiliki klinik hewan?</p>
-                <router-link to="/register" class="to-register">
+                <router-link to="/register-clinic" class="to-register">
                   Daftar sebagai klinik hewan
                 </router-link>
                 <router-link to="/register" class="more-info">
