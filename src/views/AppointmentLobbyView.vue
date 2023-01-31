@@ -8,6 +8,9 @@
 
         <v-tabs-items v-model="tabs">
           <v-tab-item class="appointment-request">
+            <p class="warning-appt">
+              Pertemuan otomatis batal jika tidak di konfirmasi lebih dari 1 jam
+            </p>
             <div class="card--appointment">
               <div class="top-section">
                 <div class="client-profile">
@@ -40,25 +43,14 @@
             </div>
           </v-tab-item>
           <v-tab-item class="clinic-queue">
-            <div class="card--queue">
-              <div class="client-profile">
-                <div class="client-photo">
-                  <img src="@/assets/pabs.png" alt="" />
-                </div>
-                <div class="client-detail">
-                  <div class="name-weight">
-                    <p class="client-name">Pablo</p>
-                    <p class="client-weight">5 Kg</p>
-                  </div>
-                  <p class="client-age">1 Tahun 6 Bulan</p>
-                </div>
-              </div>
-
-              <div class="client-schedule">
-                <p class="schedule-date">Hari ini</p>
-                <p class="schedule-hour">09:00</p>
-              </div>
-            </div>
+            <template>
+              <v-data-table
+                :headers="headers"
+                :items="desserts"
+                item-key="name"
+                class="elevation-1"
+              ></v-data-table>
+            </template>
           </v-tab-item>
         </v-tabs-items>
       </v-card>
@@ -96,6 +88,24 @@ export default {
           ],
         },
       ],
+
+      desserts: [
+        {
+          name: "Pablo",
+          date: "10 - 12 - 2023",
+          hour: "08.00 ",
+        },
+      ],
+      headers: [
+        {
+          text: "Nama Pasien",
+          align: "start",
+          sortable: false,
+          value: "name",
+        },
+        { text: "Tanggal", value: "date" },
+        { text: "Jam", value: "hour" },
+      ],
     };
   },
 };
@@ -110,10 +120,17 @@ section {
       justify-content: space-between;
       flex-wrap: wrap;
       background-color: transparent;
+
+      .warning-appt {
+        color: rgba(0, 0, 0, 0.45);
+        width: 100%;
+        text-align: center;
+        font-size: 14px;
+      }
     }
 
     .clinic-tab {
-      margin-bottom: 2rem;
+      margin-bottom: 1rem;
     }
   }
 }
@@ -233,29 +250,29 @@ section {
     }
   }
 
-  &--queue {
-    display: flex;
-    justify-content: space-between;
-    background-color: $white;
-    border-radius: 10px;
-    padding: 1rem;
-    box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.1);
+  // &--queue {
+  //   display: flex;
+  //   justify-content: space-between;
+  //   background-color: $white;
+  //   border-radius: 10px;
+  //   padding: 1rem;
+  //   box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.1);
 
-    .client-profile {
-      width: 75%;
-    }
+  //   .client-profile {
+  //     width: 75%;
+  //   }
 
-    .client-schedule {
-      width: 25%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+  //   .client-schedule {
+  //     width: 25%;
+  //     display: flex;
+  //     align-items: center;
+  //     justify-content: space-between;
 
-      p {
-        margin-bottom: 0;
-      }
-    }
-  }
+  //     p {
+  //       margin-bottom: 0;
+  //     }
+  //   }
+  // }
 }
 #app {
   background-color: $cultured;
@@ -265,17 +282,20 @@ section {
   box-shadow: none !important;
 }
 
-.v-tabs-items {
-  background-color: transparent !important;
-}
-
 .v-tabs-bar {
   background-color: transparent !important;
 }
+</style>
 
-.v-slide-group {
-  &__wrapper {
-    border-bottom: 1px solid $black;
-  }
+<style>
+.theme--light.v-tabs > .v-tabs-bar {
+  background-color: transparent;
+}
+
+.theme--light.v-tabs-items {
+  background-color: transparent;
+}
+.v-slide-group__wrapper {
+  border-bottom: 1px solid black;
 }
 </style>

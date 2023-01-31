@@ -18,6 +18,9 @@ import ClinicProductListView from "../views/ClinicProductListView.vue";
 import StaffSettingView from "../views/StaffSettingView.vue";
 import AppointmentLobbyView from "../views/AppointmentLobbyView.vue";
 import VetPetLIstView from "../views/VetPetLIstView.vue";
+import CustWishlistView from "../views/CustWishlistView.vue"
+import BookAppoinmentListView from "../views/BookAppoinmentListView.vue";
+import StaffListView from "../views/StaffListView.vue";
 
 Vue.use(VueRouter);
 
@@ -41,6 +44,11 @@ const routes = [
         path: "/pet-list",
         name: "pet-list",
         component: CustPetListView,
+      },
+      {
+        path: "/book-appoinment",
+        name: "book-appoinment",
+        component: BookAppoinmentListView,
       },
     ],
   },
@@ -89,6 +97,12 @@ const routes = [
         name: "registration-status",
         component: RegStatusSuccessView,
       },
+      
+      {
+        path: "/wishlist",
+        name: "wishlist",
+        component: CustWishlistView,
+      },
     ],
   },
   {
@@ -115,6 +129,11 @@ const routes = [
         path: "/vet-pet-list",
         name: "vet-pet-list",
         component: VetPetLIstView,
+      },
+      {
+        path: "/staff",
+        name: "staff",
+        component: StaffListView,
       },
     ],
   },
