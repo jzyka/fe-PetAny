@@ -18,6 +18,7 @@ import ClinicProductListView from "../views/ClinicProductListView.vue";
 import StaffSettingView from "../views/StaffSettingView.vue";
 import AppointmentLobbyView from "../views/AppointmentLobbyView.vue";
 import VetPetLIstView from "../views/VetPetLIstView.vue";
+import CustWishlistView from "../views/CustWishlistView.vue"
 import BookAppoinmentListView from "../views/BookAppoinmentListView.vue";
 import StaffListView from "../views/StaffListView.vue";
 
@@ -95,6 +96,12 @@ const routes = [
         path: "/registration-status",
         name: "registration-status",
         component: RegStatusSuccessView,
+      },
+      
+      {
+        path: "/wishlist",
+        name: "wishlist",
+        component: CustWishlistView,
       },
     ],
   },
