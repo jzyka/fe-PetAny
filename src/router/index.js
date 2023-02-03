@@ -20,6 +20,8 @@ import AppointmentLobbyView from "../views/AppointmentLobbyView.vue";
 import VetPetLIstView from "../views/VetPetLIstView.vue";
 import BookAppoinmentListView from "../views/BookAppoinmentListView.vue";
 import StaffListView from "../views/StaffListView.vue";
+import AddProductView from "../views/AddProductView.vue";
+import EditProductView from "../views/EditProductView.vue";
 
 Vue.use(VueRouter);
 
@@ -134,6 +136,16 @@ const routes = [
     path: "/verification",
     name: "verification",
     component: VerificationView,
+  },
+  {
+    path: "/add-product",
+    name: "addproduct",
+    component: AddProductView,
+  },
+  {
+    path: "/edit-product",
+    name: "editproduct",
+    component: EditProductView,
   },
 ];
 
