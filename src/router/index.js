@@ -9,7 +9,6 @@ import RegisterView from "../views/RegisterView.vue";
 import RegisterClinicView from "../views/RegisterClinicView.vue";
 import RegisterClinicProcessView from "../views/RegisterClinicProcessView.vue";
 import VerificationView from "../views/VerificationView.vue";
-import PetListView from "../views/PetListView.vue";
 import PetListEmptyView from "../views/PetListEmptyView.vue";
 import CustomerProductPayment from "../views/CustomerProductPayment.vue";
 import ProductPaymentDetail from "../views/ProductPaymentDetailView.vue";
@@ -74,18 +73,7 @@ const routes = [
     name: "verification",
     component: VerificationView,
   },
-  {
-    path: "/",
-    name: "",
-    component: DefaultV1,
-    children: [
-      {
-        path: "/petlist",
-        name: "petlist",
-        component: PetListView,
-      },
-    ],
-  },
+
   {
     path: "/",
     name: "",
