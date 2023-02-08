@@ -22,6 +22,7 @@ import BookAppoinmentListView from "../views/BookAppoinmentListView.vue";
 import StaffListView from "../views/StaffListView.vue";
 import AddProductView from "../views/AddProductView.vue";
 import EditProductView from "../views/EditProductView.vue";
+import CashierView from "../views/CashierView.vue";
 
 Vue.use(VueRouter);
 
@@ -129,6 +130,11 @@ const routes = [
         path: "/staff",
         name: "staff",
         component: StaffListView,
+      },
+      {
+        path: "/cashier",
+        name: "cashier",
+        component: CashierView,
       },
     ],
   },

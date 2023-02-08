@@ -80,8 +80,10 @@ section {
       font-size: 20px;
     }
     .button {
+      background-color: $primary-color !important;
       color: $white;
       margin-top: 8rem;
+      width: 10%;
     }
     .an1 {
       width: 100%;
