@@ -39,7 +39,7 @@
                   <v-file-input class="input-contain" accept="image/*" solo background-color="#F1F1F1"></v-file-input>
                 </div>
               </div>
-              <div><v-btn class="button">Simpan</v-btn></div>
+              <div class="an1"><v-btn class="button">Simpan</v-btn></div>
             </div>
           </div>
         </v-row>
@@ -83,6 +83,12 @@ section {
       background-color: $primary-color !important;
       color: $white;
       margin-top: 8rem;
+      width: 10%;
+    }
+    .an1 {
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
     }
   }
 }
