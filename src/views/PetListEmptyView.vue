@@ -2,11 +2,7 @@
   <div class="background mx-8 my-5" style="">
     <div class="my-4"><img src="@/assets/petlist.png" alt="" /></div>
     <div class="text my-4">anda belum mengisi data peliharaan anda</div>
-
-    <div class="btnn p-4"><button class="py-2 cr">buat data peliharaan</button></div>
-
-
-
+    <div class="btnn p-4"><button class="py-2 btn-cr">buat data peliharaan</button></div>
   </div>
 </template>
 
@@ -32,7 +28,7 @@ img {
   color: $primary-color;
   font-weight: 600;
 }
-.cr {
+.btn-cr {
   background-color: $primary-color;
   color: $white;
   width: 95%;
