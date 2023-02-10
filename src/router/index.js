@@ -10,6 +10,10 @@ import RegisterClinicView from "../views/RegisterClinicView.vue";
 import RegisterClinicProcessView from "../views/RegisterClinicProcessView.vue";
 import VerificationView from "../views/VerificationView.vue";
 import PetListEmptyView from "../views/PetListEmptyView.vue";
+import CustAddPetView from "../views/CustAddPetView.vue";
+import CustPetDetailView from "../views/CustPetDetailView.vue";
+import CustAddPetDataView from "../views/CustAddPetDataView.vue";
+import CustEditPetDataView from "../views/CustEditPetDataView.vue";
 
 Vue.use(VueRouter);
 
@@ -28,6 +32,26 @@ const routes = [
         path: "/pet-list-empty",
         name: "pet-list-empty",
         component: PetListEmptyView,
+      },
+      {
+        path: "/cust-add-pet",
+        name: "cust-add-pet",
+        component: CustAddPetView,
+      },
+      {
+        path: "/cust-detail-pet",
+        name: "cust-detail-pet",
+        component: CustPetDetailView,
+      },
+      {
+        path: "/cust-add-pet-data",
+        name: "cust-add-pet-data",
+        component: CustAddPetDataView,
+      },
+      {
+        path: "/cust-edit-pet-data",
+        name: "cust-edit-pet-data",
+        component: CustEditPetDataView,
       },
     ],
   },
