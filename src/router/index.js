@@ -3,6 +3,8 @@ import VueRouter from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import DefaultV1 from "../components/default-v1-layout.vue";
 import DefaultV2 from "../components/default-v2-layout.vue";
+import ProfileLayout from "../components/profile-layout.vue";
+import ClinicDashboardLayout from "../components/clinic-dashboard-layout.vue";
 import FormLayout from "../components/formLayout.vue";
 import LoginView from "../views/LoginView.vue";
 import RegisterView from "../views/RegisterView.vue";
@@ -10,10 +12,24 @@ import RegisterClinicView from "../views/RegisterClinicView.vue";
 import RegisterClinicProcessView from "../views/RegisterClinicProcessView.vue";
 import VerificationView from "../views/VerificationView.vue";
 import PetListEmptyView from "../views/PetListEmptyView.vue";
+
 import CustAddPetView from "../views/CustAddPetView.vue";
 import CustPetDetailView from "../views/CustPetDetailView.vue";
 import CustAddPetDataView from "../views/CustAddPetDataView.vue";
 import CustEditPetDataView from "../views/CustEditPetDataView.vue";
+
+import CustPetListView from "../views/CustPetListView.vue";
+import RegStatusSuccessView from "../views/RegStatusSuccessView.vue";
+import ClinicProductListView from "../views/ClinicProductListView.vue";
+import StaffSettingView from "../views/StaffSettingView.vue";
+import AppointmentLobbyView from "../views/AppointmentLobbyView.vue";
+import VetPetLIstView from "../views/VetPetLIstView.vue";
+import BookAppoinmentListView from "../views/BookAppoinmentListView.vue";
+import StaffListView from "../views/StaffListView.vue";
+import AddProductView from "../views/AddProductView.vue";
+import EditProductView from "../views/EditProductView.vue";
+import CashierView from "../views/CashierView.vue";
+
 
 Vue.use(VueRouter);
 
@@ -34,6 +50,7 @@ const routes = [
         component: PetListEmptyView,
       },
       {
+
         path: "/cust-add-pet",
         name: "cust-add-pet",
         component: CustAddPetView,
@@ -52,6 +69,16 @@ const routes = [
         path: "/cust-edit-pet-data",
         name: "cust-edit-pet-data",
         component: CustEditPetDataView,
+
+        path: "/pet-list",
+        name: "pet-list",
+        component: CustPetListView,
+      },
+      {
+        path: "/book-appoinment",
+        name: "book-appoinment",
+        component: BookAppoinmentListView,
+
       },
     ],
   },
@@ -91,9 +118,68 @@ const routes = [
     ],
   },
   {
+    path: "/",
+    name: "",
+    component: ProfileLayout,
+    children: [
+      {
+        path: "/registration-status",
+        name: "registration-status",
+        component: RegStatusSuccessView,
+      },
+    ],
+  },
+  {
+    path: "/",
+    name: "",
+    component: ClinicDashboardLayout,
+    children: [
+      {
+        path: "/clinic-product-list",
+        name: "clinic-product-list",
+        component: ClinicProductListView,
+      },
+      {
+        path: "/staff-setting",
+        name: "staff-setting",
+        component: StaffSettingView,
+      },
+      {
+        path: "/appointment-lobby",
+        name: "appointment-lobby",
+        component: AppointmentLobbyView,
+      },
+      {
+        path: "/vet-pet-list",
+        name: "vet-pet-list",
+        component: VetPetLIstView,
+      },
+      {
+        path: "/staff",
+        name: "staff",
+        component: StaffListView,
+      },
+      {
+        path: "/cashier",
+        name: "cashier",
+        component: CashierView,
+      },
+    ],
+  },
+  {
     path: "/verification",
     name: "verification",
     component: VerificationView,
+  },
+  {
+    path: "/add-product",
+    name: "addproduct",
+    component: AddProductView,
+  },
+  {
+    path: "/edit-product",
+    name: "editproduct",
+    component: EditProductView,
   },
 ];
 

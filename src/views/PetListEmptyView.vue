@@ -2,7 +2,11 @@
   <div class="background mx-8 my-5" style="">
     <div class="my-4"><img src="@/assets/petlist.png" alt="" /></div>
     <div class="text my-4">anda belum mengisi data peliharaan anda</div>
+
     <div class="btnn p-4"><button class="py-2 cr">buat data peliharaan</button></div>
+
+
+
   </div>
 </template>
 

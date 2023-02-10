@@ -14,7 +14,7 @@
               solo
               hide-details
             ></v-text-field>
-            <router-link to="/" class="to-my-pet"
+            <router-link to="/pet-list" class="to-my-pet"
               ><img src="@/assets/paw.png" alt="" />Peliharaan saya</router-link
             >
             <router-link to="/" class="btn-to cart"
