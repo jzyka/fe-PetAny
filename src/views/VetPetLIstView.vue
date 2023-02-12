@@ -88,6 +88,7 @@ export default {
           Authorization: `Bearer ${this.accessToken}`,
         };
         const petData = await Axios.get(`${this.$api}/get-pet`, { headers });
+        console.log(petData);
         const data = petData.data.data;
         this.data = data;
       } catch (error) {

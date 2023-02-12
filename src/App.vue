@@ -9,12 +9,15 @@ export default {
 
   data: () => ({}),
 
-  mounted() {
+  created() {
     var data = JSON.parse(localStorage.getItem("data"));
-    axios.defaults.headers.common = {
-      Authorization: `Bearer ${data.access_token}`,
-    };
+    axios.defaults.headers.common[
+      "Authorization"
+    ] = `Bearer ${data.access_token}`;
+    console.log(data.access_token);
   },
+
+  mounted() {},
 };
 </script>
 <style>

@@ -287,7 +287,7 @@ section {
 }
 </style>
 
-<style>
+<style scoped>
 .theme--light.v-tabs > .v-tabs-bar {
   background-color: transparent;
 }
