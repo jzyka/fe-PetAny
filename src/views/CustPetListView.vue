@@ -6,16 +6,22 @@
           <div class="wrap">
             <h1>Profil Peliharaan</h1>
             <div class="pet-list-wrap">
-              <router-link class="card--pet" tag="div" to="/">
-                <img src="@/assets/pabs.png" alt="" class="card--pet__image" />
-                <div class="card--pet__text">
-                  <div class="name-weight">
-                    <p class="name">Pablo</p>
-                    <p class="weight">5 Kg</p>
+              <v-card
+                class="card--pet rounded-lg"
+                v-for="(petData, i) in data"
+                :key="i"
+              >
+                <router-link :to="petData.links.self">
+                  <v-img alt="" class="card--pet__image" />
+                  <div class="card--pet__text">
+                    <div class="name-weight">
+                      <p class="name">{{ petData.pet_name }}</p>
+                      <p class="weight">{{ petData.weight }} Kg</p>
+                    </div>
+                    <p class="age">{{ petData.age }} year young</p>
                   </div>
-                  <p class="age">1 Tahun 6 Bulan</p>
-                </div>
-              </router-link>
+                </router-link>
+              </v-card>
             </div>
           </div>
         </v-row>
@@ -25,7 +31,35 @@
 </template>
 
 <script>
-export default {};
+import Axios from "axios";
+export default {
+  data: () => ({
+    data: [],
+  }),
+
+  async mounted() {
+    await this.getPetList();
+  },
+
+  methods: {
+    async getPetList() {
+      try {
+        const res = await Axios.get(`${this.$api}/get-pet`);
+        const arrayL = res.data;
+        for (let i = 0; i < arrayL[0].length; i++) {
+          const index0 = arrayL[0];
+          const finalData = index0[i];
+          // console.log(finalData);
+          this.data.push(finalData);
+        }
+        console.log(this.data);
+        // console.log(this.data[0].pet_name);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+  },
+};
 </script>
 
 <style lang="scss">
@@ -49,6 +83,7 @@ section {
         flex-wrap: wrap;
         gap: 2%;
         width: 100%;
+        row-gap: 20px;
       }
     }
   }
