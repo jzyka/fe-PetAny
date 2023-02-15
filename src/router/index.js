@@ -16,6 +16,8 @@ import CustAddPetView from "../views/CustAddPetView.vue";
 import CustPetDetailView from "../views/CustPetDetailView.vue";
 import CustAddPetDataView from "../views/CustAddPetDataView.vue";
 import CustEditPetDataView from "../views/CustEditPetDataView.vue";
+import CustCreatePetView from "../views/CustCreatePetView.vue";
+
 import CustPetListView from "../views/CustPetListView.vue";
 import RegStatusSuccessView from "../views/RegStatusSuccessView.vue";
 import ClinicProductListView from "../views/ClinicProductListView.vue";
@@ -53,9 +55,14 @@ const routes = [
         component: CustAddPetView,
       },
       {
-        path: "/cust-detail-pet",
+        path: "/api/get-pet/:id",
         name: "cust-detail-pet",
         component: CustPetDetailView,
+      },
+      {
+        path: "/create-pet",
+        name: "create-pet",
+        component: CustCreatePetView,
       },
       {
         path: "/cust-add-pet-data",
