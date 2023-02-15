@@ -11,8 +11,12 @@
                 v-for="(petData, i) in data"
                 :key="i"
               >
-                <router-link :to="petData.links.self">
-                  <v-img alt="" class="card--pet__image" />
+                <router-link :to="petData.links.self" class="route-link">
+                  <v-img
+                    alt=""
+                    class="card--pet__image"
+                    :src="petData.pet_image"
+                  />
                   <div class="card--pet__text">
                     <div class="name-weight">
                       <p class="name">{{ petData.pet_name }}</p>
@@ -45,9 +49,10 @@ export default {
     async getPetList() {
       try {
         const res = await Axios.get(`${this.$api}/get-pet`);
+        console.log(res);
         const arrayL = res.data;
-        for (let i = 0; i < arrayL[0].length; i++) {
-          const index0 = arrayL[0];
+        for (let i = 0; i < arrayL.length; i++) {
+          const index0 = arrayL;
           const finalData = index0[i];
           // console.log(finalData);
           this.data.push(finalData);
@@ -98,6 +103,10 @@ section {
     flex-direction: column;
     height: 205px;
     box-shadow: 0px 1px 10px 1px rgba(0, 0, 0, 0.1);
+
+    .route-link {
+      text-decoration: none;
+    }
 
     &__image {
       width: 100%;
