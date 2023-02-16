@@ -3,7 +3,12 @@
     <p class="title-form">Daftar</p>
     <div class="form--logreg__group">
       <p>Nama</p>
-      <v-text-field label="Nama" single-line outlined></v-text-field>
+      <v-text-field
+        label="Nama"
+        v-model="userName"
+        single-line
+        outlined
+      ></v-text-field>
     </div>
     <div class="form--logreg__group">
       <p>Email</p>
@@ -56,7 +61,13 @@
         @click:append="show4 = !show4"
       ></v-text-field>
     </div>
-    <v-btn block class="text-capitalize login-btn">Masuk</v-btn>
+    <v-btn
+      block
+      class="text-capitalize login-btn"
+      @submit.prevent
+      @click="register"
+      >Daftar</v-btn
+    >
     <div class="have-account">
       <p>Sudah punya akun?</p>
       <router-link to="/register" class="register-or-login">
@@ -67,13 +78,19 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "RegisterView",
   data: () => ({
-    showPassword: false,
-    show4: false,
+    userName: "",
+    numberRules: "",
+    password: "",
     email: "",
     confirmPassword: "",
+    phoneNum: "",
+    showPassword: false,
+    show4: false,
     numberRules: [
       (v) => !!v || "Please fill out this field!",
       (v) => Number.isInteger(Number(v)) || "Please enter numbers only!",
@@ -94,6 +111,24 @@ export default {
         return true;
       } else {
         return "Password tidak cocok";
+      }
+    },
+    async register() {
+      try {
+        const res = await axios.post(`${this.$api}/register`, {
+          name: this.userName,
+          password: this.password,
+          email: this.email,
+          password_confirmation: this.confirmPassword,
+          phone_number: this.phoneNum,
+        });
+        console.log(res.data);
+        if (res.status == 200) {
+          localStorage.setItem("data", JSON.stringify(res.data));
+          this.$router.push({ name: "home" });
+        }
+      } catch (error) {
+        console.log(error);
       }
     },
   },
