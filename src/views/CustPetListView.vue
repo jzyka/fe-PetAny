@@ -3,8 +3,18 @@
     <section class="pet-list">
       <v-container>
         <v-row>
-          <div class="wrap">
-            <h1>Profil Peliharaan</h1>
+          <div class="background empty" v-if="data.length === 0" id="empty">
+            <div class="my-4"><img src="@/assets/petlist.png" alt="" /></div>
+            <div class="text my-4">anda belum mengisi data peliharaan anda</div>
+
+            <div class="btnn p-4">
+              <router-link to="/create-pet" class="py-2 cr"
+                >buat data peliharaan</router-link
+              >
+            </div>
+          </div>
+          <div class="wrap" id="pet-list" v-else>
+            <h1 id="remove">Profil Peliharaan</h1>
             <div class="pet-list-wrap">
               <v-card
                 class="card--pet rounded-lg"
@@ -54,7 +64,8 @@ export default {
         for (let i = 0; i < arrayL.length; i++) {
           const index0 = arrayL;
           const finalData = index0[i];
-          // console.log(finalData);
+          const arrayLength = this.data;
+          console.log(arrayLength.length);
           this.data.push(finalData);
         }
         console.log(this.data);
@@ -91,6 +102,41 @@ section {
         row-gap: 20px;
       }
     }
+  }
+}
+
+.empty {
+  &.background {
+    background-color: $white;
+    border-radius: 10px;
+    width: 100%;
+  }
+  img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 30%;
+  }
+  .text {
+    text-transform: capitalize;
+    text-align: center;
+    font-size: 20px;
+    color: $primary-color;
+    font-weight: 600;
+  }
+  .cr {
+    background-color: $primary-color;
+    color: $white;
+    text-decoration: none;
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+    text-transform: capitalize;
+    border-radius: 10px;
+  }
+  .btnn {
+    display: flex;
+    justify-content: center;
   }
 }
 

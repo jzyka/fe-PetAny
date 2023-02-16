@@ -84,7 +84,6 @@ export default {
   name: "RegisterView",
   data: () => ({
     userName: "",
-    numberRules: "",
     password: "",
     email: "",
     confirmPassword: "",
