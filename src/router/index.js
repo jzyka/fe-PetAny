@@ -12,12 +12,10 @@ import RegisterClinicView from "../views/RegisterClinicView.vue";
 import RegisterClinicProcessView from "../views/RegisterClinicProcessView.vue";
 import VerificationView from "../views/VerificationView.vue";
 import PetListEmptyView from "../views/PetListEmptyView.vue";
-
 import CustAddPetView from "../views/CustAddPetView.vue";
 import CustPetDetailView from "../views/CustPetDetailView.vue";
 import CustAddPetDataView from "../views/CustAddPetDataView.vue";
 import CustEditPetDataView from "../views/CustEditPetDataView.vue";
-
 import CustPetListView from "../views/CustPetListView.vue";
 import RegStatusSuccessView from "../views/RegStatusSuccessView.vue";
 import ClinicProductListView from "../views/ClinicProductListView.vue";
@@ -29,7 +27,8 @@ import StaffListView from "../views/StaffListView.vue";
 import AddProductView from "../views/AddProductView.vue";
 import EditProductView from "../views/EditProductView.vue";
 import CashierView from "../views/CashierView.vue";
-
+import CustClinicPaymentView from "../views/CustClinicPaymentView.vue";
+import CustClinicPaymentDetailView from "../views/CustClinicPaymentDetailView.vue";
 
 Vue.use(VueRouter);
 
@@ -50,7 +49,6 @@ const routes = [
         component: PetListEmptyView,
       },
       {
-
         path: "/cust-add-pet",
         name: "cust-add-pet",
         component: CustAddPetView,
@@ -69,16 +67,16 @@ const routes = [
         path: "/cust-edit-pet-data",
         name: "cust-edit-pet-data",
         component: CustEditPetDataView,
-
-        path: "/pet-list",
-        name: "pet-list",
-        component: CustPetListView,
       },
       {
         path: "/book-appoinment",
         name: "book-appoinment",
         component: BookAppoinmentListView,
-
+      },
+      {
+        path: "/pet-list",
+        name: "pet-list",
+        component: CustPetListView,
       },
     ],
   },
@@ -114,6 +112,16 @@ const routes = [
         path: "/register-clinic-process",
         name: "register-clinic-process",
         component: RegisterClinicProcessView,
+      },
+      {
+        path: "/cust-clinic-payment",
+        name: "clinic-payment",
+        component: CustClinicPaymentView,
+      },
+      {
+        path: "/cust-clinic-detail",
+        name: "clinic-detail",
+        component: CustClinicPaymentDetailView,
       },
     ],
   },
