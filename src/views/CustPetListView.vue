@@ -3,7 +3,7 @@
     <section class="pet-list">
       <v-container>
         <v-row>
-          <div class="background empty" v-if="data.length === 0" id="empty">
+          <div class="background empty" v-if="data.length === 0">
             <div class="my-4"><img src="@/assets/petlist.png" alt="" /></div>
             <div class="text my-4">anda belum mengisi data peliharaan anda</div>
 
@@ -51,7 +51,7 @@ export default {
     data: [],
   }),
 
-  async mounted() {
+  async created() {
     await this.getPetList();
   },
 

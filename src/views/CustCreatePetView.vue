@@ -214,10 +214,9 @@ export default {
           },
         });
         console.log(res.data);
-        // if (res.status == 200) {
-        //   localStorage.setItem("data", JSON.stringify(res.data));
-        //   //   this.$router.push({ name: "home" });
-        // }
+        if (res.status == 200) {
+          this.$router.push({ name: "pet-list" });
+        }
       } catch (error) {
         console.log(error);
       }
