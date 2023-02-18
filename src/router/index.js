@@ -30,6 +30,7 @@ import AddProductView from "../views/AddProductView.vue";
 import EditProductView from "../views/EditProductView.vue";
 import CashierView from "../views/CashierView.vue";
 import ShoppingCartView from "../views/ShoppingCartView.vue";
+import BookAppointmentDetailView from "../views/BookAppointmentDetailView.vue";
 
 Vue.use(VueRouter);
 
@@ -88,6 +89,11 @@ const routes = [
         path: "/shopping-cart",
         name: "shopping-cart",
         component: ShoppingCartView,
+      },
+      {
+        path: "/book-appoinment-detail",
+        name: "book-appoinment-detail",
+        component: BookAppointmentDetailView,
       },
     ],
   },
