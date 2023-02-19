@@ -32,6 +32,7 @@ import CustClinicPaymentView from "../views/CustClinicPaymentView.vue";
 import CustClinicPaymentDetailView from "../views/CustClinicPaymentDetailView.vue";
 import ShoppingCartView from "../views/ShoppingCartView.vue";
 import RegisterClinicPostView from "../views/RegisterClinicPostView.vue";
+import CustPetDataDetailView from "../views/CustPetDataDetailView.vue";
 
 Vue.use(VueRouter);
 
@@ -67,7 +68,7 @@ const routes = [
         component: CustCreatePetView,
       },
       {
-        path: "/cust-add-pet-data",
+        path: "/api/add-medicalrecord",
         name: "cust-add-pet-data",
         component: CustAddPetDataView,
       },
@@ -75,6 +76,11 @@ const routes = [
         path: "/cust-edit-pet-data",
         name: "cust-edit-pet-data",
         component: CustEditPetDataView,
+      },
+      {
+        path: "/api/get-medicalrecord/:id",
+        name: "cust-medical-record-detail",
+        component: CustPetDataDetailView,
       },
       {
         path: "/book-appoinment",
