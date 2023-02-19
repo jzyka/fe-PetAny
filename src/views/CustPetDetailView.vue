@@ -105,13 +105,11 @@ export default {
         );
         const petDetail = res.data;
         this.petDetail = petDetail
-        console.log(petDetail.links.medicalrecord);
       } catch (error) {
         console.log(error);
       }
     },
-  },
-  async deletePetDetail() {
+    async deletePetDetail() {
       try {
         const res = await Axios.delete(
           `${this.$api}/delete-pet/` + this.$route.params.id
@@ -124,6 +122,8 @@ export default {
         console.log(error);
       }
     },
+  },
+  
 };
 </script>
 
