@@ -19,6 +19,12 @@
               <router-link to="/" class="to-edit"
                 >Edit Profil Peliharaan</router-link
               >
+              <v-btn
+                  class="sty"
+                  elevation="2"
+                  @click="deletePetDetail"
+                  >Hapus Pet</v-btn
+                  >
             </div>
             <v-col cols="9">
               <v-row>
@@ -58,19 +64,21 @@
               <p class="tx mb-2 mt-4 medrec-title">Data Kesehatan</p>
             </div>
             <div class="mt-4">
-              <div class="btns">
-                <v-btn class="crs" block elevation="2" fab mdi-plus tile>
-                  <v-icon>mdi-plus</v-icon>
-                </v-btn>
-              </div>
-              <div class="mt-2 rounded-3 data-pet d-flex">
-                <div class="col-6">
-                  <p class="mb-0">Pablo Demam</p>
+              <router-link :to="petDetail.links.medicalrecord" class="route-link">
+                <div class="btns">
+                    <v-btn absoluteclass="crs" block elevation="2" fab mdi-plus tile>
+                      <v-icon>mdi-plus</v-icon>
+                    </v-btn>
                 </div>
-                <div class="col-6">
-                  <p class="end-txt mb-0">Senin, 21 November 2021</p>
-                </div>
-              </div>
+              </router-link>
+                <v-card class="card--medrec mt-2 rounded-3 d-flex" v-for="medicalRecord in petDetail.medical_record" :key="medicalRecord.id">
+                  <router-link :to="medicalRecord.links.self" class="route-link">
+                    <v-row class="medrec-data col-12">
+                        <p class="mb-0">{{ medicalRecord.title }}</p>                        
+                        <p class="mb-0">{{ medicalRecord.date }}</p>
+                    </v-row>
+                  </router-link>
+                </v-card>
             </div>
           </div>
         </div>
@@ -96,13 +104,26 @@ export default {
           `${this.$api}/get-pet/` + this.$route.params.id
         );
         const petDetail = res.data;
-        this.petDetail = petDetail;
-        console.log(petDetail);
+        this.petDetail = petDetail
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async deletePetDetail() {
+      try {
+        const res = await Axios.delete(
+          `${this.$api}/delete-pet/` + this.$route.params.id
+        );
+
+        if (res.status == 200) {
+          this.$router.push({ name: "pet-list" });
+        }
       } catch (error) {
         console.log(error);
       }
     },
   },
+  
 };
 </script>
 
@@ -123,6 +144,24 @@ export default {
   font-size: 20px;
   color: $primary-color;
   font-weight: $font-weight-semibold;
+}
+
+.card {
+  &--medrec {
+    width: 100%;
+    background-color: $white;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0px 1px 10px 1px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.medrec-data{
+  justify-content: space-between;
+  margin: 0px;
+  width: 100%;
 }
 
 .medrec-title {
@@ -146,6 +185,10 @@ export default {
 }
 .pets {
   width: 70%;
+}
+
+.route-link {
+    text-decoration: none;
 }
 
 .to-edit {
