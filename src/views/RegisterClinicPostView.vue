@@ -150,46 +150,24 @@ export default {
   },
 
   async mounted() {
-    await this.getRegClinicById();
     await this.getFormData();
   },
   methods: {
-    async getRegClinic() {
+    async getFormData() {
       try {
-        const regClinic = await Axios.get(`${this.$api}/get-petshop`);
-        const clinicData = regClinic.data;
-        this.data = clinicData;
+        const formData = await Axios.get(`${this.$api}/petshop-form`);
+        const fixedFormData = formData.data;
+        this.formData = fixedFormData;
       } catch (error) {
         console.log(error);
       }
     },
-
-    async getRegClinicById() {
-      try {
-        const clinicByIdData = await Axios.get(`${this.$api}/get-petshop`);
-        const actualIdData = clinicByIdData.data.data;
-        this.models = actualIdData;
-      } catch (error) {
-        console.log(error);
-      }
-    },
-
     async regClinic() {
       try {
         const obj = this.models;
         const register = await Axios.post(`${this.$api}/create-petshop`, obj);
 
         console.log(register);
-      } catch (error) {
-        console.log(error);
-      }
-    },
-
-    async getFormData() {
-      try {
-        const formData = await Axios.get(`${this.$api}/petshop-form`);
-        const fixedFormData = formData.data;
-        this.formData = fixedFormData;
       } catch (error) {
         console.log(error);
       }

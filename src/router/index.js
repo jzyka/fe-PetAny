@@ -31,6 +31,7 @@ import CashierView from "../views/CashierView.vue";
 import CustClinicPaymentView from "../views/CustClinicPaymentView.vue";
 import CustClinicPaymentDetailView from "../views/CustClinicPaymentDetailView.vue";
 import ShoppingCartView from "../views/ShoppingCartView.vue";
+import RegisterClinicPostView from "../views/RegisterClinicPostView.vue";
 
 Vue.use(VueRouter);
 
@@ -134,6 +135,12 @@ const routes = [
         path: "/cust-clinic-detail",
         name: "clinic-detail",
         component: CustClinicPaymentDetailView,
+      },
+
+      {
+        path: "/register-as-clinic",
+        name: "register-as-clinic",
+        component: RegisterClinicPostView,
       },
     ],
   },
