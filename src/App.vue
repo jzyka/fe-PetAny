@@ -9,7 +9,7 @@ export default {
 
   data: () => ({}),
 
-  created() {
+  beforeCreate() {
     var data = JSON.parse(localStorage.getItem("data"));
     axios.defaults.headers.common[
       "Authorization"

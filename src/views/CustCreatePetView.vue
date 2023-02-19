@@ -195,15 +195,6 @@ export default {
         formData.append("weight", this.petWeight);
         formData.append("pet_image", this.imageData);
 
-        // {
-        //   pet_name: this.petName,
-        //   age: this.petAge,
-        //   allergies: this.petAllergies,
-        //   pet_genus: this.petGenus,
-        //   pet_species: this.petSpecies,
-        //   weight: this.petWeight,
-        //   pet_image: this.imageData,
-        // }
 
         const res = await axios({
           method: "post",
