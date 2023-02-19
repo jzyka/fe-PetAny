@@ -30,6 +30,7 @@ import AddProductView from "../views/AddProductView.vue";
 import EditProductView from "../views/EditProductView.vue";
 import CashierView from "../views/CashierView.vue";
 import ShoppingCartView from "../views/ShoppingCartView.vue";
+import TransactionView from "../views/TransactionView.vue"
 
 Vue.use(VueRouter);
 
@@ -135,6 +136,11 @@ const routes = [
         path: "/registration-status",
         name: "registration-status",
         component: RegStatusSuccessView,
+      },
+      {
+        path: "/transaction",
+        name: "transaction",
+        component: TransactionView,
       },
     ],
   },
