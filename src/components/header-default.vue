@@ -8,7 +8,6 @@
           /></router-link>
           <div class="header-right">
             <v-text-field
-              v-model="search"
               append-icon="mdi-magnify"
               label="Cari disini"
               solo

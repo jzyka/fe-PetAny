@@ -195,15 +195,6 @@ export default {
         formData.append("weight", this.petWeight);
         formData.append("pet_image", this.imageData);
 
-        // {
-        //   pet_name: this.petName,
-        //   age: this.petAge,
-        //   allergies: this.petAllergies,
-        //   pet_genus: this.petGenus,
-        //   pet_species: this.petSpecies,
-        //   weight: this.petWeight,
-        //   pet_image: this.imageData,
-        // }
 
         const res = await axios({
           method: "post",
@@ -214,10 +205,9 @@ export default {
           },
         });
         console.log(res.data);
-        // if (res.status == 200) {
-        //   localStorage.setItem("data", JSON.stringify(res.data));
-        //   //   this.$router.push({ name: "home" });
-        // }
+        if (res.status == 200) {
+          this.$router.push({ name: "pet-list" });
+        }
       } catch (error) {
         console.log(error);
       }
