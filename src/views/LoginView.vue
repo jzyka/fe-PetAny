@@ -74,10 +74,14 @@ export default {
           email: this.email,
           password: this.password,
         });
-        console.log(res.data);
         if (res.status == 200) {
           localStorage.setItem("data", JSON.stringify(res.data));
-          this.$router.push({ name: "home" });
+          var data = JSON.parse(localStorage.getItem("data"));
+          axios.defaults.headers.common[
+            "Authorization"
+          ] = `Bearer ${data.access_token}`;
+          this.$router.push({ name: "home" }); 
+          
         }
       } catch (error) {
         console.log(error);

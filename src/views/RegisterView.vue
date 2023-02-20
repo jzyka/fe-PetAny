@@ -124,6 +124,10 @@ export default {
         console.log(res.data);
         if (res.status == 200) {
           localStorage.setItem("data", JSON.stringify(res.data));
+          var data = JSON.parse(localStorage.getItem("data"));
+          axios.defaults.headers.common[
+            "Authorization"
+          ] = `Bearer ${data.access_token}`;
           this.$router.push({ name: "home" });
         }
       } catch (error) {

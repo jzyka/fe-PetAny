@@ -6,15 +6,15 @@
         <div class="col-6">
           <p class="tx">Judul</p>
           <div class="">
-            <v-text-field class="input-contain" solo background-color="#F1F1F1"></v-text-field>
+            <v-text-field class="input-contain" solo v-model="medRecTitle" background-color="#F1F1F1"></v-text-field>
           </div>
           <p class="tx">Deskripsi</p>
           <div>
-            <v-textarea class="input-contain" solo background-color="#F1F1F1"></v-textarea>
+            <v-textarea class="input-contain" solo v-model="medRecDescription" background-color="#F1F1F1"></v-textarea>
           </div>
           <p class="tx">Pengobatan</p>
           <div class="">
-            <v-text-field class="input-contain" solo background-color="#F1F1F1"></v-text-field>
+            <v-text-field class="input-contain" solo v-model="medRecTreatment" background-color="#F1F1F1"></v-text-field>
           </div>
         </div>
         <div class="col-6">
@@ -29,10 +29,14 @@
           </div>
           <p class="tx">Lampiran</p>
           <div class="">
-            <v-file-input accept="file/*" solo background-color="#F1F1F1" multiple> </v-file-input>
+            <v-file-input 
+            solo 
+            v-model="medRecAttachment" 
+            background-color="#F1F1F1" 
+            > </v-file-input>
           </div>
           <div class="btns">
-            <v-btn class="sty" elevation="2">Simpan Data</v-btn>
+            <v-btn class="sty" @submit.prevent @click="createMedRec" elevation="2">Simpan Data</v-btn>
           </div>
         </div>
       </div>
@@ -41,13 +45,75 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   data: () => ({
     date: new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().substr(0, 10),
     menu: false,
     modal: false,
     menu2: false,
+    medRecTitle: "",
+    medRecDescription: "",
+    medRecTreatment: "",
+    medRecAttachment: [],
+    models: {},
+    vModel: [
+      {
+        id: 1,
+        model: "title",
+      },
+      {
+        id: 2,
+        model: "description",
+      },
+      {
+        id: 3,
+        model: "treatment",
+      },
+      {
+        id: 4,
+        model: "date",
+      },
+      {
+        id: 5,
+        model: "attachment",
+      },
+    ],
   }),
+  methods: {
+    chooseFile() {
+        this.$refs.fileInput.click();
+      },
+    async createMedRec() {
+      try {
+        console.log(this.imageData);
+        const formData = new FormData();
+
+        formData.append("title", this.medRecTitle);
+        formData.append("description", this.medRecDescription);
+        formData.append("treatment", this.medRecTreatment);
+        formData.append("date", this.date);
+        formData.append("attachment", this.medRecAttachment);
+
+
+        const res = await axios({
+          method: "post",
+          url: `${this.$api}/add-medicalrecord?pet_id=` + this.$route.query.pet_id,
+          data: formData,
+          headers: {
+            "Content-Type": `multipart/form-data;`,
+          },
+        });
+        console.log(res.data);
+        if (res.status == 200) {
+          this.$router.push('/api/get-pet/' + this.$route.query.pet_id,);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+  }
 };
 </script>
 
