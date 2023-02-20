@@ -27,6 +27,12 @@
             <v-file-input accept="file/*" solo background-color="#F1F1F1" multiple> </v-file-input>
           </div>
           <div class="btns">
+            <v-btn
+              class="sty mr-5"
+              elevation="2"
+              @click="deleteMedicalRecordDetail"
+              >Hapus Data Kesehatan</v-btn
+            >
             <v-btn class="sty mr-5" elevation="2">Edit Data</v-btn>
             <v-btn :to="prevRoutePath" class="sty" elevation="2">Kembali</v-btn>
           </div>
@@ -60,6 +66,24 @@ export default {
         );
         const medicalRecord = res.data.data;
         this.medicalRecord = medicalRecord;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async deleteMedicalRecordDetail() {
+      try {
+        const response = await Axios.get(
+          `${this.$api}/get-medicalrecord/` + this.$route.params.id
+        );
+        const medicalRecord = response.data.data;
+        this.medicalRecord = medicalRecord;
+        const res = await Axios.delete(
+          `${this.$api}/delete-medicalrecord/` + this.$route.params.id
+        );
+
+        if (res.status == 200) {
+          this.$router.push(`/api/get-pet/${medicalRecord.pet_id.id}`);
+        }
       } catch (error) {
         console.log(error);
       }

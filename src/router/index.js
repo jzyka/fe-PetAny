@@ -32,6 +32,8 @@ import CustClinicPaymentView from "../views/CustClinicPaymentView.vue";
 import CustClinicPaymentDetailView from "../views/CustClinicPaymentDetailView.vue";
 import ShoppingCartView from "../views/ShoppingCartView.vue";
 import RegisterClinicPostView from "../views/RegisterClinicPostView.vue";
+import TransactionView from "../views/TransactionView.vue";
+import BookAppointmentDetailView from "../views/BookAppointmentDetailView.vue";
 import CustPetDataDetailView from "../views/CustPetDataDetailView.vue";
 
 Vue.use(VueRouter);
@@ -97,6 +99,11 @@ const routes = [
         name: "shopping-cart",
         component: ShoppingCartView,
       },
+      {
+        path: "/book-appoinment-detail",
+        name: "book-appoinment-detail",
+        component: BookAppointmentDetailView,
+      },
     ],
   },
 
@@ -159,6 +166,11 @@ const routes = [
         path: "/registration-status",
         name: "registration-status",
         component: RegStatusSuccessView,
+      },
+      {
+        path: "/transaction",
+        name: "transaction",
+        component: TransactionView,
       },
     ],
   },

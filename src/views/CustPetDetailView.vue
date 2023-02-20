@@ -19,6 +19,12 @@
               <router-link to="/" class="to-edit"
                 >Edit Profil Peliharaan</router-link
               >
+              <v-btn
+                  class="sty"
+                  elevation="2"
+                  @click="deletePetDetail"
+                  >Hapus Pet</v-btn
+                  >
             </div>
             <v-col cols="9">
               <v-row>
@@ -99,12 +105,25 @@ export default {
         );
         const petDetail = res.data;
         this.petDetail = petDetail
-        console.log(petDetail.links.medicalrecord);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async deletePetDetail() {
+      try {
+        const res = await Axios.delete(
+          `${this.$api}/delete-pet/` + this.$route.params.id
+        );
+
+        if (res.status == 200) {
+          this.$router.push({ name: "pet-list" });
+        }
       } catch (error) {
         console.log(error);
       }
     },
   },
+  
 };
 </script>
 
