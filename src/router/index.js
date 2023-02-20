@@ -31,6 +31,7 @@ import CashierView from "../views/CashierView.vue";
 import CustClinicPaymentView from "../views/CustClinicPaymentView.vue";
 import CustClinicPaymentDetailView from "../views/CustClinicPaymentDetailView.vue";
 import ShoppingCartView from "../views/ShoppingCartView.vue";
+import BookAppointmentDetailView from "../views/BookAppointmentDetailView.vue";
 import CustPetDataDetailView from "../views/CustPetDataDetailView.vue";
 
 Vue.use(VueRouter);
@@ -95,6 +96,11 @@ const routes = [
         path: "/shopping-cart",
         name: "shopping-cart",
         component: ShoppingCartView,
+      },
+      {
+        path: "/book-appoinment-detail",
+        name: "book-appoinment-detail",
+        component: BookAppointmentDetailView,
       },
     ],
   },
