@@ -31,6 +31,7 @@ import CashierView from "../views/CashierView.vue";
 import CustClinicPaymentView from "../views/CustClinicPaymentView.vue";
 import CustClinicPaymentDetailView from "../views/CustClinicPaymentDetailView.vue";
 import ShoppingCartView from "../views/ShoppingCartView.vue";
+import TransactionView from "../views/TransactionView.vue"
 import BookAppointmentDetailView from "../views/BookAppointmentDetailView.vue";
 import CustPetDataDetailView from "../views/CustPetDataDetailView.vue";
 
@@ -158,6 +159,11 @@ const routes = [
         path: "/registration-status",
         name: "registration-status",
         component: RegStatusSuccessView,
+      },
+      {
+        path: "/transaction",
+        name: "transaction",
+        component: TransactionView,
       },
     ],
   },
