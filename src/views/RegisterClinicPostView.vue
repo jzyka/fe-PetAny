@@ -42,6 +42,7 @@
                       v-if="model.name == 'permit'"
                       type="file"
                       multiple
+                      chips
                       id="input-permit"
                     />
                   </div>
@@ -150,46 +151,40 @@ export default {
   },
 
   async mounted() {
-    await this.getRegClinicById();
     await this.getFormData();
   },
   methods: {
-    async getRegClinic() {
-      try {
-        const regClinic = await Axios.get(`${this.$api}/get-petshop`);
-        const clinicData = regClinic.data;
-        this.data = clinicData;
-      } catch (error) {
-        console.log(error);
-      }
-    },
-
-    async getRegClinicById() {
-      try {
-        const clinicByIdData = await Axios.get(`${this.$api}/get-petshop`);
-        const actualIdData = clinicByIdData.data.data;
-        this.models = actualIdData;
-      } catch (error) {
-        console.log(error);
-      }
-    },
-
-    async regClinic() {
-      try {
-        const obj = this.models;
-        const register = await Axios.post(`${this.$api}/create-petshop`, obj);
-
-        console.log(register);
-      } catch (error) {
-        console.log(error);
-      }
-    },
-
     async getFormData() {
       try {
         const formData = await Axios.get(`${this.$api}/petshop-form`);
         const fixedFormData = formData.data;
         this.formData = fixedFormData;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async regClinic() {
+      try {
+        const obj = this.models;
+
+        let data = new FormData();
+        for (const key in obj) {
+          if (key == "permit") {
+            data.append("permit[]", ...obj["permit"]);
+          } else {
+            data.append(`${key}`, obj[key]);
+          }
+        }
+        const register = await Axios({
+          method: "post",
+          url: `${this.$api}/create-petshop`,
+          data: data,
+          headers: {
+            "Content-Type": `multipart/form-data;`,
+          },
+        });
+
+        console.log(register);
       } catch (error) {
         console.log(error);
       }
