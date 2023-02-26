@@ -1,40 +1,38 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import HomeView from "../views/HomeView.vue";
+import HomeView from "../views/ECommerce/HomeView.vue";
 import DefaultV1 from "../components/default-v1-layout.vue";
 import DefaultV2 from "../components/default-v2-layout.vue";
 import ProfileLayout from "../components/profile-layout.vue";
 import ClinicDashboardLayout from "../components/clinic-dashboard-layout.vue";
 import FormLayout from "../components/formLayout.vue";
-import LoginView from "../views/LoginView.vue";
-import RegisterView from "../views/RegisterView.vue";
-import RegisterClinicView from "../views/RegisterClinicView.vue";
-import RegisterClinicProcessView from "../views/RegisterClinicProcessView.vue";
-import VerificationView from "../views/VerificationView.vue";
-import PetListEmptyView from "../views/PetListEmptyView.vue";
-import CustAddPetView from "../views/CustAddPetView.vue";
-import CustPetDetailView from "../views/CustPetDetailView.vue";
-import CustAddPetDataView from "../views/CustAddPetDataView.vue";
-import CustEditPetDataView from "../views/CustEditPetDataView.vue";
-import CustCreatePetView from "../views/CustCreatePetView.vue";
-import CustPetListView from "../views/CustPetListView.vue";
-import RegStatusSuccessView from "../views/RegStatusSuccessView.vue";
-import ClinicProductListView from "../views/ClinicProductListView.vue";
-import StaffSettingView from "../views/StaffSettingView.vue";
-import AppointmentLobbyView from "../views/AppointmentLobbyView.vue";
-import VetPetLIstView from "../views/VetPetLIstView.vue";
-import BookAppoinmentListView from "../views/BookAppoinmentListView.vue";
-import StaffListView from "../views/StaffListView.vue";
-import AddProductView from "../views/AddProductView.vue";
-import EditProductView from "../views/EditProductView.vue";
-import CashierView from "../views/CashierView.vue";
-import CustClinicPaymentView from "../views/CustClinicPaymentView.vue";
-import CustClinicPaymentDetailView from "../views/CustClinicPaymentDetailView.vue";
-import ShoppingCartView from "../views/ShoppingCartView.vue";
-import RegisterClinicPostView from "../views/RegisterClinicPostView.vue";
-import TransactionView from "../views/TransactionView.vue";
-import BookAppointmentDetailView from "../views/BookAppointmentDetailView.vue";
-import CustPetDataDetailView from "../views/CustPetDataDetailView.vue";
+import LoginView from "../views/LoginRegister/LoginView.vue";
+import RegisterView from "../views/LoginRegister/RegisterView.vue";
+import RegisterClinicProcessView from "../views/LoginRegister/RegisterClinicProcessView.vue";
+import VerificationView from "../views/LoginRegister/VerificationView.vue";
+import CustAddPetView from "../views/CustPets/CustAddPetView.vue";
+import CustPetDetailView from "../views/CustPets/CustPetDetailView.vue";
+import CustAddPetDataView from "../views/CustPets/CustAddPetDataView.vue";
+import CustEditPetDataView from "../views/CustPets/CustEditPetDataView.vue";
+import CustCreatePetView from "../views/CustPets/CustCreatePetView.vue";
+import CustPetListView from "../views/CustPets/CustPetListView.vue";
+import RegStatusSuccessView from "../views/CustProfile/RegStatusSuccessView.vue";
+import ClinicProductListView from "../views/VetDashboard/ClinicProductListView.vue";
+import StaffSettingView from "../views/VetDashboard/StaffSettingView.vue";
+import AppointmentLobbyView from "../views/BookAppointment/AppointmentLobbyView.vue";
+import VetPetLIstView from "../views/VetDashboard/VetPetLIstView.vue";
+import BookAppoinmentListView from "../views/BookAppointment/BookAppoinmentListView.vue";
+import StaffListView from "../views/VetDashboard/StaffListView.vue";
+import AddProductView from "../views/VetDashboard/AddProductView.vue";
+import EditProductView from "../views/ECommerce/EditProductView.vue";
+import CashierView from "../views/VetDashboard/CashierView.vue";
+import CustClinicPaymentView from "../views/BookAppointment/CustClinicPaymentView.vue";
+import CustClinicPaymentDetailView from "../views/ECommerce/CustClinicPaymentDetailView.vue";
+import ShoppingCartView from "../views/ECommerce/ShoppingCartView.vue";
+import RegisterClinicPostView from "../views/LoginRegister/RegisterClinicPostView.vue";
+import TransactionView from "../views/ECommerce/TransactionView.vue";
+import BookAppointmentDetailView from "../views/BookAppointment/BookAppointmentDetailView.vue";
+import CustPetDataDetailView from "../views/CustPets/CustPetDataDetailView.vue";
 
 Vue.use(VueRouter);
 
@@ -48,11 +46,6 @@ const routes = [
         path: "/",
         name: "home",
         component: HomeView,
-      },
-      {
-        path: "/pet-list-empty",
-        name: "pet-list-empty",
-        component: PetListEmptyView,
       },
       {
         path: "/cust-add-pet",
@@ -129,11 +122,6 @@ const routes = [
     name: "",
     component: DefaultV2,
     children: [
-      {
-        path: "/register-clinic",
-        name: "register-clinic",
-        component: RegisterClinicView,
-      },
       {
         path: "/register-clinic-process",
         name: "register-clinic-process",
