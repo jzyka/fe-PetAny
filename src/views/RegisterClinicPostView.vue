@@ -42,6 +42,7 @@
                       v-if="model.name == 'permit'"
                       type="file"
                       multiple
+                      chips
                       id="input-permit"
                     />
                   </div>
@@ -165,7 +166,23 @@ export default {
     async regClinic() {
       try {
         const obj = this.models;
-        const register = await Axios.post(`${this.$api}/create-petshop`, obj);
+
+        let data = new FormData();
+        for (const key in obj) {
+          if (key == "permit") {
+            data.append("permit[]", ...obj["permit"]);
+          } else {
+            data.append(`${key}`, obj[key]);
+          }
+        }
+        const register = await Axios({
+          method: "post",
+          url: `${this.$api}/create-petshop`,
+          data: data,
+          headers: {
+            "Content-Type": `multipart/form-data;`,
+          },
+        });
 
         console.log(register);
       } catch (error) {
