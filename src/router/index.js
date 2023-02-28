@@ -4,6 +4,7 @@ import HomeView from "../views/ECommerce/HomeView.vue";
 import DefaultV1 from "../components/default-v1-layout.vue";
 import DefaultV2 from "../components/default-v2-layout.vue";
 import ProfileLayout from "../components/profile-layout.vue";
+import ProfileSidebar from "../components/cust-profile-sidebar.vue";
 import ClinicDashboardLayout from "../components/clinic-dashboard-layout.vue";
 import FormLayout from "../components/formLayout.vue";
 import LoginView from "../views/LoginRegister/LoginView.vue";
@@ -33,6 +34,9 @@ import RegisterClinicPostView from "../views/LoginRegister/RegisterClinicPostVie
 import TransactionView from "../views/ECommerce/TransactionView.vue";
 import BookAppointmentDetailView from "../views/BookAppointment/BookAppointmentDetailView.vue";
 import CustPetDataDetailView from "../views/CustPets/CustPetDataDetailView.vue";
+import CustTransactionAppointView from "../views/CustPets/CustTransactionAppointView.vue";
+import CustTransactionProductView from "../views/CustPets/CustTransactionProductView.vue";
+import InvoiceTransaction from "../views/CustPets/InvoiceTransactionView.vue";
 
 Vue.use(VueRouter);
 
@@ -96,6 +100,27 @@ const routes = [
         path: "/book-appoinment-detail",
         name: "book-appoinment-detail",
         component: BookAppointmentDetailView,
+      },
+      {
+        path: "/transaction-appoint",
+        name: "transaction-appoint",
+        component: CustTransactionAppointView,
+      },
+      {
+        path: "/transaction-product",
+        name: "transaction-product",
+        component: CustTransactionProductView,
+      },
+      {
+        path: "/invoice",
+        name: "invoice",
+        component: InvoiceTransaction,
+      },
+      {
+        path: "/sidebar",
+        name: "",
+        component: ProfileSidebar,
+        children: [],
       },
     ],
   },
