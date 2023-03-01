@@ -1,11 +1,8 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+
+// Views
 import HomeView from "../views/ECommerce/HomeView.vue";
-import DefaultV1 from "../components/default-v1-layout.vue";
-import DefaultV2 from "../components/default-v2-layout.vue";
-import ProfileLayout from "../components/profile-layout.vue";
-import ClinicDashboardLayout from "../components/clinic-dashboard-layout.vue";
-import FormLayout from "../components/formLayout.vue";
 import LoginView from "../views/LoginRegister/LoginView.vue";
 import RegisterView from "../views/LoginRegister/RegisterView.vue";
 import RegisterClinicProcessView from "../views/LoginRegister/RegisterClinicProcessView.vue";
@@ -33,6 +30,15 @@ import RegisterClinicPostView from "../views/LoginRegister/RegisterClinicPostVie
 import TransactionView from "../views/ECommerce/TransactionView.vue";
 import BookAppointmentDetailView from "../views/BookAppointment/BookAppointmentDetailView.vue";
 import CustPetDataDetailView from "../views/CustPets/CustPetDataDetailView.vue";
+import CreatePetshopProfileView from "../views/VetDashboard/CreatePetshopProfileView.vue";
+import PetshopProfileView from "../views/VetDashboard/PetshopProfileView.vue";
+
+// Layouts
+import DefaultV1 from "../components/default-v1-layout.vue";
+import DefaultV2 from "../components/default-v2-layout.vue";
+import ProfileLayout from "../components/profile-layout.vue";
+import ClinicDashboardLayout from "../components/clinic-dashboard-layout.vue";
+import FormLayout from "../components/formLayout.vue";
 
 Vue.use(VueRouter);
 
@@ -196,6 +202,16 @@ const routes = [
         path: "/cashier",
         name: "cashier",
         component: CashierView,
+      },
+      {
+        path: "/create-petshop-profile",
+        name: "create-petshop-profile",
+        component: CreatePetshopProfileView,
+      },
+      {
+        path: "/petshop-profile",
+        name: "petshop-profile",
+        component: PetshopProfileView,
       },
     ],
   },
