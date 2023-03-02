@@ -23,6 +23,18 @@
                 <p class="email">kliniklorem@gmail.com</p>
               </div>
 
+              <div class="link-contain">
+                <div class="bg-link">
+                  <v-img
+                    src="@/assets/link-icon.png"
+                    class="link-img"
+                    cover
+                    max-width="15px"
+                  ></v-img>
+                </div>
+                <a href="https://github.com/jzyka/fe-PetAny">Link</a>
+              </div>
+
               <div class="services">
                 <p class="service-card">Grooming</p>
               </div>
@@ -36,7 +48,7 @@
                 mdi-plus
                 tile
                 @submit.prevent
-                >Simpan Profil</v-btn
+                >Edit Profil</v-btn
               >
             </div>
           </div>
@@ -63,17 +75,6 @@
                 nulla pariatur. Excepteur sint occaecat cupidatat non proident,
                 sunt in culpa qui officia deserunt mollit anim id est laborum.
               </p>
-            </div>
-            <div class="link-contain">
-              <div class="bg-link">
-                <v-img
-                  src="@/assets/link-icon.png"
-                  class="link-img"
-                  cover
-                  max-width="15px"
-                ></v-img>
-              </div>
-              <a href="https://github.com/jzyka/fe-PetAny">Link</a>
             </div>
           </div>
         </div>
@@ -192,6 +193,23 @@ export default {
         font-weight: $font-weight-semibold;
       }
 
+      .link-contain {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 10px;
+
+        .bg-link {
+          padding: 7px;
+          border-radius: 100px;
+          background-color: $secondary-color;
+        }
+        a {
+          text-decoration: none;
+          color: $steel-blue;
+        }
+      }
+
       .services {
         display: flex;
         flex-wrap: wrap;
@@ -219,6 +237,13 @@ export default {
     .edit-btn {
       width: 15%;
       margin-left: auto;
+
+      .crs {
+        background-color: $primary-color !important;
+        color: $white !important;
+        text-transform: capitalize;
+        border-radius: 7px;
+      }
     }
   }
 
@@ -237,21 +262,6 @@ export default {
         font-size: 18px;
         font-weight: $font-weight-medium;
         margin-bottom: 5px;
-      }
-    }
-
-    .link-contain {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      .bg-link {
-        padding: 7px;
-        border-radius: 100px;
-        background-color: $secondary-color;
-      }
-      a {
-        text-decoration: none;
-        color: $steel-blue;
       }
     }
   }
