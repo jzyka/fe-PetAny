@@ -33,6 +33,7 @@ import RegisterClinicPostView from "../views/LoginRegister/RegisterClinicPostVie
 import TransactionView from "../views/ECommerce/TransactionView.vue";
 import BookAppointmentDetailView from "../views/BookAppointment/BookAppointmentDetailView.vue";
 import CustPetDataDetailView from "../views/CustPets/CustPetDataDetailView.vue";
+import ProductDetailView from "../views/ECommerce/ProductDetailView.vue";
 
 Vue.use(VueRouter);
 
@@ -96,6 +97,11 @@ const routes = [
         path: "/book-appoinment-detail",
         name: "book-appoinment-detail",
         component: BookAppointmentDetailView,
+      },
+      {
+        path: "/product",
+        name: "product",
+        component: ProductDetailView,
       },
     ],
   },
