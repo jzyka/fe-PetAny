@@ -16,6 +16,9 @@
             <router-link to="/" class="menu">Status Pendaftaran</router-link>
             <router-link to="/" class="menu">Bantuan</router-link>
             <router-link to="/" class="menu">Pengaturan</router-link>
+            <button v-if="localStorage" @click="logout()" class="logout">
+              Logout
+            </button>
           </div>
         </v-row>
       </v-container>
@@ -24,11 +27,25 @@
 </template>
 
 <script>
-export default {};
+export default {
+  created() {
+    this.getLocalStorage();
+  },
+  methods: {
+    getLocalStorage() {
+      this.localStorage = JSON.parse(localStorage.getItem("data"));
+    },
+
+    logout() {
+      localStorage.clear();
+      this.$router.push({ name: "login" });
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
-qw .customer-nav {
+.customer-nav {
   background: $white;
   box-shadow: 0px 1px 10px 1px rgba(0, 0, 0, 0.15);
   border-radius: 20px;
@@ -63,6 +80,10 @@ qw .customer-nav {
   .profile-text {
     margin-top: 10px;
     font-weight: $font-weight-medium;
+  }
+
+  .logout {
+    color: #ff4a4a;
   }
 }
 </style>
