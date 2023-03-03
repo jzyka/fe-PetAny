@@ -30,6 +30,7 @@ import RegisterClinicPostView from "../views/LoginRegister/RegisterClinicPostVie
 import TransactionView from "../views/ECommerce/TransactionView.vue";
 import BookAppointmentDetailView from "../views/BookAppointment/BookAppointmentDetailView.vue";
 import CustPetDataDetailView from "../views/CustPets/CustPetDataDetailView.vue";
+import ProductDetailView from "../views/ECommerce/ProductDetailView.vue";
 import CustTransactionAppointView from "../views/CustPets/CustTransactionAppointView.vue";
 import CustTransactionProductView from "../views/CustPets/CustTransactionProductView.vue";
 import InvoiceTransaction from "../views/CustPets/InvoiceTransactionView.vue";
@@ -107,6 +108,11 @@ const routes = [
         component: BookAppointmentDetailView,
       },
       {
+        path: "/product",
+        name: "product",
+        component: ProductDetailView,
+      },
+      {
         path: "/transaction-appoint",
         name: "transaction-appoint",
         component: CustTransactionAppointView,
@@ -120,12 +126,6 @@ const routes = [
         path: "/invoice",
         name: "invoice",
         component: InvoiceTransaction,
-      },
-      {
-        path: "/sidebar",
-        name: "",
-        component: ProfileSidebar,
-        children: [],
       },
     ],
   },
