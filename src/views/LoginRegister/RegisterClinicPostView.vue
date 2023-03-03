@@ -183,6 +183,13 @@ export default {
             "Content-Type": `multipart/form-data;`,
           },
         });
+        if (register.status == 200) {
+          let localStorageData = JSON.parse(localStorage.getItem("data"));
+          localStorageData.data.petshop_id = register.data.data.id;
+          console.log(localStorageData);
+          localStorage.setItem("data", JSON.stringify(localStorageData));
+          this.$router.push({ name: "create-petshop-profile" });
+        }
 
         console.log(register);
       } catch (error) {

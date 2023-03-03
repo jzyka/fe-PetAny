@@ -37,13 +37,26 @@
                   <a href="#"><img src="@/assets/instagram.png" alt="" /></a>
                 </div>
               </div>
-              <div class="footer-content">
+              <div
+                class="footer-content"
+                v-if="localStorage.data.petshop_id == null"
+              >
                 <p class="content-title">Anda memiliki klinik hewan?</p>
-                <router-link to="/register-clinic" class="to-register">
+                <router-link to="/register-as-clinic" class="to-register">
                   Daftar sebagai klinik hewan
                 </router-link>
                 <router-link to="/register" class="more-info">
                   Informasi lebih lanjut
+                </router-link>
+              </div>
+              <div
+                class="footer-content"
+                v-if="localStorage.data.petshop_id != null"
+              >
+                <p class="content-title">Kelola klinik anda</p>
+
+                <router-link to="/petshop-profile" class="to-clinic">
+                  Ke Dashboard Klinik
                 </router-link>
               </div>
             </div>
@@ -64,6 +77,15 @@
 <script>
 export default {
   name: "FooterPetany",
+  created() {
+    this.getLocalStorage();
+    console.log(localStorage.data.petshop_id);
+  },
+  methods: {
+    getLocalStorage() {
+      this.localStorage = JSON.parse(localStorage.getItem("data"));
+    },
+  },
 };
 </script>
 
@@ -120,7 +142,8 @@ footer {
           }
         }
 
-        .to-register {
+        .to-register,
+        .to-clinic {
           text-decoration: none;
           color: $white;
           background-color: $primary-color;

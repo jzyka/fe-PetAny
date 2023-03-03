@@ -13,18 +13,21 @@
               solo
               hide-details
             ></v-text-field>
-            <router-link to="/pet-list" class="to-my-pet"
+            <router-link to="/pet-list" class="to-my-pet" v-if="localStorage"
               ><img src="@/assets/paw.png" alt="" />Peliharaan saya</router-link
             >
-            <router-link to="/" class="btn-to cart"
+            <router-link to="/" class="btn-to cart" v-if="localStorage"
               ><img src="@/assets/cart.png" alt=""
             /></router-link>
-            <router-link to="/" class="btn-to notification"
+            <router-link to="/" class="btn-to notification" v-if="localStorage"
               ><img src="@/assets/notification.png" alt=""
             /></router-link>
-            <router-link to="/" class="profile"
+            <router-link to="/login" class="to-login" v-if="!localStorage">
+              <p class="login">Masuk/Daftar</p>
+            </router-link>
+            <router-link to="/transaction" class="profile" v-if="localStorage"
               ><img src="@/assets/user-img.png" alt="" />
-              <p class="username">John Doe</p>
+              <p class="username">{{ localStorage.data.name }}</p>
             </router-link>
           </div>
         </v-row>
@@ -34,7 +37,21 @@
 </template>
 
 <script>
-export default {};
+export default {
+  created() {
+    this.getLocalStorage();
+  },
+  methods: {
+    getLocalStorage() {
+      this.localStorage = JSON.parse(localStorage.getItem("data"));
+    },
+
+    logout() {
+      localStorage.clear();
+      this.$router.push({ name: "login" });
+    },
+  },
+};
 </script>
 
 <style lang="scss">
@@ -131,5 +148,18 @@ header {
 }
 #app {
   margin-bottom: auto;
+}
+
+.to-login {
+  text-decoration: none;
+  padding: 10px 15px;
+  border-radius: 10px;
+  background-color: $primary-color;
+  .login {
+    color: $white;
+    font-weight: $font-weight-reg;
+    margin: auto 0;
+    line-height: 16px;
+  }
 }
 </style>
