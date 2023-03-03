@@ -13,14 +13,13 @@
               ></v-img>
             </div>
             <div class="main-info">
-              <p class="clinic-name">Klinik Hewan Lorem</p>
+              <p class="clinic-name">{{ clinic.petshop_name }}</p>
               <p class="petshop-address">
-                Jl. Sukun Raya No.09, Besito Kulon, Besito, Kec. Gebog, Kab.
-                Kudus, Jawa Tengah
+                {{ clinic.petshop_address }}
               </p>
               <div class="flex-info">
-                <p class="phone-number">0851-5555-8909</p>
-                <p class="email">kliniklorem@gmail.com</p>
+                <p class="phone-number">{{ clinic.phone_number }}</p>
+                <p class="email">{{ clinic.petshop_email }}</p>
               </div>
 
               <div class="link-contain">
@@ -32,11 +31,17 @@
                     max-width="15px"
                   ></v-img>
                 </div>
-                <a href="https://github.com/jzyka/fe-PetAny">Link</a>
+                <a :href="clinic.website">{{ clinic.website }}</a>
               </div>
 
               <div class="services">
-                <p class="service-card">Grooming</p>
+                <p
+                  class="service-card"
+                  v-for="(value, i) in categories"
+                  :key="i"
+                >
+                  {{ value }}
+                </p>
               </div>
             </div>
             <div class="edit-btn">
@@ -52,7 +57,16 @@
               >
             </div>
           </div>
-          <div class="operational-data my-5">
+
+          <div class="bottom-section">
+            <div class="desc-contain">
+              <p class="data-title">Deskripsi Toko</p>
+              <p class="data-content">
+                {{ clinic.description }}
+              </p>
+            </div>
+          </div>
+          <div class="operational-data my-4">
             <p class="operational-title">Jam Operasional Klinik</p>
             <v-data-table
               :headers="headers"
@@ -61,21 +75,6 @@
               class="elevation-1 rounded-lg"
             >
             </v-data-table>
-          </div>
-
-          <div class="bottom-section">
-            <div class="desc-contain">
-              <p class="data-title">Deskripsi Toko</p>
-              <p class="data-content">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                sunt in culpa qui officia deserunt mollit anim id est laborum.
-              </p>
-            </div>
           </div>
         </div>
       </v-container>
@@ -109,22 +108,20 @@ export default {
       },
     ],
     data: [],
+    clinic: [],
+    categories: [],
   }),
 
   async mounted() {
     await this.getOperationalHour();
-  },
-  created() {
-    this.getLocalStorage();
+    await this.getClinicData();
   },
 
   methods: {
-    getLocalStorage() {
-      this.localStorage = JSON.parse(localStorage.getItem("data"));
-    },
-
     async getOperationalHour() {
       try {
+        this.localStorage = JSON.parse(localStorage.getItem("data"));
+
         const petshopID = this.localStorage.data.petshop_id;
         const operational = await axios.get(
           `${this.$api}/petshop/get-jam-operasional/${petshopID}`
@@ -132,6 +129,22 @@ export default {
         console.log(operational);
         const data = operational.data;
         this.data = data;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+    async getClinicData() {
+      try {
+        const petshopID = this.localStorage.data.petshop_id;
+        const clinicData = await axios.get(
+          `${this.$api}/get-petshop/${petshopID}`
+        );
+        let clinic = clinicData.data.data;
+        this.clinic = clinic;
+        let categories = clinic.category;
+        this.categories = categories;
+        console.log(categories);
       } catch (error) {
         console.log(error);
       }
@@ -186,6 +199,7 @@ export default {
       border-radius: 20px;
       width: 13%;
       box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.1);
+      height: fit-content;
 
       .profile {
         border-radius: 20px;
@@ -221,6 +235,7 @@ export default {
         display: flex;
         flex-wrap: wrap;
         width: 100%;
+        gap: 10px;
         .service-card {
           background-color: $secondary-color;
           border-radius: 100px;
@@ -263,12 +278,17 @@ export default {
   }
 
   .bottom-section {
+    margin-top: 2rem;
     margin-bottom: 0;
     .desc-contain {
       .data-title {
         font-size: 18px;
         font-weight: $font-weight-medium;
         margin-bottom: 5px;
+      }
+
+      .data-content {
+        margin-bottom: 0;
       }
     }
   }
