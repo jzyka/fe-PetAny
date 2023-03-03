@@ -30,6 +30,9 @@ import RegisterClinicPostView from "../views/LoginRegister/RegisterClinicPostVie
 import TransactionView from "../views/ECommerce/TransactionView.vue";
 import BookAppointmentDetailView from "../views/BookAppointment/BookAppointmentDetailView.vue";
 import CustPetDataDetailView from "../views/CustPets/CustPetDataDetailView.vue";
+import CustTransactionAppointView from "../views/CustPets/CustTransactionAppointView.vue";
+import CustTransactionProductView from "../views/CustPets/CustTransactionProductView.vue";
+import InvoiceTransaction from "../views/CustPets/InvoiceTransactionView.vue";
 import CreatePetshopProfileView from "../views/VetDashboard/CreatePetshopProfileView.vue";
 import PetshopProfileView from "../views/VetDashboard/PetshopProfileView.vue";
 
@@ -102,6 +105,27 @@ const routes = [
         path: "/book-appoinment-detail",
         name: "book-appoinment-detail",
         component: BookAppointmentDetailView,
+      },
+      {
+        path: "/transaction-appoint",
+        name: "transaction-appoint",
+        component: CustTransactionAppointView,
+      },
+      {
+        path: "/transaction-product",
+        name: "transaction-product",
+        component: CustTransactionProductView,
+      },
+      {
+        path: "/invoice",
+        name: "invoice",
+        component: InvoiceTransaction,
+      },
+      {
+        path: "/sidebar",
+        name: "",
+        component: ProfileSidebar,
+        children: [],
       },
     ],
   },
