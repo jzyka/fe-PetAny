@@ -80,8 +80,7 @@ export default {
           axios.defaults.headers.common[
             "Authorization"
           ] = `Bearer ${data.access_token}`;
-          this.$router.push({ name: "home" }); 
-          
+          this.$router.push({ name: "home" });
         }
       } catch (error) {
         console.log(error);

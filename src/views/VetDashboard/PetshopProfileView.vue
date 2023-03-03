@@ -114,13 +114,24 @@ export default {
   async mounted() {
     await this.getOperationalHour();
   },
+  created() {
+    this.getLocalStorage();
+  },
 
   methods: {
+    getLocalStorage() {
+      this.localStorage = JSON.parse(localStorage.getItem("data"));
+      console.log(this.localStorage.data.petshop_id);
+    },
+
     async getOperationalHour() {
       try {
-        // console.log(`printt ${this.$api}/petshop/${id}/get-jam-operasional`);
+        const petshopID = this.localStorage.data.petshop_id;
+        console.log(
+          `printt ${this.$api}/petshop/get-jam-operasional/${petshopID}`
+        );
         const operational = await axios.get(
-          `${this.$api}/petshop/2/get-jam-operasional`
+          `${this.$api}/petshop/get-jam-operasional/${petshopID}`
         );
         console.log(operational);
         const data = operational.data;
