@@ -118,6 +118,7 @@
               >
             </div>
           </div>
+
           <div class="operational-hour">
             <p class="form-title mt-4 mb-3">Jam Operasional</p>
 
@@ -132,78 +133,69 @@
               </template>
 
               <template v-slot:[`item.jam_buka`]="{ item }">
-                <v-dialog
-                  :retain-focus="false"
-                  ref="jamBuka"
-                  v-model="jamBuka"
-                  :return-value="item"
-                  persistent
-                  width="290px"
+                <v-menu
+                  v-model="jamBuka[item.hari_buka]"
+                  :close-on-content-click="false"
+                  transition="scale-transition"
+                  offset-y
+                  max-width="290px"
+                  min-width="290px"
                 >
                   <template v-slot:activator="{ on, attrs }">
                     <v-text-field
+                      hide-details="auto"
+                      single-line
                       v-model="item.jam_buka"
                       label="Pilih Jam Buka"
                       readonly
+                      :disabled="!item.is_open"
+                      class="py-2"
                       v-bind="attrs"
                       v-on="on"
                     ></v-text-field>
                   </template>
                   <v-time-picker
-                    v-if="jamBuka"
+                    no-title
+                    ampm-in-title
+                    :disabled="!item.is_open"
+                    format="24hr"
                     v-model="item.jam_buka"
                     full-width
-                  >
-                    <v-spacer></v-spacer>
-                    <v-btn text color="primary" @click="jamBuka = false">
-                      Cancel
-                    </v-btn>
-                    <v-btn
-                      text
-                      color="primary"
-                      @click="$refs.jamBuka.save(item.jam_buka)"
-                    >
-                      OK
-                    </v-btn>
-                  </v-time-picker>
-                </v-dialog>
+                  ></v-time-picker>
+                </v-menu>
               </template>
 
               <template v-slot:[`item.jam_tutup`]="{ item }">
-                <v-dialog
-                  ref="jamTutup"
-                  v-model="dialogTutup"
-                  :return-value.sync="item.jam_tutup"
-                  persistent
-                  width="290px"
+                <v-menu
+                  v-model="jamTutup[item.hari_buka]"
+                  :close-on-content-click="false"
+                  transition="scale-transition"
+                  offset-y
+                  max-width="290px"
+                  min-width="290px"
                 >
                   <template v-slot:activator="{ on, attrs }">
                     <v-text-field
+                      hide-details="auto"
+                      single-line
                       v-model="item.jam_tutup"
-                      label="Pilih Jam tutup"
+                      label="Pilih Jam Tutup"
                       readonly
+                      :disabled="!item.is_open"
+                      class="py-2"
                       v-bind="attrs"
                       v-on="on"
                     ></v-text-field>
                   </template>
                   <v-time-picker
-                    v-if="dialogTutup"
+                    no-title
+                    ampm-in-title
+                    :disabled="!item.is_open"
+                    format="24hr"
                     v-model="item.jam_tutup"
                     full-width
-                  >
-                    <v-spacer></v-spacer>
-                    <v-btn text color="primary" @click="dialogTutup = false">
-                      Cancel
-                    </v-btn>
-                    <v-btn
-                      text
-                      color="primary"
-                      @click="$refs.jamTutup.save(item.jam_tutup)"
-                    >
-                      OK
-                    </v-btn>
-                  </v-time-picker>
-                </v-dialog>
+                  ></v-time-picker>
+                </v-menu>
               </template>
             </v-data-table>
           </div>
@@ -249,48 +241,48 @@ export default {
 
   data: () => ({
     categories: [],
-    jamBuka: false,
-    dialogTutup: false,
+    jamBuka: [],
+    jamTutup: [],
     clinic: [],
     operational_hour: [
       {
-        is_open: true,
+        is_open: false,
         hari_buka: "Senin",
         jam_buka: "",
         jam_tutup: "",
       },
       {
-        is_open: true,
+        is_open: false,
         hari_buka: "Selasa",
         jam_buka: "",
         jam_tutup: "",
       },
       {
-        is_open: true,
+        is_open: false,
         hari_buka: "Rabu",
         jam_buka: "",
         jam_tutup: "",
       },
       {
-        is_open: true,
+        is_open: false,
         hari_buka: "Kamis",
         jam_buka: "",
         jam_tutup: "",
       },
       {
-        is_open: true,
+        is_open: false,
         hari_buka: "Jumat",
         jam_buka: "",
         jam_tutup: "",
       },
       {
-        is_open: true,
+        is_open: false,
         hari_buka: "Sabtu",
         jam_buka: "",
         jam_tutup: "",
       },
       {
-        is_open: true,
+        is_open: false,
         hari_buka: "Minggu",
         jam_buka: "",
         jam_tutup: "",
@@ -305,14 +297,17 @@ export default {
       },
       {
         text: "Hari",
+        sortable: false,
         value: "hari_buka",
       },
       {
         text: "Jam Buka",
+        sortable: false,
         value: "jam_buka",
       },
       {
         text: "Jam Tutup",
+        sortable: false,
         value: "jam_tutup",
       },
     ],
