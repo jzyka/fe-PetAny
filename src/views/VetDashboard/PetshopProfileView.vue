@@ -6,7 +6,7 @@
           <div class="top-section">
             <div class="profile-img">
               <v-img
-                src="@/assets/petany-logo-bright.png"
+                :src="clinic.petshop_image"
                 aspect-ratio="1"
                 cover
                 class="profile"
@@ -45,15 +45,8 @@
               </div>
             </div>
             <div class="edit-btn">
-              <v-btn
-                class="crs"
-                block
-                elevation="2"
-                large
-                mdi-plus
-                tile
-                @submit.prevent
-                >Edit Profil</v-btn
+              <router-link class="crs" block to="/create-petshop-profile"
+                >Edit Profil</router-link
               >
             </div>
           </div>
