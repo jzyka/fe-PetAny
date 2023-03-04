@@ -7,8 +7,7 @@
             <div class="choose-profile">
               <div class="image-bg">
                 <v-img
-                  v-if="imagePreviewURL"
-                  :src="imagePreviewURL"
+                  :src="clinic.petshop_image"
                   aspect-ratio="1"
                   cover
                   class="profile"
@@ -18,6 +17,7 @@
                 justify-center
                 label="File input"
                 @change="onFileChange"
+                v-model="clinic.petshop_image"
                 prepend-icon="Pilih profil"
                 hide-input
                 class="image-input"
@@ -30,22 +30,27 @@
                 placeholder="Nama Klinik"
                 outlined
                 block
+                v-model="clinic.petshop_name"
                 hide-details
-                class="mb-2 mid-input"
+                class="mb-3 mid-input"
               ></v-text-field>
               <v-text-field
                 label="Alamat"
                 placeholder="Alamat solat"
                 outlined
                 block
+                disabled
+                v-model="clinic.petshop_address"
                 hide-details
-                class="mb-2 mid-input"
+                class="mb-3 mid-input"
               ></v-text-field>
               <div class="contain">
                 <v-text-field
                   label="Nomor Telepon Klinik"
                   placeholder="Nomor Telepon Klinik"
                   outlined
+                  disabled
+                  v-model="clinic.phone_number"
                   block
                   class="mid-input"
                   hide-details
@@ -55,6 +60,8 @@
                   placeholder="Email Klinik"
                   class="mid-input"
                   outlined
+                  disabled
+                  v-model="clinic.petshop_email"
                   block
                   hide-details
                 ></v-text-field>
@@ -64,33 +71,33 @@
                 <p class="service-title mb-1 mt-3">Layanan Kami</p>
                 <div class="checkbox-contain">
                   <v-checkbox
-                    v-model="services"
+                    v-model="categories"
                     label="Grooming"
-                    value="Grooming"
+                    value="grooming"
                     class="check-services mt-0"
                   ></v-checkbox>
                   <v-checkbox
-                    v-model="services"
+                    v-model="categories"
                     label="Klinik"
-                    value="Klinik"
+                    value="klinik"
                     class="check-services mt-0"
                   ></v-checkbox>
                   <v-checkbox
-                    v-model="services"
+                    v-model="categories"
                     label="Laboratorium"
-                    value="Laboratorium"
+                    value="laboratorium"
                     class="check-services mt-0"
                   ></v-checkbox>
                   <v-checkbox
-                    v-model="services"
+                    v-model="categories"
                     label="Rawat Inap"
-                    value="Rawat Inap"
+                    value="rawat inap"
                     class="check-services mt-0"
                   ></v-checkbox>
                   <v-checkbox
-                    v-model="services"
+                    v-model="categories"
                     label="Petshop"
-                    value="Petshop"
+                    value="petshop"
                     class="check-services mt-0"
                   ></v-checkbox>
                 </div>
@@ -106,6 +113,7 @@
                 mdi-plus
                 tile
                 @submit.prevent
+                @click="postClinicData"
                 >Simpan Profil</v-btn
               >
             </div>
@@ -205,6 +213,7 @@
             <v-textarea
               label="Deskripsi Klinik"
               class="form-clinic"
+              v-model="clinic.description"
               counter
               maxlength="300"
               full-width
@@ -220,6 +229,7 @@
               class="form-clinic"
               full-width
               solo
+              v-model="clinic.website"
               block
               outlined
             ></v-text-field>
@@ -231,17 +241,17 @@
 </template>
 
 <script>
-// import axios from "axios";
-import ImagePreviewMixin from "@/mixins/ImagePreviewMixin";
+import axios from "axios";
+// import ImagePreviewMixin from "@/mixins/ImagePreviewMixin";
 
 export default {
-  mixins: [ImagePreviewMixin],
+  // mixins: [ImagePreviewMixin],
 
   data: () => ({
-    services: [],
+    categories: [],
     jamBuka: false,
     dialogTutup: false,
-    ckinic_desc: "",
+    clinic: [],
     operational_hour: [
       {
         is_open: true,
@@ -307,6 +317,52 @@ export default {
       },
     ],
   }),
+
+  async mounted() {
+    await this.getClinicData();
+  },
+
+  methods: {
+    async postClinicData() {
+      try {
+        const petshopID = this.localStorage.data.petshop_id;
+
+        const res = await axios.post(
+          `${this.$api}/update-petshop/${petshopID}`,
+          {
+            petshop_name: this.clinic.petshop_name,
+            petshop_image: this.clinic.petshop_image,
+            petshop_address: this.clinic.petshop_address,
+            description: this.clinic.description,
+            website: this.clinic.website,
+            category: this.clinic.category,
+          }
+        );
+        console.log(res);
+        if (res.status == 200) {
+          this.$router.push({ name: "petshop-profile" });
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async getClinicData() {
+      try {
+        this.localStorage = JSON.parse(localStorage.getItem("data"));
+
+        const petshopID = this.localStorage.data.petshop_id;
+        const clinicData = await axios.get(
+          `${this.$api}/get-petshop/${petshopID}`
+        );
+        let clinic = clinicData.data.data;
+        this.clinic = clinic;
+        let categories = clinic.category;
+        this.categories = categories;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+  },
 };
 </script>
 
