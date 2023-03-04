@@ -256,6 +256,13 @@ export default {
       .crs {
         background-color: $primary-color !important;
         color: $white !important;
+        text-decoration: none;
+        width: 100%;
+        padding: 7px 10px;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        float: right;
         text-transform: capitalize;
         border-radius: 7px;
       }
