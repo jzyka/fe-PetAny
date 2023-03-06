@@ -91,9 +91,12 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   data: () => ({
     VetCard: [],
+    vetAll: [],
     banners: [
       {
         src: "https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg",
@@ -109,6 +112,22 @@ export default {
       },
     ],
   }),
+
+  async mounted() {
+    await this.getVetAll();
+  },
+
+  methods: {
+    async getVetAll() {
+      try {
+        const res = await axios.get(`${this.$api}/get-petshop`);
+        const vetAll = res.data;
+        this.vetAll = vetAll;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+  },
 };
 </script>
 
