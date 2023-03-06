@@ -341,6 +341,7 @@ export default {
   data: () => ({
     categories: [],
     jamBuka: [],
+    formData: [],
     jamTutup: [],
     clinic: [],
     operational_hour: [
@@ -423,19 +424,52 @@ export default {
       try {
         const petshopID = this.localStorage.data.petshop_id;
 
-        const res = await axios.post(
-          `${this.$api}/update-petshop/${petshopID}`,
-          {
-            petshop_name: this.clinic.petshop_name,
-            petshop_image: this.clinic.petshop_image,
-            petshop_address: this.clinic.petshop_address,
-            description: this.clinic.description,
-            website: this.clinic.website,
-            category: this.clinic.category,
+        // const res = await axios.post(
+        //   `${this.$api}/update-petshop/${petshopID}`,
+        //   {
+        //     petshop_name: this.clinic.petshop_name,
+        //     petshop_image: this.clinic.petshop_image,
+        //     petshop_address: this.clinic.petshop_address,
+        //     description: this.clinic.description,
+        //     website: this.clinic.website,
+        //     category: this.clinic.category,
+        //   }
+        // );
+
+        // let obj = {
+        //   petshop_name: this.clinic.petshop_name,
+        //   petshop_image: this.clinic.petshop_image,
+        //   petshop_address: this.clinic.petshop_address,
+        //   description: this.clinic.description,
+        //   website: this.clinic.website,
+        //   category: this.clinic.category,
+        // };
+        let obj = this.clinic;
+
+        let data = new FormData();
+
+        for (const key in obj) {
+          if (key == "category") {
+            for (let i = 0; i < obj["category"].length; i++) {
+              data.append("category[]", obj["category"][i]);
+            }
+          } else {
+            data.append(`${key}`, obj[key]);
           }
-        );
-        console.log(res);
+        }
+        const res = await axios({
+          method: "post",
+          url: `${this.$api}/update-petshop/${petshopID}`,
+          data: data,
+          headers: {
+            "Content-Type": `multipart/form-data;`,
+          },
+        });
         if (res.status == 200) {
+          let localStorageData = JSON.parse(localStorage.getItem("data"));
+          localStorageData.data.petshop_id = res.data.data.id;
+          console.log(localStorageData);
+          localStorage.setItem("data", JSON.stringify(localStorageData));
           this.$router.push({ name: "petshop-profile" });
         }
       } catch (error) {
@@ -490,6 +524,9 @@ export default {
         this.clinic = clinic;
         let categories = clinic.category;
         this.categories = categories;
+        var image = this.clinic.petshop_image;
+        console.log("image", image);
+        this.clinic.petshop_image = image;
       } catch (error) {
         console.log(error);
       }
