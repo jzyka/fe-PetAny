@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app class="flex-grow-1">
     <section class="register-clinic-form">
       <v-container>
         <v-row>
@@ -239,6 +239,10 @@ section {
         color: $primary-color;
         font-weight: $font-weight-semibold;
         margin-bottom: 2rem;
+
+        @media (max-width: $bp-sm) {
+          text-align: center;
+        }
       }
 
       .v-input {
@@ -297,8 +301,17 @@ section {
     display: flex;
     width: 100%;
     justify-content: space-between;
+
+    @media (max-width: $bp-sm) {
+        gap: 16px;
+        flex-direction: column; 
+      }
     &__half {
       width: 45%;
+
+      @media (max-width: $bp-sm) {
+        width: 100%; 
+      }
 
       .input-permit {
         -moz-user-select: none;
