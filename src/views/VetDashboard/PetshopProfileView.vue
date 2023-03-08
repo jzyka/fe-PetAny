@@ -37,7 +37,7 @@
               <div class="services">
                 <p
                   class="service-card"
-                  v-for="(value, i) in categories"
+                  v-for="(value, i) in clinic.category"
                   :key="i"
                 >
                   {{ value }}
@@ -102,7 +102,7 @@ export default {
     ],
     data: [],
     clinic: [],
-    categories: [],
+    // categories: [],
     petshopImage: [],
   }),
 
@@ -120,7 +120,7 @@ export default {
         const operational = await axios.get(
           `${this.$api}/petshop/get-jam-operasional/${petshopID}`
         );
-        console.log(operational);
+        console.log("", operational);
         const data = operational.data;
         this.data = data;
       } catch (error) {
@@ -241,6 +241,7 @@ export default {
           padding: 5px 15px;
           margin-bottom: 0 !important;
           width: fit-content;
+          text-transform: capitalize;
         }
       }
 

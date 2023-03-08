@@ -103,7 +103,7 @@ const routes = [
         component: ShoppingCartView,
       },
       {
-        path: "/book-appoinment-detail",
+        path: "api/get-petshop/:id",
         name: "book-appoinment-detail",
         component: BookAppointmentDetailView,
       },
