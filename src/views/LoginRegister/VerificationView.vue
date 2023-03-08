@@ -51,6 +51,18 @@ section {
       flex-direction: column;
       align-items: center;
 
+      @media (max-width: $bp-xl) {
+        width: 55%;
+      }
+
+      @media (max-width: $bp-lg) {
+        width: 55%;
+      }
+
+      @media (max-width: $bp-md) {
+        width: 70%;
+      }
+
       .back-to-register {
         position: absolute;
         z-index: 2;

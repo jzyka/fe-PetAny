@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app class="flex-grow-1">
     <section class="register-clinic-process">
       <v-container>
         <v-row>
@@ -60,6 +60,10 @@ section {
         width: 100%;
         gap: 1rem;
 
+        @media (max-width:$bp-sm) {
+          flex-direction: column;
+        }
+
         .btn {
           display: flex;
           justify-content: center;
@@ -69,6 +73,10 @@ section {
           padding: 10px;
           border-radius: 10px;
           font-weight: $font-weight-medium;
+
+          @media (max-width:$bp-sm) {
+            width: 100%;
+        }
         }
 
         .white {
