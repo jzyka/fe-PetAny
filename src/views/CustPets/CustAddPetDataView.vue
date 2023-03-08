@@ -6,37 +6,77 @@
         <div class="col-6">
           <p class="tx">Judul</p>
           <div class="">
-            <v-text-field class="input-contain" solo v-model="medRecTitle" background-color="#F1F1F1"></v-text-field>
+            <v-text-field
+              class="input-contain"
+              solo
+              v-model="medRecTitle"
+              background-color="#F1F1F1"
+            ></v-text-field>
           </div>
           <p class="tx">Deskripsi</p>
           <div>
-            <v-textarea class="input-contain" solo v-model="medRecDescription" background-color="#F1F1F1"></v-textarea>
+            <v-textarea
+              class="input-contain"
+              solo
+              v-model="medRecDescription"
+              background-color="#F1F1F1"
+            ></v-textarea>
           </div>
           <p class="tx">Pengobatan</p>
           <div class="">
-            <v-text-field class="input-contain" solo v-model="medRecTreatment" background-color="#F1F1F1"></v-text-field>
+            <v-text-field
+              class="input-contain"
+              solo
+              v-model="medRecTreatment"
+              background-color="#F1F1F1"
+            ></v-text-field>
           </div>
         </div>
         <div class="col-6">
           <p class="tx">Tanggal</p>
           <div class="">
-            <v-menu v-model="menu2" :close-on-content-click="false" :nudge-right="40" transition="scale-transition" offset-y min-width="auto">
+            <v-menu
+              v-model="menu2"
+              :close-on-content-click="false"
+              :nudge-right="40"
+              transition="scale-transition"
+              offset-y
+              min-width="auto"
+            >
               <template v-slot:activator="{ on, attrs }">
-                <v-text-field class="input-contain" solo v-model="date" readonly background-color="#F1F1F1" v-bind="attrs" v-on="on"></v-text-field>
+                <v-text-field
+                  class="input-contain"
+                  solo
+                  v-model="date"
+                  readonly
+                  background-color="#F1F1F1"
+                  v-bind="attrs"
+                  v-on="on"
+                ></v-text-field>
               </template>
-              <v-date-picker v-model="date" @input="menu2 = false"></v-date-picker>
+              <v-date-picker
+                v-model="date"
+                @input="menu2 = false"
+              ></v-date-picker>
             </v-menu>
           </div>
           <p class="tx">Lampiran</p>
           <div class="">
-            <v-file-input 
-            solo 
-            v-model="medRecAttachment" 
-            background-color="#F1F1F1" 
-            > </v-file-input>
+            <v-file-input
+              solo
+              v-model="medRecAttachment"
+              background-color="#F1F1F1"
+            >
+            </v-file-input>
           </div>
           <div class="btns">
-            <v-btn class="sty" @submit.prevent @click="createMedRec" elevation="2">Simpan Data</v-btn>
+            <v-btn
+              class="sty"
+              @submit.prevent
+              @click="createMedRec"
+              elevation="2"
+              >Simpan Data</v-btn
+            >
           </div>
         </div>
       </div>
@@ -49,7 +89,9 @@ import axios from "axios";
 
 export default {
   data: () => ({
-    date: new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().substr(0, 10),
+    date: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
+      .toISOString()
+      .substr(0, 10),
     menu: false,
     modal: false,
     menu2: false,
@@ -83,8 +125,8 @@ export default {
   }),
   methods: {
     chooseFile() {
-        this.$refs.fileInput.click();
-      },
+      this.$refs.fileInput.click();
+    },
     async createMedRec() {
       try {
         console.log(this.imageData);
@@ -96,10 +138,10 @@ export default {
         formData.append("date", this.date);
         formData.append("attachment", this.medRecAttachment);
 
-
         const res = await axios({
           method: "post",
-          url: `${this.$api}/add-medicalrecord?pet_id=` + this.$route.query.pet_id,
+          url:
+            `${this.$api}/add-medicalrecord?pet_id=` + this.$route.query.pet_id,
           data: formData,
           headers: {
             "Content-Type": `multipart/form-data;`,
@@ -107,13 +149,13 @@ export default {
         });
         console.log(res.data);
         if (res.status == 200) {
-          this.$router.push('/api/get-pet/' + this.$route.query.pet_id,);
+          this.$router.push("/api/get-pet/" + this.$route.query.pet_id);
         }
       } catch (error) {
         console.log(error);
       }
     },
-  }
+  },
 };
 </script>
 

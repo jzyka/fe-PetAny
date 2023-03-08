@@ -70,33 +70,39 @@
                 <p class="service-title mb-1 mt-3">Layanan Kami</p>
                 <div class="checkbox-contain">
                   <v-checkbox
-                    v-model="categories"
+                    v-model="clinic.category"
                     label="Grooming"
                     value="grooming"
                     class="check-services mt-0"
                   ></v-checkbox>
                   <v-checkbox
-                    v-model="categories"
+                    v-model="clinic.category"
                     label="Klinik"
                     value="klinik"
                     class="check-services mt-0"
                   ></v-checkbox>
                   <v-checkbox
-                    v-model="categories"
+                    v-model="clinic.category"
                     label="Laboratorium"
                     value="laboratorium"
                     class="check-services mt-0"
                   ></v-checkbox>
                   <v-checkbox
-                    v-model="categories"
+                    v-model="clinic.category"
                     label="Rawat Inap"
                     value="rawat inap"
                     class="check-services mt-0"
                   ></v-checkbox>
                   <v-checkbox
-                    v-model="categories"
+                    v-model="clinic.category"
                     label="Petshop"
                     value="petshop"
+                    class="check-services mt-0"
+                  ></v-checkbox>
+                  <v-checkbox
+                    v-model="clinic.category"
+                    label="Menerima Datang Langsung"
+                    value="menerima datang langsung"
                     class="check-services mt-0"
                   ></v-checkbox>
                 </div>
@@ -453,6 +459,11 @@ export default {
             for (let i = 0; i < obj["category"].length; i++) {
               data.append("category[]", obj["category"][i]);
             }
+          } else if (key == "petshop_image") {
+            if (obj["petshop_image"] instanceof File) {
+              data.append("petshop_image", obj["petshop_image"]);
+              console.log(obj["petshop_image"] instanceof File);
+            }
           } else {
             data.append(`${key}`, obj[key]);
           }
@@ -526,6 +537,7 @@ export default {
         this.categories = categories;
         var image = this.clinic.petshop_image;
         console.log("image", image);
+        console.log(clinic);
         this.clinic.petshop_image = image;
       } catch (error) {
         console.log(error);
