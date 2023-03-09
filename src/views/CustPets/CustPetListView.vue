@@ -4,29 +4,19 @@
       <v-container>
         <v-row>
           <div class="background empty" v-if="data.length === 0">
-            <div class="my-4"><img src="@/assets/petlist.png" alt="" /></div>
+            <div class="my-4"><img src="@/assets/petlist.png" alt="" class="empty-img" /></div>
             <div class="text my-4">anda belum mengisi data peliharaan anda</div>
 
             <div class="btnn p-4">
-              <router-link to="/create-pet" class="py-2 cr"
-                >buat data peliharaan</router-link
-              >
+              <router-link to="/create-pet" class="py-2 cr">buat data peliharaan</router-link>
             </div>
           </div>
           <div class="wrap" id="pet-list" v-else>
             <h1 id="remove">Profil Peliharaan</h1>
             <div class="pet-list-wrap">
-              <v-card
-                class="card--pet rounded-lg"
-                v-for="(petData, i) in data"
-                :key="i"
-              >
+              <v-card class="card--pet rounded-lg" v-for="(petData, i) in data" :key="i">
                 <router-link :to="petData.links.self" class="route-link">
-                  <v-img
-                    alt=""
-                    class="card--pet__image"
-                    :src="petData.pet_image"
-                  />
+                  <v-img alt="" class="card--pet__image" :src="petData.pet_image" />
                   <div class="card--pet__text">
                     <div class="name-weight">
                       <p class="name">{{ petData.pet_name }}</p>
@@ -111,11 +101,23 @@ section {
     border-radius: 10px;
     width: 100%;
   }
-  img {
+  .empty-img {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width: 30%;
+    width: 35%;
+
+    @include sm-max {
+      width: 50%;
+    }
+
+    @include xs-max {
+      width: 65%;
+    }
+
+    @include xxs-max {
+      width: 75%;
+    }
   }
   .text {
     text-transform: capitalize;
@@ -123,6 +125,15 @@ section {
     font-size: 20px;
     color: $primary-color;
     font-weight: 600;
+
+    @include sm-max {
+      font-size: 18px;
+      padding: 0 30px;
+    }
+
+    @include xs-max {
+      font-size: 16px;
+    }
   }
   .cr {
     background-color: $primary-color;
@@ -133,6 +144,14 @@ section {
     text-align: center;
     text-transform: capitalize;
     border-radius: 10px;
+
+    @include md-max {
+      width: 95%;
+    }
+
+    @include sm-max {
+      width: 85%;
+    }
   }
   .btnn {
     display: flex;
