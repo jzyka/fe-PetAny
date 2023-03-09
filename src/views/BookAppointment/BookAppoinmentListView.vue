@@ -212,6 +212,38 @@
                     <p class="location">1.2 KM</p>
                     </div>
                 </router-link>
+                <router-link tag="a" to="/" class="card--vetproduct">
+                    <div class="card--vetproduct__image">
+                    <v-img
+                        src="@/assets/vet-img.png"
+                        contain
+                        class="rounded-lg"
+                    ></v-img>
+                    </div>
+                    <div class="card--vetproduct__detail">
+                    <p class="name">
+                        Klinik Hewan Lovely Vets lorem ipsum dolor sit
+                    </p>
+                    <p class="hours-price">09.00 - 19.00</p>
+                    <p class="location">1.2 KM</p>
+                    </div>
+                </router-link>
+                <router-link tag="a" to="/" class="card--vetproduct">
+                    <div class="card--vetproduct__image">
+                    <v-img
+                        src="@/assets/vet-img.png"
+                        contain
+                        class="rounded-lg"
+                    ></v-img>
+                    </div>
+                    <div class="card--vetproduct__detail">
+                    <p class="name">
+                        Klinik Hewan Lovely Vets lorem ipsum dolor sit
+                    </p>
+                    <p class="hours-price">09.00 - 19.00</p>
+                    <p class="location">1.2 KM</p>
+                    </div>
+                </router-link>
                 </div>
             </v-row>
         </v-container>
@@ -236,6 +268,10 @@ section {
             .card {
                 &--vetproduct {
                     width: 19%;
+
+                    @media (max-width: $bp-md) {
+                        width: 200px;
+                    }
                 }
             }
         }
@@ -254,21 +290,41 @@ section {
             padding: 35px;
             gap: 20px;
             margin-top: 20px;
+
+            @media (max-width: $bp-md){
+                flex-direction: column;
+            }
         } 
         .input-contain {
             border-radius: 10px;
         }
         .search-input {
             width: 40%;
+
+            @media (max-width: $bp-md){
+                width: 100%;
+            }
         }
         .location-input {
             width: 18%;
+
+            @media (max-width: $bp-md){
+                width: 100%;
+            }
         }
         .service-input {
             width: 18%;
+
+            @media (max-width: $bp-md){
+                width: 100%;
+            }
         }
         .schedule-input {
             width: 24%;
+
+            @media (max-width: $bp-md){
+                width: 100%;
+            }
         }
         .field-title {
             font-size: 18px;

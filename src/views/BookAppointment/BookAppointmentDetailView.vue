@@ -1,23 +1,27 @@
 <template>
   <v-container class="my-5">
     <!-- Klinik -->
-    <div class="background row">
-      <div class="col-1">
-        <v-avatar size="70px">
-          <v-img src="@/assets/vet-img.png" class=""></v-img>
-        </v-avatar>
+    <div class="background flex-column flex-md-row d-flex justify-start">
+      <div class="d-flex flex-row col-md-7">
+        <div class="">
+          <v-avatar size="70px">
+            <v-img src="@/assets/vet-img.png" class=""></v-img>
+          </v-avatar>
+        </div>
+        <div class="my-auto mx-4">
+          <div class="txt-klinik">Klinik Hewan Lovely Vets</div>
+          <div>Jakarta Utara | Melayani Datang Langsung</div>
+        </div>
       </div>
-      <div class="col-6 my-auto">
-        <div class="txt-klinik">Klinik Hewan Lovely Vets</div>
-        <div>Jakarta Utara | Melayani Datang Langsung</div>
-      </div>
-      <div class="col-3 my-auto alg-center">
-        <v-btn class="btn-klinik">Chat Klinik</v-btn>
-      </div>
-      <div class="my-3"><v-divider vertical></v-divider></div>
-      <div class="col-2 my-auto alg-center">
-        <div>Jam Operasional</div>
-        <div class="txt-jam">08.00 - 18.00</div>
+      <div class="d-flex flex-row col-md-5 justify-md-end">
+        <div class="my-auto alg-center">
+          <v-btn class="btn-klinik">Chat Klinik</v-btn>
+        </div>
+        <div class="my-3 mx-4"><v-divider vertical></v-divider></div>
+        <div class="my-auto alg-center">
+          <div>Jam Operasional</div>
+          <div class="txt-jam">08.00 - 18.00</div>
+        </div>
       </div>
     </div>
     <!-- Tab -->
@@ -41,8 +45,8 @@
             <p class="txt-title">Hari</p>
             <v-item-group class="pb-4">
               <v-row>
-                <v-col v-for="n in 6" :key="n" cols="12" md="2">
-                  <v-item v-slot="{ isSelected, selectedClass, toggle }">
+                <v-col v-for="n in 6" :key="n" cols="4" md="2" class="justify-center">
+                  <v-item v-slot="{ isSelected, selectedClass, toggle }" class="justify-center">
                     <v-card :color="isSelected ? '537FE7' : ''" :class="['d-flex align-center', selectedClass]" height="100" @click="toggle">
                       <div class="flex-grow- text-center">
                         {{ isSelected ? "Selected" : "Senin 28 Des" }}
@@ -56,7 +60,7 @@
             <p class="txt-title">Jam</p>
             <v-item-group>
               <v-row>
-                <v-col v-for="n in 6" :key="n" cols="12" md="2">
+                <v-col v-for="n in 6" :key="n" cols="4" md="2">
                   <v-item v-slot="{ isSelected, selectedClass, toggle }">
                     <v-card :color="isSelected ? '537FE7' : ''" :class="['d-flex align-center', selectedClass]" height="40" @click="toggle">
                       <div class="flex-grow-1 text-center">
