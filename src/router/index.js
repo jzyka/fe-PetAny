@@ -36,6 +36,7 @@ import CustTransactionProductView from "../views/CustPets/CustTransactionProduct
 import InvoiceTransaction from "../views/CustPets/InvoiceTransactionView.vue";
 import CreatePetshopProfileView from "../views/VetDashboard/CreatePetshopProfileView.vue";
 import PetshopProfileView from "../views/VetDashboard/PetshopProfileView.vue";
+import EditDoctorView from "../views/VetDashboard/EditDoctorView.vue";
 
 // Layouts
 import DefaultV1 from "../components/default-v1-layout.vue";
@@ -236,6 +237,11 @@ const routes = [
         path: "/petshop-profile",
         name: "petshop-profile",
         component: PetshopProfileView,
+      },
+      {
+        path: "/edit-dokter",
+        name: "edit-dokter",
+        component: EditDoctorView,
       },
     ],
   },
