@@ -11,6 +11,37 @@
             <p class="warning-appt">
               Pertemuan otomatis batal jika tidak di konfirmasi lebih dari 1 jam
             </p>
+            <v-row class="card--appointments">
+              <div class="card--appointment">
+              <div class="top-section">
+                <div class="client-profile">
+                  <div class="client-photo">
+                    <img src="@/assets/pabs.png" alt="" />
+                  </div>
+                  <div class="client-detail">
+                    <div class="name-weight">
+                      <p class="client-name">Pablo</p>
+                      <p class="client-weight">5 Kg</p>
+                    </div>
+                    <p class="client-age">1 Tahun 6 Bulan</p>
+                  </div>
+                </div>
+
+                <p class="req-time">19.00</p>
+              </div>
+              <div class="symptoms">
+                <p class="symptoms--title">Keluhan:</p>
+                <p class="symptoms--desc">Demam, diare</p>
+              </div>
+              <div class="appointment-detail">
+                <p class="doctor-name">drh. Jane Doe</p>
+                <p class="appt-schedule">Senin 28 Des, 08:00</p>
+              </div>
+              <div class="button">
+                <v-btn outlined class="reject pa-1"> Tolak </v-btn>
+                <v-btn class="accept pa-1"> Terima </v-btn>
+              </div>
+            </div>
             <div class="card--appointment">
               <div class="top-section">
                 <div class="client-profile">
@@ -41,6 +72,67 @@
                 <v-btn class="accept pa-1"> Terima </v-btn>
               </div>
             </div>
+            <div class="card--appointment">
+              <div class="top-section">
+                <div class="client-profile">
+                  <div class="client-photo">
+                    <img src="@/assets/pabs.png" alt="" />
+                  </div>
+                  <div class="client-detail">
+                    <div class="name-weight">
+                      <p class="client-name">Pablo</p>
+                      <p class="client-weight">5 Kg</p>
+                    </div>
+                    <p class="client-age">1 Tahun 6 Bulan</p>
+                  </div>
+                </div>
+
+                <p class="req-time">19.00</p>
+              </div>
+              <div class="symptoms">
+                <p class="symptoms--title">Keluhan:</p>
+                <p class="symptoms--desc">Demam, diare</p>
+              </div>
+              <div class="appointment-detail">
+                <p class="doctor-name">drh. Jane Doe</p>
+                <p class="appt-schedule">Senin 28 Des, 08:00</p>
+              </div>
+              <div class="button">
+                <v-btn outlined class="reject pa-1"> Tolak </v-btn>
+                <v-btn class="accept pa-1"> Terima </v-btn>
+              </div>
+            </div>
+            <div class="card--appointment">
+              <div class="top-section">
+                <div class="client-profile">
+                  <div class="client-photo">
+                    <img src="@/assets/pabs.png" alt="" />
+                  </div>
+                  <div class="client-detail">
+                    <div class="name-weight">
+                      <p class="client-name">Pablo</p>
+                      <p class="client-weight">5 Kg</p>
+                    </div>
+                    <p class="client-age">1 Tahun 6 Bulan</p>
+                  </div>
+                </div>
+
+                <p class="req-time">19.00</p>
+              </div>
+              <div class="symptoms">
+                <p class="symptoms--title">Keluhan:</p>
+                <p class="symptoms--desc">Demam, diare</p>
+              </div>
+              <div class="appointment-detail">
+                <p class="doctor-name">drh. Jane Doe</p>
+                <p class="appt-schedule">Senin 28 Des, 08:00</p>
+              </div>
+              <div class="button">
+                <v-btn outlined class="reject pa-1"> Tolak </v-btn>
+                <v-btn class="accept pa-1"> Terima </v-btn>
+              </div>
+            </div>
+            </v-row>
           </v-tab-item>
           <v-tab-item class="clinic-queue">
             <template>
@@ -117,8 +209,8 @@ section {
     .appointment-request {
       display: flex;
       width: 100%;
-      justify-content: space-between;
-      flex-wrap: wrap;
+      flex-direction: column;
+      justify-content: center;
       background-color: transparent;
 
       .warning-appt {
@@ -131,6 +223,17 @@ section {
 
     .clinic-tab {
       margin-bottom: 1rem;
+    }
+
+    .card--appointments {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin: 0;
+
+      @media (max-width: $bp-md) {
+        justify-content: center;
+      }
     }
   }
 }
@@ -183,7 +286,7 @@ section {
 
 .card {
   &--appointment {
-    width: 32%;
+    flex: 0 0 max(300px, 30%);
     background-color: $white;
     border-radius: 1rem;
     box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.1);
@@ -191,6 +294,10 @@ section {
     gap: 10px;
     display: flex;
     flex-direction: column;
+
+    @media (max-width: $bp-md) {
+      flex: 1 0 max(300px, 30%);
+    }
 
     .top-section {
       display: flex;
