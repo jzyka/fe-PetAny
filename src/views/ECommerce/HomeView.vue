@@ -132,7 +132,7 @@ export default {
   methods: {
     async getVetAll() {
       try {
-        const res = await axios.get(`${this.$api}/get-petshop`);
+        const res = await axios.get(`${this.$api}/get-petshop-with-schedule`);
         const vetAlls = res.data;
         this.vetAlls = vetAlls;
 
