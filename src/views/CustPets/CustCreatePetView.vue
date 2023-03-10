@@ -4,10 +4,10 @@
       <v-row>
         <div class="background pa-8" style="">
           <div class="mb-5">
-            <p class="tx-add">Isi data untuk menambahkan data peliharaan</p>
+            <p class="tx-add d-flex">Isi data untuk menambahkan data peliharaan</p>
           </div>
           <div class="row align-center">
-            <div class="col-3 justify-center">
+            <v-col cols="12" md="3" class="justify-center">
               <!-- <img class="pets" src="@/assets/user-img.png" alt="" />
         <input type="file" ref="file" style="display: none" />
         <button @click="$refs.file.click()" class="btnfoto m-5">
@@ -15,100 +15,46 @@
         </button> -->
 
               <div class="image-bg">
-                <v-img
-                  v-if="imagePreviewURL"
-                  :src="imagePreviewURL"
-                  aspect-ratio="1"
-                  cover
-                  class="rounded-lg"
-                ></v-img>
+                <v-img v-if="imagePreviewURL" :src="imagePreviewURL" aspect-ratio="1" cover class="rounded-lg"></v-img>
               </div>
-              <v-file-input
-                justify-center
-                label="File input"
-                v-model="imageData"
-                @change="onFileChange"
-                prepend-icon="Pilih profil"
-                hide-input
-                class="image-input"
-              ></v-file-input>
-            </div>
-            <v-col cols="9">
+              <v-file-input justify-center label="File input" v-model="imageData" @change="onFileChange" prepend-icon="Pilih profil" hide-input class="image-input"></v-file-input>
+            </v-col>
+            <v-col cols="12" md="9">
               <v-row>
-                <div class="col-6 mb-5">
+                <v-col cols="12" md="6">
                   <p class="tx">Nama Hewan</p>
                   <div class="">
-                    <v-text-field
-                      class="input-contain"
-                      solo
-                      v-model="petName"
-                      background-color="#F1F1F1"
-                    ></v-text-field>
+                    <v-text-field class="input-contain" solo v-model="petName" background-color="#F1F1F1"></v-text-field>
                   </div>
                   <p class="tx">Usia</p>
                   <div class="">
-                    <v-text-field
-                      class="input-contain"
-                      solo
-                      v-model="petAge"
-                      background-color="#F1F1F1"
-                    ></v-text-field>
+                    <v-text-field class="input-contain" solo v-model="petAge" background-color="#F1F1F1"></v-text-field>
                   </div>
                   <p class="tx">Alergi</p>
                   <div class="">
-                    <v-text-field
-                      class="input-contain"
-                      solo
-                      v-model="petAllergies"
-                      background-color="#F1F1F1"
-                    ></v-text-field>
+                    <v-text-field class="input-contain" solo v-model="petAllergies" background-color="#F1F1F1"></v-text-field>
                   </div>
-                </div>
-                <div class="col-6">
+                </v-col>
+                <v-col cols="12" md="6">
                   <p class="tx">Jenis Hewan</p>
                   <div class="">
-                    <v-text-field
-                      class="input-contain"
-                      solo
-                      v-model="petGenus"
-                      background-color="#F1F1F1"
-                    ></v-text-field>
+                    <v-text-field class="input-contain" solo v-model="petGenus" background-color="#F1F1F1"></v-text-field>
                   </div>
                   <p class="tx">Ras</p>
                   <div class="">
-                    <v-text-field
-                      class="input-contain"
-                      solo
-                      v-model="petSpecies"
-                      background-color="#F1F1F1"
-                    ></v-text-field>
+                    <v-text-field class="input-contain" solo v-model="petSpecies" background-color="#F1F1F1"></v-text-field>
                   </div>
                   <p class="tx">Berat Badan</p>
                   <div class="">
-                    <v-text-field
-                      class="input-contain"
-                      solo
-                      v-model="petWeight"
-                      background-color="#F1F1F1"
-                    ></v-text-field>
+                    <v-text-field class="input-contain" solo v-model="petWeight" background-color="#F1F1F1"></v-text-field>
                   </div>
-                </div>
+                </v-col>
               </v-row>
             </v-col>
           </div>
           <div>
-            <div class="btns">
-              <v-btn
-                class="crs"
-                block
-                elevation="2"
-                large
-                mdi-plus
-                tile
-                @submit.prevent
-                @click="createPet"
-                >Buat profil peliharaan</v-btn
-              >
+            <div class="btns pt-5">
+              <v-btn class="crs" block elevation="2" large mdi-plus tile @submit.prevent @click="createPet">Buat profil peliharaan</v-btn>
             </div>
           </div>
         </div>
@@ -195,7 +141,6 @@ export default {
         formData.append("weight", this.petWeight);
         formData.append("pet_image", this.imageData);
 
-
         const res = await axios({
           method: "post",
           url: `${this.$api}/add-pet`,
@@ -219,9 +164,16 @@ export default {
 <style lang="scss" scoped>
 .image-bg {
   background-color: $gainsboro;
-  // width: 200px;
-  // height: 200px;
+  width: 150px;
+  //height: 100px;
   border-radius: 10px;
+  display: block;
+  margin: auto;
+  padding: auto;
+
+  @include sm-max {
+    //columns: 7;
+  }
 }
 .background {
   background-color: $white;
@@ -233,6 +185,12 @@ export default {
   font-size: 20px;
   color: $primary-color;
   font-weight: $font-weight-semibold;
+
+  @include sm-max {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+  }
 }
 .tx {
   font-size: 16px;

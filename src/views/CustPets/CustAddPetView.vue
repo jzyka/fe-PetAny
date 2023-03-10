@@ -10,7 +10,7 @@
         <button @click="$refs.file.click()" class="btnfoto m-5">Ubah Foto</button>
       </div>
       <div class="col-4">
-        <p class="tx">Nama Produk</p>
+        <p class="tx">Nama Hewan</p>
         <div class="">
           <v-text-field class="input-contain" solo background-color="#F1F1F1"></v-text-field>
         </div>

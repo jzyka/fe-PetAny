@@ -1,28 +1,27 @@
 // VARIABLES
 
 // Colors
-$primary-color: #112D4E !default;
-$secondary-color: #DBE2EF !default;
-$white: #FFF !default;
+$primary-color: #112d4e !default;
+$secondary-color: #dbe2ef !default;
+$white: #fff !default;
 $black: #252525 !default;
-$steel-blue: #3F72AF !default;
-$light-grey: #F4F4F4 !default;
-$dark-grey: #C4C4C4 !default;
-$link-color: #1EAEDB !default;
+$steel-blue: #3f72af !default;
+$light-grey: #f4f4f4 !default;
+$dark-grey: #c4c4c4 !default;
+$link-color: #1eaedb !default;
 $font-color: #111 !default;
 $granite-gray: #656565 !default;
-$gainsboro: #D4d4d4 !default;
-$cultured: #F3F4F5 !default;
+$gainsboro: #d4d4d4 !default;
+$cultured: #f3f4f5 !default;
 $anti-flash: #f1f1f1 !default;
 
 // Typography
-$font-family: 'Poppins', sans-serif;
+$font-family: "Poppins", sans-serif;
 $font-weight-bold: 700 !default;
 $font-weight-semibold: 600 !default;
 $font-weight-medium: 500 !default;
 $font-weight-reg: 400 !default;
 $font-weight-light: 300 !default;
-
 
 // Breakpoints
 $bp-xxs: 375px !default;
@@ -32,3 +31,67 @@ $bp-md: 992px !default;
 $bp-lg: 1200px !default;
 $bp-xl: 1366px !default;
 $bp-xxl: 1440px !default;
+
+// min
+
+@mixin xxs-min {
+  @media (min-width: $bp-xxs) {
+    @content;
+  }
+}
+
+@mixin xs-min {
+  @media (min-width: $bp-xs) {
+    @content;
+  }
+}
+
+@mixin sm-min {
+  @media (min-width: $bp-sm) {
+    @content;
+  }
+}
+
+@mixin md-min {
+  @media (min-width: $bp-md) {
+    @content;
+  }
+}
+
+@mixin lg-min {
+  @media (min-width: $bp-lg) {
+    @content;
+  }
+}
+
+// max
+
+@mixin xxs-max {
+  @media (max-width: $bp-xxs) {
+    @content;
+  }
+}
+
+@mixin xs-max {
+  @media (max-width: $bp-xs) {
+    @content;
+  }
+}
+
+@mixin sm-max {
+  @media (max-width: $bp-sm) {
+    @content;
+  }
+}
+
+@mixin md-max {
+  @media (max-width: $bp-md) {
+    @content;
+  }
+}
+
+@mixin lg-max {
+  @media (max-width: $bp-lg) {
+    @content;
+  }
+}
