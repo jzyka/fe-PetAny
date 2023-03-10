@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app class="flex-grow-1">
     <section class="register-clinic-form">
       <v-container>
         <v-row>
@@ -183,6 +183,13 @@ export default {
             "Content-Type": `multipart/form-data;`,
           },
         });
+        if (register.status == 200) {
+          let localStorageData = JSON.parse(localStorage.getItem("data"));
+          localStorageData.data.petshop_id = register.data.data.id;
+          console.log(localStorageData);
+          localStorage.setItem("data", JSON.stringify(localStorageData));
+          this.$router.push({ name: "create-petshop-profile" });
+        }
 
         console.log(register);
       } catch (error) {
@@ -232,6 +239,10 @@ section {
         color: $primary-color;
         font-weight: $font-weight-semibold;
         margin-bottom: 2rem;
+
+        @media (max-width: $bp-sm) {
+          text-align: center;
+        }
       }
 
       .v-input {
@@ -290,8 +301,17 @@ section {
     display: flex;
     width: 100%;
     justify-content: space-between;
+
+    @media (max-width: $bp-sm) {
+        gap: 16px;
+        flex-direction: column; 
+      }
     &__half {
       width: 45%;
+
+      @media (max-width: $bp-sm) {
+        width: 100%; 
+      }
 
       .input-permit {
         -moz-user-select: none;

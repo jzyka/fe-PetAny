@@ -19,37 +19,46 @@
     <section class="slider--cards__clinic">
       <v-container>
         <v-row>
-          <div class="slider--cards__title">
-            <p class="slider-title">Buat janji dengan dokter hewan terdekat</p>
-            <router-link to="/book-appoinment" class="see-more"
-              >Lihat Semua</router-link
+          <v-cols cols="12">
+            <div class="slider--cards__title">
+              <p class="slider-title">
+                Buat janji dengan dokter hewan terdekat
+              </p>
+              <router-link to="/book-appoinment" class="see-more"
+                >Lihat Semua</router-link
+              >
+            </div>
+            <v-slide-group
+              v-model="VetCard"
+              selected-class="bg-primary"
+              multiple
+              show-arrows
             >
-          </div>
-          <v-slide-group
-            v-model="VetCard"
-            selected-class="bg-primary"
-            multiple
-            show-arrows
-          >
-            <v-slide-item v-for="n in 15" :key="n">
-              <router-link tag="a" to="/" class="card--vetproduct ma-2">
-                <div class="card--vetproduct__image">
-                  <v-img
-                    src="@/assets/vet-img.png"
-                    contain
-                    class="rounded-lg"
-                  ></v-img>
-                </div>
-                <div class="card--vetproduct__detail">
-                  <p class="name">
-                    Klinik Hewan Lovely Vets lorem ipsum dolor sit
-                  </p>
-                  <p class="hours-price">09.00 - 19.00</p>
-                  <p class="location">1.2 KM</p>
-                </div>
-              </router-link>
-            </v-slide-item>
-          </v-slide-group>
+              <v-slide-item v-for="(vetAll, i) in vetAlls" :key="i">
+                <router-link
+                  tag="a"
+                  :to="vetAll.links.self"
+                  class="card--vetproduct ma-2"
+                >
+                  <div class="card--vetproduct__image">
+                    <v-img
+                      :src="vetAll.petshop_image"
+                      cover
+                      :aspect-ratio="4 / 3"
+                      class="rounded-lg elevation-1"
+                    ></v-img>
+                  </div>
+                  <div class="card--vetproduct__detail">
+                    <p class="name">{{ vetAll.petshop_name }}</p>
+                    <p class="hours-price">
+                      {{ vetAll.jam_buka }}-{{ vetAll.jam_tutup }}
+                    </p>
+                    <p class="location">{{ vetAll.district }}</p>
+                  </div>
+                </router-link>
+              </v-slide-item>
+            </v-slide-group>
+          </v-cols>
         </v-row>
       </v-container>
     </section>
@@ -67,19 +76,22 @@
             multiple
             show-arrows
           >
-            <v-slide-item v-for="n in 15" :key="n">
+            <v-slide-item v-for="i in 15" :key="i">
               <router-link tag="a" to="/" class="card--vetproduct ma-2">
                 <div class="card--vetproduct__image">
                   <v-img
                     src="@/assets/vet-img.png"
-                    contain
+                    cover
+                    :aspect-ratio="4 / 3"
                     class="rounded-lg"
                   ></v-img>
                 </div>
                 <div class="card--vetproduct__detail">
-                  <p class="name">Royal Canin Protein Exigent 1.2Kg</p>
-                  <p class="hours-price">Rp999.999</p>
-                  <p class="location">Kota Surabaya</p>
+                  <p class="name">
+                    Klinik Hewan Lovely Vets lorem ipsum dolor sit
+                  </p>
+                  <p class="hours-price">09.00 - 19.00</p>
+                  <p class="location">1.2 KM</p>
                 </div>
               </router-link>
             </v-slide-item>
@@ -91,9 +103,12 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   data: () => ({
     VetCard: [],
+    vetAlls: [],
     banners: [
       {
         src: "https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg",
@@ -109,6 +124,24 @@ export default {
       },
     ],
   }),
+
+  async mounted() {
+    await this.getVetAll();
+  },
+
+  methods: {
+    async getVetAll() {
+      try {
+        const res = await axios.get(`${this.$api}/get-petshop`);
+        const vetAlls = res.data;
+        this.vetAlls = vetAlls;
+
+        console.log(vetAlls);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+  },
 };
 </script>
 

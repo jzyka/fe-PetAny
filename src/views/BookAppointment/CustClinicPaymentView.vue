@@ -11,7 +11,9 @@
           <!-- Pilih -->
           <div class="txt-rincian">Pilih Langganan</div>
           <div class="py-3">
-            <v-btn variant="outlined" v-for="n in 4" :key="n" class="ml-3"> 3 Bulan </v-btn>
+            <v-btn variant="outlined" v-for="n in 4" :key="n" class="ml-3">
+              3 Bulan
+            </v-btn>
           </div>
           <!-- Pilih -->
           <div class="txt-clinic py-5">Rincian Pembayaran</div>
@@ -21,7 +23,11 @@
         <div class="col-5">
           <div class="txt-rincian">Metode Pembayaran</div>
           <div class="py-3">
-            <v-select :items="pembayaran" solo background-color="#F1F1F1"></v-select>
+            <v-select
+              :items="pembayaran"
+              solo
+              background-color="#F1F1F1"
+            ></v-select>
           </div>
           <!-- Pembayaran -->
           <div>
@@ -45,7 +51,8 @@
           <div>
             <form action="">
               <input type="checkbox" />
-              <label> Saya setuju dengan syarat dan ketentuan PetAny</label><br />
+              <label> Saya setuju dengan syarat dan ketentuan PetAny</label
+              ><br />
             </form>
           </div>
         </div>
@@ -74,7 +81,7 @@ export default {
   }),
 };
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 .background {
   background-color: $white;
   border-radius: 7px;
