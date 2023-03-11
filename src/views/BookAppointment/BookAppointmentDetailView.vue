@@ -165,6 +165,9 @@ export default {
     await this.getClinicData();
     this.selectedDoctor = this.docNames[0].id;
     this.getOperationalHour();
+    // console.log(window.snap);
+    window.snap.skip = true;
+    console.log(window.snap);
   },
   watch: {
     selectedDoctor: function () {
@@ -195,6 +198,25 @@ export default {
         });
         if (res.status == 200) {
           console.log("berhasil book, bayar gih");
+          this.$router.push({ name: "pay-appointment" });
+          const midtransToken = res.data.midtrans_token;
+          // const paymentUrl = res.data.payment_url;
+          window.snap.pay(midtransToken, {
+            onSuccess: function (result) {
+              console.log("Payment successful", result);
+              this.$router.push({ name: "pay-appointment" });
+
+              // Redirect to a success page or do something else
+            },
+            onError: function (result) {
+              console.log("Payment error", result);
+              // Redirect to an error page or do something else
+            },
+            onClose: function () {
+              console.log("Payment dialog closed");
+              // Redirect to a cancel page or do something else
+            },
+          });
         }
       } catch (error) {
         console.log(error);

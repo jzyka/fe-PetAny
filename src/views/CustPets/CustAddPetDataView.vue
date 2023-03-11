@@ -1,84 +1,4 @@
 <template>
-  <div class="background mx-8 my-5" style="">
-    <div class="p-5">
-      <p class="tx-add">Tambah data kesehatan Pablo</p>
-      <div class="row">
-        <div class="col-6">
-          <p class="tx">Judul</p>
-          <div class="">
-            <v-text-field
-              class="input-contain"
-              solo
-              v-model="medRecTitle"
-              background-color="#F1F1F1"
-            ></v-text-field>
-          </div>
-          <p class="tx">Deskripsi</p>
-          <div>
-            <v-textarea
-              class="input-contain"
-              solo
-              v-model="medRecDescription"
-              background-color="#F1F1F1"
-            ></v-textarea>
-          </div>
-          <p class="tx">Pengobatan</p>
-          <div class="">
-            <v-text-field
-              class="input-contain"
-              solo
-              v-model="medRecTreatment"
-              background-color="#F1F1F1"
-            ></v-text-field>
-          </div>
-        </div>
-        <div class="col-6">
-          <p class="tx">Tanggal</p>
-          <div class="">
-            <v-menu
-              v-model="menu2"
-              :close-on-content-click="false"
-              :nudge-right="40"
-              transition="scale-transition"
-              offset-y
-              min-width="auto"
-            >
-              <template v-slot:activator="{ on, attrs }">
-                <v-text-field
-                  class="input-contain"
-                  solo
-                  v-model="date"
-                  readonly
-                  background-color="#F1F1F1"
-                  v-bind="attrs"
-                  v-on="on"
-                ></v-text-field>
-              </template>
-              <v-date-picker
-                v-model="date"
-                @input="menu2 = false"
-              ></v-date-picker>
-            </v-menu>
-          </div>
-          <p class="tx">Lampiran</p>
-          <div class="">
-            <v-file-input
-              solo
-              v-model="medRecAttachment"
-              background-color="#F1F1F1"
-            >
-            </v-file-input>
-          </div>
-          <div class="btns">
-            <v-btn
-              class="sty"
-              @submit.prevent
-              @click="createMedRec"
-              elevation="2"
-              >Simpan Data</v-btn
-            >
-          </div>
-        </div>
   <v-app>
     <v-container class="pt-10">
       <div class="background pa-5">
@@ -88,33 +8,77 @@
             <v-col cols="12" md="6">
               <p class="tx">Judul</p>
               <div class="">
-                <v-text-field class="input-contain" solo v-model="medRecTitle" background-color="#F1F1F1"></v-text-field>
+                <v-text-field
+                  class="input-contain"
+                  solo
+                  v-model="medRecTitle"
+                  background-color="#F1F1F1"
+                ></v-text-field>
               </div>
               <p class="tx">Deskripsi</p>
               <div>
-                <v-textarea class="input-contain" solo v-model="medRecDescription" background-color="#F1F1F1"></v-textarea>
+                <v-textarea
+                  class="input-contain"
+                  solo
+                  v-model="medRecDescription"
+                  background-color="#F1F1F1"
+                ></v-textarea>
               </div>
               <p class="tx">Pengobatan</p>
               <div class="">
-                <v-text-field class="input-contain" solo v-model="medRecTreatment" background-color="#F1F1F1"></v-text-field>
+                <v-text-field
+                  class="input-contain"
+                  solo
+                  v-model="medRecTreatment"
+                  background-color="#F1F1F1"
+                ></v-text-field>
               </div>
             </v-col>
             <v-col cols="12" md="6">
               <p class="tx">Tanggal</p>
               <div class="">
-                <v-menu v-model="menu2" :close-on-content-click="false" :nudge-right="40" transition="scale-transition" offset-y min-width="auto">
+                <v-menu
+                  v-model="menu2"
+                  :close-on-content-click="false"
+                  :nudge-right="40"
+                  transition="scale-transition"
+                  offset-y
+                  min-width="auto"
+                >
                   <template v-slot:activator="{ on, attrs }">
-                    <v-text-field class="input-contain" solo v-model="date" readonly background-color="#F1F1F1" v-bind="attrs" v-on="on"></v-text-field>
+                    <v-text-field
+                      class="input-contain"
+                      solo
+                      v-model="date"
+                      readonly
+                      background-color="#F1F1F1"
+                      v-bind="attrs"
+                      v-on="on"
+                    ></v-text-field>
                   </template>
-                  <v-date-picker v-model="date" @input="menu2 = false"></v-date-picker>
+                  <v-date-picker
+                    v-model="date"
+                    @input="menu2 = false"
+                  ></v-date-picker>
                 </v-menu>
               </div>
               <p class="tx">Lampiran</p>
               <div class="">
-                <v-file-input solo v-model="medRecAttachment" background-color="#F1F1F1"> </v-file-input>
+                <v-file-input
+                  solo
+                  v-model="medRecAttachment"
+                  background-color="#F1F1F1"
+                >
+                </v-file-input>
               </div>
               <div class="btns">
-                <v-btn class="sty" @submit.prevent @click="createMedRec" elevation="2">Simpan Data</v-btn>
+                <v-btn
+                  class="sty"
+                  @submit.prevent
+                  @click="createMedRec"
+                  elevation="2"
+                  >Simpan Data</v-btn
+                >
               </div>
             </v-col>
           </div>
