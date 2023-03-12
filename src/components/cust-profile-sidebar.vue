@@ -5,17 +5,17 @@
         <v-row>
           <div class="customer-nav">
             <router-link class-active="active" to="/" class="profile-menu">
-              <v-img src="@/assets/user-img.png" max-width="25%"></v-img>
+              <!-- <v-img src="@/assets/user-img.png" max-width="25%"></v-img> -->
               <div class="profile-text">
-                <p>John Doe</p>
+                <p>{{ localStorage.data.name }}</p>
               </div>
             </router-link>
             <router-link to="/" class="menu">Wishlist</router-link>
-            <router-link to="/" class="menu">Kotak Masuk</router-link>
-            <router-link to="/" class="menu">Transaksi</router-link>
-            <router-link to="/" class="menu">Status Pendaftaran</router-link>
-            <router-link to="/" class="menu">Bantuan</router-link>
-            <router-link to="/" class="menu">Pengaturan</router-link>
+            <!-- <router-link to="/" class="menu">Kotak Masuk</router-link> -->
+            <router-link to="/transaction" class="menu">Transaksi</router-link>
+            <!-- <router-link to="/" class="menu">Status Pendaftaran</router-link> -->
+            <!-- <router-link to="/" class="menu">Bantuan</router-link> -->
+            <!-- <router-link to="/" class="menu">Pengaturan</router-link> -->
             <button v-if="localStorage" @click="logout()" class="logout">
               Logout
             </button>
