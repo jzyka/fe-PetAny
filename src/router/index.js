@@ -245,7 +245,7 @@ const routes = [
         component: PetshopProfileView,
       },
       {
-        path: "/edit-dokter",
+        path: "/doctor/edit-doctor/:id",
         name: "edit-dokter",
         component: EditDoctorView,
       },

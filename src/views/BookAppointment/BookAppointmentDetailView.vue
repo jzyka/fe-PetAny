@@ -200,11 +200,12 @@ export default {
           console.log("berhasil book, bayar gih");
           this.$router.push({ name: "pay-appointment" });
           const midtransToken = res.data.midtrans_token;
+          const vm = this;
           // const paymentUrl = res.data.payment_url;
           window.snap.pay(midtransToken, {
             onSuccess: function (result) {
               console.log("Payment successful", result);
-              this.$router.push({ name: "pay-appointment" });
+              vm.$router.push({ name: "transaction" });
 
               // Redirect to a success page or do something else
             },
