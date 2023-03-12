@@ -194,7 +194,7 @@ const routes = [
     ],
   },
   {
-    path: "/",
+    path: "/dash",
     name: "",
     component: ClinicDashboardLayout,
     children: [

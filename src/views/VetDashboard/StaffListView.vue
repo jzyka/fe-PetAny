@@ -3,54 +3,34 @@
     <v-card class="elevation-1 rounded-lg pa-4">
       <h4 class="section-title">Tambah Staff</h4>
       <div class="form-add-staff d-flex">
-        <div class="field-contain">
-          <p class="field-name">Email</p>
+        <v-row>
+          <v-col cols="12" md="5">
+            <div class="field-contain">
+              <p class="field-name">Email</p>
 
-          <v-text-field
-            v-model="email"
-            label="Masukkan Alamat Email"
-            outlined
-            solo
-            hide-details
-          ></v-text-field>
-        </div>
+              <v-text-field v-model="email" label="Masukkan Alamat Email" outlined solo hide-details></v-text-field>
+            </div>
+          </v-col>
+          <v-col cols="12" md="5">
+            <div class="field-contain">
+              <p class="field-name">Peran</p>
 
-        <div class="field-contain">
-          <p class="field-name">Peran</p>
-
-          <v-select
-            :items="roles"
-            label="Peran"
-            outlined
-            multiple
-            solo
-            v-model="selectedRoles"
-            hide-details
-          ></v-select>
-        </div>
-
-        <v-btn
-          color="primary"
-          elevation="2"
-          class="add-btn"
-          @click="postAddStaff"
-          >Tambah</v-btn
-        >
+              <v-select :items="roles" label="Peran" outlined multiple solo v-model="selectedRoles" hide-details></v-select>
+            </div>
+          </v-col>
+          <v-col cols="4" md="2" class="d-flex align-end">
+            <v-btn color="primary" elevation="2" class="add-btn" @click="postAddStaff">Tambah</v-btn>
+          </v-col>
+        </v-row>
       </div>
     </v-card>
 
     <div class="staff-cards mt-4">
-      <v-card
-        v-for="(staffData, i) in staffDatas"
-        :key="i"
-        class="rounded-lg elevation-1 d-flex px-3 py-3 staff-card"
-      >
+      <v-card v-for="(staffData, i) in staffDatas" :key="i" class="rounded-lg elevation-1 d-flex px-3 py-3 staff-card">
         <div class="left-section pr-4">
           <p class="username">{{ staffData.name }}</p>
           <div class="wrap">
-            <v-chip v-for="(role, i) in staffData.roleNames" :key="i">{{
-              role
-            }}</v-chip>
+            <v-chip v-for="(role, i) in staffData.roleNames" :key="i">{{ role }}</v-chip>
           </div>
         </div>
 
@@ -65,16 +45,9 @@
           class="role-select"
         ></v-select> -->
 
-        <router-link
-          class="edit-doctor"
-          to="/"
-          v-if="staffData.roleNames !== dokter"
-          >Edit Dokter</router-link
-        >
+        <router-link class="edit-doctor" to="/" v-if="staffData.roleNames !== dokter">Edit Dokter</router-link>
 
-        <v-btn color="primary" elevation="2" outlined class="delete-btn"
-          >Hapus</v-btn
-        >
+        <v-btn color="primary" elevation="2" outlined class="delete-btn">Hapus</v-btn>
       </v-card>
     </div>
   </section>
@@ -105,9 +78,7 @@ export default {
         this.localStorage = JSON.parse(localStorage.getItem("data"));
 
         const petshopID = this.localStorage.data.petshop_id;
-        const staffList = await axios.get(
-          `${this.$api}/get-staffs/${petshopID}`
-        );
+        const staffList = await axios.get(`${this.$api}/get-staffs/${petshopID}`);
         const staffDatas = staffList.data.data;
         for (let i = 0; i < staffDatas.length; i++) {
           const roles = staffDatas[i].roles;
@@ -159,15 +130,15 @@ section {
 
     .form-add-staff {
       align-items: center;
-      gap: 20px;
+      gap: 10px;
       width: 100%;
 
       .field-contain {
-        width: 40%;
+        width: 100%;
       }
 
       .add-btn {
-        width: 20%;
+        width: 100%;
       }
     }
 
