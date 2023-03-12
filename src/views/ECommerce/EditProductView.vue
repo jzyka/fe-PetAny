@@ -10,7 +10,7 @@
               </router-link>
               <p class="text-add">Edit Produk</p>
             </div>
-            <div class="row">
+            <div class="row form-items">
               <div class="col-6">
                 <p>Nama Produk</p>
                 <div class="">
@@ -53,6 +53,20 @@ export default {};
 </script>
 
 <style lang="scss">
+
+.form-items {
+  @media (max-width: $bp-sm) {
+    flex-direction: column;
+    .col-6 {
+      flex: 0 0 100%;
+      max-width: 100%;
+    }
+    .button {
+      min-width: 100px!important;
+    }
+  }
+}
+
 section {
   &.background {
     background-color: $cultured;
