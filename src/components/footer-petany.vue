@@ -6,15 +6,29 @@
           <v-row>
             <div class="footer-top-contain">
               <div class="footer-content">
-                <img src="@/assets/petany-logo-bright.png" alt="" class="logo-footer" />
-                <router-link to="/register" class="links"> Tentang Kami </router-link>
-                <router-link to="/register" class="links"> Hak Kekayaan Intelektual </router-link><router-link to="/register" class="links"> Blog </router-link>
+                <img
+                  src="@/assets/petany-logo-bright.png"
+                  alt=""
+                  class="logo-footer"
+                />
+                <router-link to="/register" class="links">
+                  Tentang Kami
+                </router-link>
+                <router-link to="/register" class="links">
+                  Hak Kekayaan Intelektual </router-link
+                ><router-link to="/register" class="links"> Blog </router-link>
               </div>
 
               <div class="footer-content">
                 <p class="content-title">Bantuan dan Panduan</p>
-                <router-link to="/register" class="links"> Syarat dan ketentuan </router-link>
-                <router-link to="/register" class="links"> Kebijakan privasi </router-link><router-link to="/register" class="links"> Bantuan </router-link>
+                <router-link to="/register" class="links">
+                  Syarat dan ketentuan
+                </router-link>
+                <router-link to="/register" class="links">
+                  Kebijakan privasi </router-link
+                ><router-link to="/register" class="links">
+                  Bantuan
+                </router-link>
               </div>
 
               <div class="footer-content">
@@ -26,10 +40,27 @@
                 </div>
               </div>
 
-              <div class="footer-content">
+              <div
+                class="footer-content"
+                v-if="localStorage.data.petshop_id == null"
+              >
                 <p class="content-title">Anda memiliki klinik hewan?</p>
-                <router-link to="/register-clinic" class="to-register"> Daftar sebagai klinik hewan </router-link>
-                <router-link to="/register" class="more-info"> Informasi lebih lanjut </router-link>
+                <router-link to="/register-clinic" class="to-register">
+                  Daftar sebagai klinik hewan
+                </router-link>
+                <router-link to="/register" class="more-info">
+                  Informasi lebih lanjut
+                </router-link>
+              </div>
+              <div
+                class="footer-content"
+                v-if="localStorage.data.petshop_id != null"
+              >
+                <p class="content-title">Kelola klinik anda</p>
+
+                <router-link to="/petshop-profile" class="to-clinic">
+                  Ke Dashboard Klinik
+                </router-link>
               </div>
             </div>
           </v-row>
@@ -49,6 +80,15 @@
 <script>
 export default {
   name: "FooterPetany",
+  created() {
+    this.getLocalStorage();
+    console.log(localStorage.data.petshop_id);
+  },
+  methods: {
+    getLocalStorage() {
+      this.localStorage = JSON.parse(localStorage.getItem("data"));
+    },
+  },
 };
 </script>
 
@@ -118,7 +158,8 @@ footer {
           }
         }
 
-        .to-register {
+        .to-register,
+        .to-clinic {
           text-decoration: none;
           color: $white;
           background-color: $primary-color;
