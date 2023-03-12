@@ -255,6 +255,11 @@ const routes = [
         name: "edit-dokter",
         component: EditDoctorView,
       },
+      {
+        path: "/add-product",
+        name: "add-product",
+        component: EditProductView,
+      },
     ],
   },
   {
@@ -266,11 +271,6 @@ const routes = [
     path: "/add-product",
     name: "addproduct",
     component: AddProductView,
-  },
-  {
-    path: "/edit-product",
-    name: "editproduct",
-    component: EditProductView,
   },
 ];
 

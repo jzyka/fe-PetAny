@@ -30,7 +30,7 @@
               <router-link
                 to="/appointment-lobby"
                 class="menu"
-                v-if="currentUser.currentRole.includes('cashier')"
+                v-if="!currentUser.currentRole.includes('cashier')"
                 >Klinik</router-link
               >
               <!-- <router-link to="/" class="menu">Pesanan</router-link> -->

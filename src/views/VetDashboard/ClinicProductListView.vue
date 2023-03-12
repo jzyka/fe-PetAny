@@ -1,104 +1,87 @@
 <template>
   <v-app>
     <v-container>
-      <p class="textt">Daftar Produk</p>
+      <div class="wrapper">
+        <p class="textt">Daftar Produk</p>
+        <router-link to="/add-product" class="to-add-prod"
+          >Tambah Product</router-link
+        >
+      </div>
 
-      <div class="container white rounded-lg p-2">
-        <div class="row sose">
-          <div class="col-3">
-            <v-tabs fixed-tabs flat v-model="tab" background-color="transparent" color="black" indicator-color="red">
-              <v-tab class="text-caption text-capitalize"> Semua Produk </v-tab>
-              <v-tab class="text-caption text-capitalize"> Nonaktif </v-tab>
-            </v-tabs>
-          </div>
-          <div class="col-6"></div>
-          <div class="col-3 anu1">
-            <div class="ros">
-              <v-text-field class="tfield" label="Cari produk" solo dense>
-                <v-icon slot="append"> mdi-magnify </v-icon>
-              </v-text-field>
-            </div>
-          </div>
+      <div class="containerrounded-lg p-2">
+        <div class="sose">
+          <v-data-table
+            :headers="headers"
+            :items="products"
+            class="elevation-1 rounded-lg"
+          >
+          </v-data-table>
         </div>
       </div>
-      <!-- <v-divider inset></v-divider> -->
-      <!-- isi ============================================================== -->
-
-      <v-tabs-items v-model="tab">
-        <v-tab-item>
-          <v-card flat>
-            <div>
-              <v-data-table :headers="headers" :items="content" hide-default-footer class="elevation-1">
-                <template #[`item.image`]="{ item }">
-                  <div class="p-2">
-                    <v-img :src="item.image" :alt="item.name" height="100px"></v-img>
-                  </div>
-                </template>
-                <template #[`item.aktif`]="{ item }">
-                  <v-switch v-model="item.aktif"></v-switch>
-                </template>
-              </v-data-table>
-            </div>
-          </v-card>
-        </v-tab-item>
-        <v-tab-item>
-          <v-card flat>
-            <div>tes</div>
-          </v-card>
-        </v-tab-item>
-      </v-tabs-items>
     </v-container>
   </v-app>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   data() {
     return {
-      tab: null,
-      switch1: null,
-      text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      // tab: null,
+      // switch1: null,
+      // text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
       headers: [
-        { text: "", value: "  ", sortable: false },
-        {
-          text: "NAMA",
-          value: "name",
-          width: "70%",
-        },
-        { text: "HARGA", value: "harga" },
-        { text: "STOK", value: "stok" },
-        { text: "AKTIF", value: "aktif" },
+        { text: "Product Name", value: "name" },
+        { text: "Stock", value: "stock" },
+        { text: "Price", value: "price" },
       ],
-      content: [
-        {
-          image: "facebook.png",
-          name: "Pakan",
-          anu: "222",
-          harga: "Rp.99.000",
-          stok: "99",
-          aktif: null,
-        },
-        {
-          name: "Pelet",
-          anu: "111",
-          harga: "Rp.199.000",
-          stok: "99",
-          aktif: null,
-        },
-        {
-          name: "biji",
-          anu: "212",
-          harga: "Rp.939.000",
-          stok: "99",
-          aktif: null,
-        },
-      ],
+      products: [],
     };
+  },
+  async created() {
+    await this.getProductList();
+  },
+  methods: {
+    async getProductList() {
+      try {
+        const productList = await axios.get(`${this.$api}/get-product`);
+        this.products = productList.data.map((item) => {
+          const { name, price, stock } = item.data;
+          return {
+            name,
+            price,
+            stock,
+            ...item.data,
+          };
+        });
+        console.log(this.products);
+      } catch (error) {
+        console.log(error);
+      }
+    },
   },
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+.wrapper {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-content: center;
+
+  .to-add-prod {
+    text-decoration: none;
+    color: $white;
+    font-weight: $font-weight-medium;
+    background-color: $primary-color;
+    border-radius: 5px;
+    height: fit-content;
+    padding: 5px 10px;
+    margin-top: 0.5rem;
+  }
+}
 .textt {
   color: $black;
   font-weight: $font-weight-medium;
