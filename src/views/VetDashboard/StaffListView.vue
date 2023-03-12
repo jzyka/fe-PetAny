@@ -46,15 +46,15 @@
         class="rounded-lg elevation-1 d-flex px-3 py-3 staff-card"
       >
         <div class="left-section pr-4">
-          <p class="username">{{ staffData.name }}</p>
+          <p class="username">{{ staffData.staff[i].name }}</p>
           <div class="wrap">
-            <v-chip v-for="(role, i) in staffData.roleNames" :key="i">{{
+            <v-chip v-for="(role, i) in staffData.staff[i].roleUser" :key="i">{{
               role
             }}</v-chip>
           </div>
         </div>
 
-        <p class="staff-email ml-auto">{{ staffData.email }}</p>
+        <p class="staff-email ml-auto">{{ staffData.staff[i].email }}</p>
         <!-- <v-select
           :items="roles"
           label="Standard"
@@ -68,11 +68,17 @@
         <router-link
           class="edit-doctor"
           to="/"
-          v-if="staffData.roleNames !== dokter"
+          v-if="staffData.staff[i].roleUser !== 'dokter'"
           >Edit Dokter</router-link
         >
 
-        <v-btn color="primary" elevation="2" outlined class="delete-btn"
+        <v-btn
+          color="primary"
+          elevation="2"
+          outlined
+          class="delete-btn"
+          v-if="!staffData.staff[i].roleUser.includes('petshop_owner')"
+          @click="removeStaff(staffData.staff[i].id)"
           >Hapus</v-btn
         >
       </v-card>
@@ -93,11 +99,15 @@ export default {
     finalData: [],
   }),
 
-  async mounted() {
+  async created() {
     await this.getStaffList();
   },
 
-  computed: {},
+  // watch: {
+  //   staffDatas: function () {
+  //     this.getStaffList();
+  //   },
+  // },
 
   methods: {
     async getStaffList() {
@@ -108,17 +118,26 @@ export default {
         const staffList = await axios.get(
           `${this.$api}/get-staffs/${petshopID}`
         );
-        const staffDatas = staffList.data.data;
+        const staffDatas = staffList.data;
+
         for (let i = 0; i < staffDatas.length; i++) {
-          const roles = staffDatas[i].roles;
-          const roleNames = [];
-          for (let j = 0; j < roles.length; j++) {
-            roleNames.push(roles[j].name);
+          const stafAll = staffDatas;
+          const staffAllData = stafAll[i].staff;
+          for (let j = 0; j < staffAllData.length; j++) {
+            const userRole = staffAllData[j].roles;
+            const roleUser = [];
+
+            for (let k = 0; k < userRole.length; k++) {
+              const userRoles = userRole[k];
+              roleUser.push(userRoles.name);
+            }
+            staffAllData[j].roleUser = roleUser;
           }
-          staffDatas[i].roleNames = roleNames;
         }
+
         this.staffDatas = staffDatas;
-        console.log(staffDatas);
+        this;
+        console.log("ini staffdata", this.staffDatas);
 
         // console.log(staffDatas);
       } catch (error) {
@@ -134,6 +153,18 @@ export default {
         console.log("ini staff baru", addStaff);
         // if (addStaff.status == 200) {
         // }
+        this.getStaffList();
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+    async removeStaff(id) {
+      try {
+        await axios.delete(`${this.$api}/remove-staff?user_id=${id}`);
+        // remove the staff from the staffDatas array
+        this.staffDatas = this.staffDatas.filter((staff) => staff.id !== id);
+        this.getStaffList();
       } catch (error) {
         console.log(error);
       }
