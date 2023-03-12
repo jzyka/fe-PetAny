@@ -4,13 +4,7 @@
       <v-container>
         <v-row>
           <v-carousel cycle height="400" hide-delimiter-background>
-            <v-carousel-item
-              v-for="(banner, i) in banners"
-              :key="i"
-              :src="banner.src"
-              reverse-transition="fade-transition"
-              transition="fade-transition"
-            ></v-carousel-item>
+            <v-carousel-item v-for="(banner, i) in banners" :key="i" :src="banner.src" reverse-transition="fade-transition" transition="fade-transition"></v-carousel-item>
           </v-carousel>
         </v-row>
       </v-container>
@@ -21,38 +15,18 @@
         <v-row>
           <v-cols cols="12">
             <div class="slider--cards__title">
-              <p class="slider-title">
-                Buat janji dengan dokter hewan terdekat
-              </p>
-              <router-link to="/book-appoinment" class="see-more"
-                >Lihat Semua</router-link
-              >
+              <p class="slider-title">Buat janji dengan dokter hewan terdekat</p>
+              <router-link to="/book-appoinment" class="see-more">Lihat Semua</router-link>
             </div>
-            <v-slide-group
-              v-model="VetCard"
-              selected-class="bg-primary"
-              multiple
-              show-arrows
-            >
+            <v-slide-group v-model="VetCard" selected-class="bg-primary" multiple show-arrows>
               <v-slide-item v-for="(vetAll, i) in vetAlls" :key="i">
-                <router-link
-                  tag="a"
-                  :to="vetAll.links.self"
-                  class="card--vetproduct ma-2"
-                >
+                <router-link tag="a" :to="vetAll.links.self" class="card--vetproduct ma-2">
                   <div class="card--vetproduct__image">
-                    <v-img
-                      :src="vetAll.petshop_image"
-                      cover
-                      :aspect-ratio="4 / 3"
-                      class="rounded-lg elevation-1"
-                    ></v-img>
+                    <v-img :src="vetAll.petshop_image" cover :aspect-ratio="4 / 3" class="rounded-lg elevation-1"></v-img>
                   </div>
                   <div class="card--vetproduct__detail">
                     <p class="name">{{ vetAll.petshop_name }}</p>
-                    <p class="hours-price">
-                      {{ vetAll.jam_buka }}-{{ vetAll.jam_tutup }}
-                    </p>
+                    <p class="hours-price">{{ vetAll.jam_buka }}-{{ vetAll.jam_tutup }}</p>
                     <p class="location">{{ vetAll.district }}</p>
                   </div>
                 </router-link>
@@ -70,26 +44,14 @@
             <p class="slider-title">Beli Pakan Hewan</p>
             <router-link to="/" class="see-more">Lihat Semua</router-link>
           </div>
-          <v-slide-group
-            v-model="VetCard"
-            selected-class="bg-primary"
-            multiple
-            show-arrows
-          >
+          <v-slide-group v-model="VetCard" selected-class="bg-primary" multiple show-arrows>
             <v-slide-item v-for="i in 15" :key="i">
               <router-link tag="a" to="/" class="card--vetproduct ma-2">
                 <div class="card--vetproduct__image">
-                  <v-img
-                    src="@/assets/vet-img.png"
-                    cover
-                    :aspect-ratio="4 / 3"
-                    class="rounded-lg"
-                  ></v-img>
+                  <v-img src="@/assets/vet-img.png" cover :aspect-ratio="4 / 3" class="rounded-lg"></v-img>
                 </div>
                 <div class="card--vetproduct__detail">
-                  <p class="name">
-                    Klinik Hewan Lovely Vets lorem ipsum dolor sit
-                  </p>
+                  <p class="name">Klinik Hewan Lovely Vets lorem ipsum dolor sit</p>
                   <p class="hours-price">09.00 - 19.00</p>
                   <p class="location">1.2 KM</p>
                 </div>
@@ -151,6 +113,10 @@ section {
   &.banner-slider {
     .v-carousel {
       height: 250px !important;
+
+      @include md-max {
+        padding: 0 20px;
+      }
     }
     .v-image {
       &__image {
@@ -168,6 +134,10 @@ section {
       align-items: center;
       margin-bottom: 1.5rem;
 
+      @include md-max {
+        margin-left: 20px;
+      }
+
       .slider-title {
         font-size: 22px;
         font-weight: $font-weight-semibold;
@@ -177,6 +147,13 @@ section {
         line-height: 26px;
         margin-right: 1rem;
         margin-bottom: 0;
+
+        @include md-max {
+          font-size: 20px;
+        }
+        @include sm-max {
+          font-size: 18px;
+        }
       }
 
       .see-more {
@@ -185,6 +162,13 @@ section {
         color: $primary-color;
         text-decoration: none;
         line-height: 20px;
+
+        @include md-max {
+          font-size: 18px;
+        }
+        @include sm-max {
+          font-size: 16px;
+        }
       }
     }
   }

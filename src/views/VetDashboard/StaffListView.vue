@@ -3,39 +3,45 @@
     <v-card class="elevation-1 rounded-lg pa-4">
       <h4 class="section-title">Tambah Staff</h4>
       <div class="form-add-staff d-flex">
-        <div class="field-contain">
-          <p class="field-name">Email</p>
+        <v-row>
+          <v-col cols="12" md="5">
+            <div class="field-contain">
+              <p class="field-name">Email</p>
 
-          <v-text-field
-            v-model="email"
-            label="Masukkan Alamat Email"
-            outlined
-            solo
-            hide-details
-          ></v-text-field>
-        </div>
+              <v-text-field
+                v-model="email"
+                label="Masukkan Alamat Email"
+                outlined
+                solo
+                hide-details
+              ></v-text-field>
+            </div>
+          </v-col>
+          <v-col cols="12" md="5">
+            <div class="field-contain">
+              <p class="field-name">Peran</p>
 
-        <div class="field-contain">
-          <p class="field-name">Peran</p>
-
-          <v-select
-            :items="roles"
-            label="Peran"
-            outlined
-            multiple
-            solo
-            v-model="selectedRoles"
-            hide-details
-          ></v-select>
-        </div>
-
-        <v-btn
-          color="primary"
-          elevation="2"
-          class="add-btn"
-          @click="postAddStaff"
-          >Tambah</v-btn
-        >
+              <v-select
+                :items="roles"
+                label="Peran"
+                outlined
+                multiple
+                solo
+                v-model="selectedRoles"
+                hide-details
+              ></v-select>
+            </div>
+          </v-col>
+          <v-col cols="4" md="2" class="d-flex align-end">
+            <v-btn
+              color="primary"
+              elevation="2"
+              class="add-btn"
+              @click="postAddStaff"
+              >Tambah</v-btn
+            >
+          </v-col>
+        </v-row>
       </div>
     </v-card>
 
@@ -48,7 +54,7 @@
         <div class="left-section pr-4">
           <p class="username">{{ staffData.staff[i].name }}</p>
           <div class="wrap">
-            <v-chip v-for="(role, i) in staffData.staff[i].roleUser" :key="i">{{
+            <v-chip v-for="(role, i) in staffData.roleNames" :key="i">{{
               role
             }}</v-chip>
           </div>
@@ -190,15 +196,15 @@ section {
 
     .form-add-staff {
       align-items: center;
-      gap: 20px;
+      gap: 10px;
       width: 100%;
 
       .field-contain {
-        width: 40%;
+        width: 100%;
       }
 
       .add-btn {
-        width: 20%;
+        width: 100%;
       }
     }
 

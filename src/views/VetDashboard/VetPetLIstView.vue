@@ -5,23 +5,17 @@
         <v-card class="top-data-bar elevation-1 mb-8 rounded-lg pa-3">
           <h2 class="title-bar">Data Hewan</h2>
           <div class="pet-search-add d-flex align-center">
-            <v-text-field
-              v-model="search"
-              append-icon="mdi-magnify"
-              label="Cari berdasarkan nama, ID atau nama pemilik"
-              outlined
-              hide-details
-            ></v-text-field>
-            <v-btn color="primary" v-bind="attrs" v-on="on"> New Item </v-btn>
+            <v-row>
+              <v-col cols="12" md="10">
+                <v-text-field v-model="search" append-icon="mdi-magnify" label="Cari berdasarkan nama, ID atau nama pemilik" outlined hide-details></v-text-field>
+              </v-col>
+              <v-col cols="4" md="2">
+                <v-btn color="primary" v-bind="attrs" v-on="on"> New Item </v-btn>
+              </v-col>
+            </v-row>
           </div>
         </v-card>
-        <v-data-table
-          :headers="headers"
-          :items="data"
-          :search="search"
-          class="elevation-1 rounded-lg"
-        >
-        </v-data-table>
+        <v-data-table :headers="headers" :items="data" :search="search" class="elevation-1 rounded-lg"> </v-data-table>
       </section>
     </v-container>
   </v-app>
