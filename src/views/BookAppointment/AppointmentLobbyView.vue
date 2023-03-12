@@ -12,126 +12,55 @@
               Pertemuan otomatis batal jika tidak di konfirmasi lebih dari 1 jam
             </p>
             <v-row class="card--appointments">
-              <div class="card--appointment">
-              <div class="top-section">
-                <div class="client-profile">
-                  <div class="client-photo">
-                    <img src="@/assets/pabs.png" alt="" />
-                  </div>
-                  <div class="client-detail">
-                    <div class="name-weight">
-                      <p class="client-name">Pablo</p>
-                      <p class="client-weight">5 Kg</p>
+              <div
+                class="card--appointment"
+                v-for="appointment in appointments"
+                :key="appointment._id"
+              >
+                <div
+                  class="top-section"
+                  v-for="(petsInfo, i) in appointment.pets"
+                  :key="i"
+                >
+                  <div class="client-profile">
+                    <div class="client-photo">
+                      <img :src="petsInfo.pet_image" alt="" />
                     </div>
-                    <p class="client-age">1 Tahun 6 Bulan</p>
+                    <div class="client-detail">
+                      <div class="name-weight">
+                        <p class="client-name">{{ petsInfo.pet_name }}</p>
+                        <p class="client-weight">
+                          {{ petsInfo.pet_weight }} Kg
+                        </p>
+                      </div>
+                      <p class="client-age">{{ petsInfo.pet_age }} Tahun</p>
+                    </div>
+                  </div>
+
+                  <div
+                    class="loop-time"
+                    v-for="(time, j) in appointment.orders"
+                    :key="j"
+                  >
+                    <p class="req-time">{{ time.time }}</p>
                   </div>
                 </div>
-
-                <p class="req-time">19.00</p>
-              </div>
-              <div class="symptoms">
-                <p class="symptoms--title">Keluhan:</p>
-                <p class="symptoms--desc">Demam, diare</p>
-              </div>
-              <div class="appointment-detail">
-                <p class="doctor-name">drh. Jane Doe</p>
-                <p class="appt-schedule">Senin 28 Des, 08:00</p>
-              </div>
-              <div class="button">
-                <v-btn outlined class="reject pa-1"> Tolak </v-btn>
-                <v-btn class="accept pa-1"> Terima </v-btn>
-              </div>
-            </div>
-            <div class="card--appointment">
-              <div class="top-section">
-                <div class="client-profile">
-                  <div class="client-photo">
-                    <img src="@/assets/pabs.png" alt="" />
-                  </div>
-                  <div class="client-detail">
-                    <div class="name-weight">
-                      <p class="client-name">Pablo</p>
-                      <p class="client-weight">5 Kg</p>
-                    </div>
-                    <p class="client-age">1 Tahun 6 Bulan</p>
-                  </div>
+                <div class="symptoms">
+                  <p class="symptoms--title">Keluhan:</p>
+                  <p class="symptoms--desc">{{ appointment.complaint }}</p>
                 </div>
-
-                <p class="req-time">19.00</p>
-              </div>
-              <div class="symptoms">
-                <p class="symptoms--title">Keluhan:</p>
-                <p class="symptoms--desc">Demam, diare</p>
-              </div>
-              <div class="appointment-detail">
-                <p class="doctor-name">drh. Jane Doe</p>
-                <p class="appt-schedule">Senin 28 Des, 08:00</p>
-              </div>
-              <div class="button">
-                <v-btn outlined class="reject pa-1"> Tolak </v-btn>
-                <v-btn class="accept pa-1"> Terima </v-btn>
-              </div>
-            </div>
-            <div class="card--appointment">
-              <div class="top-section">
-                <div class="client-profile">
-                  <div class="client-photo">
-                    <img src="@/assets/pabs.png" alt="" />
-                  </div>
-                  <div class="client-detail">
-                    <div class="name-weight">
-                      <p class="client-name">Pablo</p>
-                      <p class="client-weight">5 Kg</p>
-                    </div>
-                    <p class="client-age">1 Tahun 6 Bulan</p>
-                  </div>
+                <div class="appointment-detail">
+                  <p class="doctor-name">{{ appointment.doctor }}</p>
+                  <p class="appt-schedule">
+                    {{ appointment.date }},
+                    {{ appointment.shift }}
+                  </p>
                 </div>
-
-                <p class="req-time">19.00</p>
-              </div>
-              <div class="symptoms">
-                <p class="symptoms--title">Keluhan:</p>
-                <p class="symptoms--desc">Demam, diare</p>
-              </div>
-              <div class="appointment-detail">
-                <p class="doctor-name">drh. Jane Doe</p>
-                <p class="appt-schedule">Senin 28 Des, 08:00</p>
-              </div>
-              <div class="button">
-                <v-btn outlined class="reject pa-1"> Tolak </v-btn>
-                <v-btn class="accept pa-1"> Terima </v-btn>
-              </div>
-            </div>
-            <div class="card--appointment">
-              <div class="top-section">
-                <div class="client-profile">
-                  <div class="client-photo">
-                    <img src="@/assets/pabs.png" alt="" />
-                  </div>
-                  <div class="client-detail">
-                    <div class="name-weight">
-                      <p class="client-name">Pablo</p>
-                      <p class="client-weight">5 Kg</p>
-                    </div>
-                    <p class="client-age">1 Tahun 6 Bulan</p>
-                  </div>
+                <div class="button">
+                  <v-btn outlined class="reject pa-1"> Tolak </v-btn>
+                  <v-btn class="accept pa-1"> Terima </v-btn>
                 </div>
-
-                <p class="req-time">19.00</p>
               </div>
-              <div class="symptoms">
-                <p class="symptoms--title">Keluhan:</p>
-                <p class="symptoms--desc">Demam, diare</p>
-              </div>
-              <div class="appointment-detail">
-                <p class="doctor-name">drh. Jane Doe</p>
-                <p class="appt-schedule">Senin 28 Des, 08:00</p>
-              </div>
-              <div class="button">
-                <v-btn outlined class="reject pa-1"> Tolak </v-btn>
-                <v-btn class="accept pa-1"> Terima </v-btn>
-              </div>
-            </div>
             </v-row>
           </v-tab-item>
           <v-tab-item class="clinic-queue">
@@ -151,6 +80,7 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   data() {
     return {
@@ -198,7 +128,50 @@ export default {
         { text: "Tanggal", value: "date" },
         { text: "Jam", value: "hour" },
       ],
+
+      appointments: [],
+      key: Date.now(),
     };
+  },
+  async created() {
+    await this.getBookedAppt();
+    // setInterval(() => {
+    //   this.getBookedAppt();
+    // }, 10000);
+  },
+
+  // computed: {
+  //   appointmentNew: {
+  //     get() {
+  //       return this.appointments;
+  //     },
+  //   },
+  // },
+  watch: {
+    appointments: {
+      handler: function (newVal, oldVal) {
+        console.log("Appointments changed", newVal);
+        this.key = Date.now(); // update key to trigger re-render
+
+        console.log("old", oldVal);
+      },
+      deep: true,
+    },
+  },
+
+  methods: {
+    async getBookedAppt() {
+      try {
+        const appointmentAll = await axios.get(
+          `${this.$api}/get-all-bookappoinment`
+        );
+        const appointments = appointmentAll.data;
+        this.appointments = appointments;
+        console.log(this.appointments);
+      } catch (error) {
+        console.log(error);
+      }
+    },
   },
 };
 </script>
@@ -278,7 +251,7 @@ section {
     img {
       width: 100%;
       height: 100%;
-      object-fit: contain;
+      object-fit: cover;
       border-radius: 5px;
     }
   }
@@ -303,10 +276,13 @@ section {
       display: flex;
       gap: 10px;
 
-      .req-time {
+      .loop-time {
         width: 15%;
-        text-align: end;
-        color: $granite-gray;
+
+        .req-time {
+          text-align: end;
+          color: $granite-gray;
+        }
       }
     }
 
