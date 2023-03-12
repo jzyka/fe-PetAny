@@ -67,8 +67,8 @@
 
         <router-link
           class="edit-doctor"
-          to="/"
-          v-if="staffData.staff[i].roleUser !== 'dokter'"
+          :to="staffData.links"
+          v-if="staffData.staff[i].roleUser.includes('dokter')"
           >Edit Dokter</router-link
         >
 

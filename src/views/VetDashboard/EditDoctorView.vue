@@ -11,7 +11,7 @@
                   placeholder="Nama Klinik"
                   outlined
                   block
-                  v-model="clinic.petshop_name"
+                  v-model="data.doctor"
                   hide-details
                   class="mb-3 mid-input"
                 ></v-text-field>
@@ -28,10 +28,7 @@
                 tile
                 v-if="data != 0"
                 @submit.prevent
-                @click="
-                  editOperational();
-                  postClinicData();
-                "
+                @click="editOperational"
                 >Simpan Profil</v-btn
               >
               <v-btn
@@ -57,7 +54,7 @@
 
             <v-data-table
               :headers="headers"
-              :items="data"
+              :items="data.jam_operasional"
               class="elevation-2 rounded-lg"
               hide-default-footer
             >
@@ -530,13 +527,15 @@ export default {
     //     },
     async postInitOperational() {
       try {
-        let operationalHour = this.operational_hour;
+        const res = await axios.post(
+          `${this.$api}/dokter/create-jam-operasional/` + this.$route.params.id,
+          {
+            name: this.data.doctor,
+            jam_operasional: this.operational_hour,
+          }
+        );
         // const petshopID = this.localStorage.data.petshop_id;
-        const res = await axios({
-          method: "post",
-          url: `${this.$api}/dokter/create-jam-operasional/2`,
-          data: operationalHour,
-        });
+
         console.log(res);
         if (res.status == 200) {
           this.$router.push({ name: "staff" });
@@ -547,13 +546,13 @@ export default {
     },
     async editOperational() {
       try {
-        let operationalHour = this.data;
-        // const petshopID = this.localStorage.data.petshop_id;
-        const res = await axios({
-          method: "post",
-          url: `${this.$api}/dokter/create-jam-operasional/2`,
-          data: operationalHour,
-        });
+        const res = await axios.post(
+          `${this.$api}/dokter/create-jam-operasional/` + this.$route.params.id,
+          {
+            name: this.data.doctor,
+            jam_operasional: this.data.jam_operasional,
+          }
+        );
         console.log(res);
         if (res.status == 200) {
           this.$router.push({ name: "staff" });
@@ -587,11 +586,12 @@ export default {
 
         // const petshopID = this.localStorage.data.petshop_id;
         const operational = await axios.get(
-          `${this.$api}/dokter/get-jam-operasional/2`
+          `${this.$api}/dokter/get-jam-operasional/` + this.$route.params.id
         );
         console.log(operational);
         const data = operational.data;
         this.data = data;
+        console.log("ini jadwal", this.data);
       } catch (error) {
         console.log(error);
       }
