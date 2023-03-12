@@ -111,7 +111,7 @@ const routes = [
         component: BookAppointmentDetailView,
       },
       {
-        path: "/product/:id",
+        path: "api/get-product/:id",
         name: "product",
         component: ProductDetailView,
       },
