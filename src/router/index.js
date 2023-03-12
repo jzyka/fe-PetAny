@@ -38,6 +38,7 @@ import CreatePetshopProfileView from "../views/VetDashboard/CreatePetshopProfile
 import PetshopProfileView from "../views/VetDashboard/PetshopProfileView.vue";
 import EditDoctorView from "../views/VetDashboard/EditDoctorView.vue";
 import PayAppointmentView from "../views/BookAppointment/PayAppointmentView.vue";
+import AddPatientMedRecordView from "../views/BookAppointment/AddPatientMedRecordView.vue";
 
 // Layouts
 import DefaultV1 from "../components/default-v1-layout.vue";
@@ -204,6 +205,11 @@ const routes = [
     name: "",
     component: ClinicDashboardLayout,
     children: [
+      {
+        path: "/petshop/add-medicalrecord",
+        name: "doctor-add-medical-record",
+        component: AddPatientMedRecordView,
+      },
       {
         path: "/clinic-product-list",
         name: "clinic-product-list",
