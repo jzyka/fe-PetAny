@@ -86,8 +86,7 @@
                   color="deep-purple accent-3"
                   group
                   v-model="selectedDoctorShift"
-                  mandatory
-                  class="mb-4"
+                  class="mb-4 btn-date"
                 >
                   <v-btn
                     v-for="(shift, index) in doctorShift"
@@ -147,7 +146,7 @@ export default {
     doctor: [],
     docNames: [],
     selectedDoctor: "",
-    operationalHour: [],
+    operationalHour: "",
     tanggalArr: [],
     selectedDoctorShift: "",
     selectedDate: "",
@@ -400,6 +399,10 @@ export default {
 }
 .btn-appoint {
   justify-content: space-between;
+}
+
+.v-item-group {
+  flex-wrap: wrap !important;
 }
 .btn-janji {
   color: $white !important;

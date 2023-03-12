@@ -9,7 +9,7 @@
           <div class="header-right">
             <router-link to="/" class="profile"
               ><img src="@/assets/user-img.png" alt="" />
-              <p class="username">John Doe</p>
+              <p class="username">{{ localStorage.data.name }}</p>
             </router-link>
           </div>
         </v-row>
@@ -19,7 +19,22 @@
 </template>
 
 <script>
-export default {};
+export default {
+  created() {
+    this.getLocalStorage();
+  },
+  methods: {
+    getLocalStorage() {
+      this.localStorage = JSON.parse(localStorage.getItem("data"));
+    },
+  },
+  data() {
+    return {
+      drawer: false,
+      searchIsActive: false,
+    };
+  },
+};
 </script>
 
 <style lang="scss" scoped>

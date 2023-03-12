@@ -16,7 +16,12 @@
             </div>
           </div>
           <div class="wrap" id="pet-list" v-else>
-            <h1 id="remove">Profil Peliharaan</h1>
+            <div class="d-flex align-center">
+              <h1 id="remove">Profil Peliharaan</h1>
+              <router-link to="/create-pet" class="ml-auto add-pet"
+                >Tambah Hewan</router-link
+              >
+            </div>
             <div class="pet-list-wrap">
               <v-card
                 class="card--pet rounded-lg"
@@ -94,6 +99,15 @@ section {
         color: $primary-color;
         margin-bottom: 2rem;
         font-weight: $font-weight-semibold;
+      }
+
+      .add-pet {
+        text-decoration: none;
+        padding: 5px 10px;
+        background-color: $primary-color;
+        color: $white;
+        border-radius: 5px;
+        height: auto;
       }
 
       .pet-list-wrap {

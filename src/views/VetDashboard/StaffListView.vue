@@ -54,7 +54,7 @@
         <div class="left-section pr-4">
           <p class="username">{{ staffData.staff[i].name }}</p>
           <div class="wrap">
-            <v-chip v-for="(role, i) in staffData.roleNames" :key="i">{{
+            <v-chip v-for="(role, i) in staffData.staff[i].roleUser" :key="i">{{
               role
             }}</v-chip>
           </div>
@@ -142,7 +142,7 @@ export default {
         }
 
         this.staffDatas = staffDatas;
-        this;
+
         console.log("ini staffdata", this.staffDatas);
 
         // console.log(staffDatas);
