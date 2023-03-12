@@ -16,7 +16,7 @@
           <v-cols cols="12">
             <div class="slider--cards__title">
               <p class="slider-title">Buat janji dengan dokter hewan terdekat</p>
-              <router-link to="/book-appoinment" class="see-more">Lihat Semua</router-link>
+              <!-- <router-link to="/book-appoinment" class="see-more">Lihat Semua</router-link> -->
             </div>
             <v-slide-group v-model="VetCard" selected-class="bg-primary" multiple show-arrows>
               <v-slide-item v-for="(vetAll, i) in vetAlls" :key="i">
@@ -41,19 +41,19 @@
       <v-container>
         <v-row>
           <div class="slider--cards__title">
-            <p class="slider-title">Beli Pakan Hewan</p>
-            <router-link to="/" class="see-more">Lihat Semua</router-link>
+            <p class="slider-title">Beli Product</p>
+            <!-- <router-link to="/" class="see-more">Lihat Semua</router-link> -->
           </div>
           <v-slide-group v-model="VetCard" selected-class="bg-primary" multiple show-arrows>
-            <v-slide-item v-for="i in 15" :key="i">
-              <router-link tag="a" to="/" class="card--vetproduct ma-2">
+            <v-slide-item v-for="(productAll, i) in productAlls" :key="i">
+              <router-link tag="a" :to="productAll.link" class="card--vetproduct ma-2">
                 <div class="card--vetproduct__image">
-                  <v-img src="@/assets/vet-img.png" cover :aspect-ratio="4 / 3" class="rounded-lg"></v-img>
+                  <v-img :src="productAll.data.image" cover :aspect-ratio="4 / 3" class="rounded-lg"></v-img>
                 </div>
                 <div class="card--vetproduct__detail">
-                  <p class="name">Klinik Hewan Lovely Vets lorem ipsum dolor sit</p>
-                  <p class="hours-price">09.00 - 19.00</p>
-                  <p class="location">1.2 KM</p>
+                  <p class="name">{{ productAll.data.name }}</p>
+                  <p class="hours-price">Rp {{ productAll.data.price }}</p>
+                  <p class="location">Tersisa {{ productAll.data.stock }}</p>
                 </div>
               </router-link>
             </v-slide-item>
@@ -71,6 +71,7 @@ export default {
   data: () => ({
     VetCard: [],
     vetAlls: [],
+    productAlls: [],
     banners: [
       {
         src: "https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg",
@@ -87,11 +88,12 @@ export default {
     ],
   }),
 
-  async mounted() {
-    await this.getVetAll();
-  },
+    async mounted() {
+      await this.getVetAll();
+      await this.getProductAll();
+    },
 
-  methods: {
+    methods: {
     async getVetAll() {
       try {
         const res = await axios.get(`${this.$api}/get-petshop-with-schedule`);
@@ -99,6 +101,18 @@ export default {
         this.vetAlls = vetAlls;
 
         console.log(vetAlls);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+    async getProductAll() {
+      try {
+        const res = await axios.get(`${this.$api}/get-product`);
+        this.productAlls = res.data.map(product => ({
+        data: product.data,
+        link: product.links,
+      }));
       } catch (error) {
         console.log(error);
       }
@@ -143,7 +157,7 @@ section {
         font-weight: $font-weight-semibold;
         color: $granite-gray;
         padding-right: 1rem;
-        border-right: 2px solid $black;
+        // border-right: 2px solid $black;
         line-height: 26px;
         margin-right: 1rem;
         margin-bottom: 0;
