@@ -37,6 +37,8 @@ import InvoiceTransaction from "../views/CustPets/InvoiceTransactionView.vue";
 import CreatePetshopProfileView from "../views/VetDashboard/CreatePetshopProfileView.vue";
 import PetshopProfileView from "../views/VetDashboard/PetshopProfileView.vue";
 import EditDoctorView from "../views/VetDashboard/EditDoctorView.vue";
+import PayAppointmentView from "../views/BookAppointment/PayAppointmentView.vue";
+import AddPatientMedRecordView from "../views/BookAppointment/AddPatientMedRecordView.vue";
 
 // Layouts
 import DefaultV1 from "../components/default-v1-layout.vue";
@@ -159,6 +161,11 @@ const routes = [
         component: RegisterClinicProcessView,
       },
       {
+        path: "/pay-appointment",
+        name: "pay-appointment",
+        component: PayAppointmentView,
+      },
+      {
         path: "/cust-clinic-payment",
         name: "clinic-payment",
         component: CustClinicPaymentView,
@@ -198,6 +205,11 @@ const routes = [
     name: "",
     component: ClinicDashboardLayout,
     children: [
+      {
+        path: "/petshop/add-medicalrecord",
+        name: "doctor-add-medical-record",
+        component: AddPatientMedRecordView,
+      },
       {
         path: "/clinic-product-list",
         name: "clinic-product-list",
@@ -239,7 +251,7 @@ const routes = [
         component: PetshopProfileView,
       },
       {
-        path: "/edit-dokter",
+        path: "/doctor/edit-doctor/:id",
         name: "edit-dokter",
         component: EditDoctorView,
       },

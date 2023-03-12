@@ -93,7 +93,9 @@ import axios from "axios";
 
 export default {
   data: () => ({
-    date: new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().substr(0, 10),
+    date: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
+      .toISOString()
+      .substr(0, 10),
     menu: false,
     modal: false,
     menu2: false,
@@ -142,7 +144,8 @@ export default {
 
         const res = await axios({
           method: "post",
-          url: `${this.$api}/add-medicalrecord?pet_id=` + this.$route.query.pet_id,
+          url:
+            `${this.$api}/add-medicalrecord?pet_id=` + this.$route.query.pet_id,
           data: formData,
           headers: {
             "Content-Type": `multipart/form-data;`,
@@ -150,7 +153,7 @@ export default {
         });
         console.log(res.data);
         if (res.status == 200) {
-          this.$router.push("/api/get-pet/" + this.$route.query.pet_id);
+          this.$router.push({ name: "appointment-lobby" });
         }
       } catch (error) {
         console.log(error);

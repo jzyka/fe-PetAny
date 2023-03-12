@@ -12,137 +12,103 @@
               Pertemuan otomatis batal jika tidak di konfirmasi lebih dari 1 jam
             </p>
             <v-row class="card--appointments">
-              <div class="card--appointment">
-              <div class="top-section">
-                <div class="client-profile">
-                  <div class="client-photo">
-                    <img src="@/assets/pabs.png" alt="" />
-                  </div>
-                  <div class="client-detail">
-                    <div class="name-weight">
-                      <p class="client-name">Pablo</p>
-                      <p class="client-weight">5 Kg</p>
+              <div
+                class="card--appointment"
+                v-for="appointment in appointments"
+                :key="appointment._id"
+              >
+                <div
+                  class="top-section"
+                  v-for="(petsInfo, i) in appointment.pets"
+                  :key="i"
+                >
+                  <div class="client-profile">
+                    <div class="client-photo">
+                      <img :src="petsInfo.pet_image" alt="" />
                     </div>
-                    <p class="client-age">1 Tahun 6 Bulan</p>
+                    <div class="client-detail">
+                      <div class="name-weight">
+                        <p class="client-name">{{ petsInfo.pet_name }}</p>
+                        <p class="client-weight">
+                          {{ petsInfo.pet_weight }} Kg
+                        </p>
+                      </div>
+                      <p class="client-age">{{ petsInfo.pet_age }} Tahun</p>
+                    </div>
+                  </div>
+
+                  <div
+                    class="loop-time"
+                    v-for="(time, j) in appointment.orders"
+                    :key="j"
+                  >
+                    <p class="req-time">{{ time.time }}</p>
                   </div>
                 </div>
-
-                <p class="req-time">19.00</p>
-              </div>
-              <div class="symptoms">
-                <p class="symptoms--title">Keluhan:</p>
-                <p class="symptoms--desc">Demam, diare</p>
-              </div>
-              <div class="appointment-detail">
-                <p class="doctor-name">drh. Jane Doe</p>
-                <p class="appt-schedule">Senin 28 Des, 08:00</p>
-              </div>
-              <div class="button">
-                <v-btn outlined class="reject pa-1"> Tolak </v-btn>
-                <v-btn class="accept pa-1"> Terima </v-btn>
-              </div>
-            </div>
-            <div class="card--appointment">
-              <div class="top-section">
-                <div class="client-profile">
-                  <div class="client-photo">
-                    <img src="@/assets/pabs.png" alt="" />
-                  </div>
-                  <div class="client-detail">
-                    <div class="name-weight">
-                      <p class="client-name">Pablo</p>
-                      <p class="client-weight">5 Kg</p>
-                    </div>
-                    <p class="client-age">1 Tahun 6 Bulan</p>
-                  </div>
+                <div class="symptoms">
+                  <p class="symptoms--title">Keluhan:</p>
+                  <p class="symptoms--desc">{{ appointment.complaint }}</p>
                 </div>
-
-                <p class="req-time">19.00</p>
-              </div>
-              <div class="symptoms">
-                <p class="symptoms--title">Keluhan:</p>
-                <p class="symptoms--desc">Demam, diare</p>
-              </div>
-              <div class="appointment-detail">
-                <p class="doctor-name">drh. Jane Doe</p>
-                <p class="appt-schedule">Senin 28 Des, 08:00</p>
-              </div>
-              <div class="button">
-                <v-btn outlined class="reject pa-1"> Tolak </v-btn>
-                <v-btn class="accept pa-1"> Terima </v-btn>
-              </div>
-            </div>
-            <div class="card--appointment">
-              <div class="top-section">
-                <div class="client-profile">
-                  <div class="client-photo">
-                    <img src="@/assets/pabs.png" alt="" />
-                  </div>
-                  <div class="client-detail">
-                    <div class="name-weight">
-                      <p class="client-name">Pablo</p>
-                      <p class="client-weight">5 Kg</p>
-                    </div>
-                    <p class="client-age">1 Tahun 6 Bulan</p>
-                  </div>
+                <div class="appointment-detail">
+                  <p class="doctor-name">{{ appointment.doctor }}</p>
+                  <p class="appt-schedule">
+                    {{ appointment.date }},
+                    {{ appointment.shift }}
+                  </p>
                 </div>
-
-                <p class="req-time">19.00</p>
-              </div>
-              <div class="symptoms">
-                <p class="symptoms--title">Keluhan:</p>
-                <p class="symptoms--desc">Demam, diare</p>
-              </div>
-              <div class="appointment-detail">
-                <p class="doctor-name">drh. Jane Doe</p>
-                <p class="appt-schedule">Senin 28 Des, 08:00</p>
-              </div>
-              <div class="button">
-                <v-btn outlined class="reject pa-1"> Tolak </v-btn>
-                <v-btn class="accept pa-1"> Terima </v-btn>
-              </div>
-            </div>
-            <div class="card--appointment">
-              <div class="top-section">
-                <div class="client-profile">
-                  <div class="client-photo">
-                    <img src="@/assets/pabs.png" alt="" />
-                  </div>
-                  <div class="client-detail">
-                    <div class="name-weight">
-                      <p class="client-name">Pablo</p>
-                      <p class="client-weight">5 Kg</p>
-                    </div>
-                    <p class="client-age">1 Tahun 6 Bulan</p>
-                  </div>
+                <div class="button">
+                  <v-btn
+                    outlined
+                    class="reject pa-1"
+                    @click="rejectAppt(appointment.apptID)"
+                  >
+                    Tolak
+                  </v-btn>
+                  <v-btn
+                    class="accept pa-1"
+                    @click="acceptAppt(appointment.apptID)"
+                  >
+                    Terima
+                  </v-btn>
                 </div>
-
-                <p class="req-time">19.00</p>
               </div>
-              <div class="symptoms">
-                <p class="symptoms--title">Keluhan:</p>
-                <p class="symptoms--desc">Demam, diare</p>
-              </div>
-              <div class="appointment-detail">
-                <p class="doctor-name">drh. Jane Doe</p>
-                <p class="appt-schedule">Senin 28 Des, 08:00</p>
-              </div>
-              <div class="button">
-                <v-btn outlined class="reject pa-1"> Tolak </v-btn>
-                <v-btn class="accept pa-1"> Terima </v-btn>
-              </div>
-            </div>
             </v-row>
           </v-tab-item>
           <v-tab-item class="clinic-queue">
-            <template>
-              <v-data-table
-                :headers="headers"
-                :items="desserts"
-                item-key="name"
-                class="elevation-1"
-              ></v-data-table>
-            </template>
+            <div class="header-appt"></div>
+            <v-card
+              v-for="(queue, i) in appointmentsQueue"
+              :key="i"
+              class="queue-card"
+            >
+              <div class="pet-info" v-for="(pet, j) in queue.pets" :key="j">
+                <v-img
+                  :src="pet.pet_image"
+                  aspect-ratio="1"
+                  max-width="45px"
+                  class="rounded-lg"
+                  cover
+                ></v-img>
+                <div class="pet-data">
+                  <div class="d-flex">
+                    <p class="pet-name">{{ pet.pet_name }}</p>
+                    <p class="pet-weight">{{ pet.pet_weight }} Kg</p>
+                  </div>
+
+                  <div class="pet-age">{{ pet.pet_age }} Tahun</div>
+                </div>
+                <div class="book-data">
+                  <p>{{ queue.date }}</p>
+                  <p>{{ queue.shift }}</p>
+                  <router-link :to="pet.add_medical_record" class="visit"
+                    >Kunjungi</router-link
+                  >
+                  <v-btn class="done" @click="finishAppt(queue.queueID)"
+                    >Selesai</v-btn
+                  >
+                </div>
+              </div>
+            </v-card>
           </v-tab-item>
         </v-tabs-items>
       </v-card>
@@ -151,6 +117,7 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   data() {
     return {
@@ -161,23 +128,9 @@ export default {
       data: [
         {
           routing: "lobi",
-          data: [
-            {
-              text: "lorem20",
-              cardData: "card",
-              etc: "etc",
-            },
-          ],
         },
         {
           routing: "antrean",
-          data: [
-            {
-              text: "lorem20",
-              cardData: "card",
-              etc: "etc",
-            },
-          ],
         },
       ],
 
@@ -198,7 +151,129 @@ export default {
         { text: "Tanggal", value: "date" },
         { text: "Jam", value: "hour" },
       ],
+
+      appointments: [],
+      appointmentsQueue: [],
+      key: Date.now(),
     };
+  },
+  async created() {
+    await this.getBookedAppt();
+    await this.getBookedQueue();
+    // setInterval(() => {
+    //   this.getBookedAppt();
+    // }, 10000);
+  },
+
+  // computed: {
+  //   appointmentNew: {
+  //     get() {
+  //       return this.appointments;
+  //     },
+  //   },
+  // },
+  watch: {
+    appointments: {
+      handler: function (newVal, oldVal) {
+        console.log("Appointments changed", newVal);
+        this.key = Date.now(); // update key to trigger re-render
+
+        console.log("old", oldVal);
+      },
+      deep: true,
+    },
+  },
+
+  methods: {
+    async getBookedAppt() {
+      try {
+        const appointmentAll = await axios.get(
+          `${this.$api}/get-all-bookappoinment`
+        );
+        const appointments = appointmentAll.data;
+        for (let i = 0; i < appointments.length; i++) {
+          const apptAll = appointments[i];
+          const apptsAll = apptAll.orders;
+          let apptID = null;
+          for (let j = 0; j < apptsAll.length; j++) {
+            const apptsOrder = apptsAll[j];
+            apptID = apptsOrder.order_id;
+          }
+          apptAll.apptID = apptID;
+        }
+        this.appointments = appointments;
+        console.log(this.appointments);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async getBookedQueue() {
+      try {
+        const appointmentQueueAll = await axios.get(
+          `${this.$api}/get-today-bookappoinment`
+        );
+        const appointmentsQueue = appointmentQueueAll.data;
+        for (let i = 0; i < appointmentsQueue.length; i++) {
+          const queueAll = appointmentsQueue[i];
+          const queueOrders = queueAll.orders;
+          let queueID = null;
+          for (let j = 0; j < queueOrders.length; j++) {
+            const queueOrder = queueOrders[j];
+            queueID = queueOrder.order_id;
+          }
+          queueAll.queueID = queueID;
+        }
+        this.appointmentsQueue = appointmentsQueue;
+        console.log(this.appointmentsQueue);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async finishAppt(queueId) {
+      try {
+        const response = await axios.post(
+          `${this.$api}/finish-bookappoinment/${queueId}`
+        );
+        console.log(response.data); // log the response data to the console
+        // update the appointments queue by calling the getBookedQueue() method again
+        if (response.status == 200) {
+          this.getBookedQueue();
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async rejectAppt(apptId) {
+      try {
+        const response = await axios.post(
+          `${this.$api}/reject-bookappoinment/${apptId}`
+        );
+        console.log(response.data); // log the response data to the console
+        // update the appointments queue by calling the getBookedQueue() method again
+        if (response.status == 200) {
+          this.getBookedAppt();
+          this.getBookedQueue();
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async acceptAppt(apptId) {
+      try {
+        const response = await axios.post(
+          `${this.$api}/accept-bookappoinment/${apptId}`
+        );
+        console.log(response.data); // log the response data to the console
+        // update the appointments queue by calling the getBookedQueue() method again
+        if (response.status == 200) {
+          this.getBookedAppt();
+          this.getBookedQueue();
+        }
+        await this.getBookedQueue();
+      } catch (error) {
+        console.error(error);
+      }
+    },
   },
 };
 </script>
@@ -237,7 +312,61 @@ section {
     }
   }
 }
+.queue-card {
+  .pet-info {
+    background: $white !important;
+    box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.1) !important;
+    width: 100%;
+    padding: 10px;
+    border-radius: 20px;
+  }
+  p {
+    margin-bottom: 0;
+  }
 
+  .pet-info {
+    display: flex;
+    align-items: center;
+
+    .pet-data {
+      margin-left: 1rem;
+      .pet-name {
+        color: $primary-color;
+        font-weight: $font-weight-medium;
+        padding-right: 5px;
+        margin-right: 5px;
+        border-right: 2px solid $secondary-color;
+      }
+    }
+
+    .book-data {
+      margin-left: auto;
+      display: flex;
+      width: fit-content;
+      gap: 1rem;
+      align-items: center;
+      float: right;
+
+      p {
+        text-align: center;
+      }
+
+      .visit {
+        background-color: $primary-color;
+        border: 2px solid $primary-color;
+        color: $white;
+        padding: 5px 10px;
+        border-radius: 5px;
+        text-decoration: none;
+      }
+      .done {
+        background-color: $primary-color;
+        border: 2px solid $primary-color;
+        color: $white;
+      }
+    }
+  }
+}
 .client-profile {
   display: flex;
   width: 85%;
@@ -278,7 +407,7 @@ section {
     img {
       width: 100%;
       height: 100%;
-      object-fit: contain;
+      object-fit: cover;
       border-radius: 5px;
     }
   }
@@ -303,10 +432,13 @@ section {
       display: flex;
       gap: 10px;
 
-      .req-time {
+      .loop-time {
         width: 15%;
-        text-align: end;
-        color: $granite-gray;
+
+        .req-time {
+          text-align: end;
+          color: $granite-gray;
+        }
       }
     }
 

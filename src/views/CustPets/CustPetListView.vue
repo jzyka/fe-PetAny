@@ -4,19 +4,31 @@
       <v-container>
         <v-row>
           <div class="background empty" v-if="data.length === 0">
-            <div class="my-4"><img src="@/assets/petlist.png" alt="" class="empty-img" /></div>
+            <div class="my-4">
+              <img src="@/assets/petlist.png" alt="" class="empty-img" />
+            </div>
             <div class="text my-4">anda belum mengisi data peliharaan anda</div>
 
             <div class="btnn p-4">
-              <router-link to="/create-pet" class="py-2 cr">buat data peliharaan</router-link>
+              <router-link to="/create-pet" class="py-2 cr"
+                >buat data peliharaan</router-link
+              >
             </div>
           </div>
           <div class="wrap" id="pet-list" v-else>
             <h1 id="remove">Profil Peliharaan</h1>
             <div class="pet-list-wrap">
-              <v-card class="card--pet rounded-lg" v-for="(petData, i) in data" :key="i">
+              <v-card
+                class="card--pet rounded-lg"
+                v-for="(petData, i) in data"
+                :key="i"
+              >
                 <router-link :to="petData.links.self" class="route-link">
-                  <v-img alt="" class="card--pet__image" :src="petData.pet_image" />
+                  <v-img
+                    alt=""
+                    class="card--pet__image"
+                    :src="petData.pet_image"
+                  />
                   <div class="card--pet__text">
                     <div class="name-weight">
                       <p class="name">{{ petData.pet_name }}</p>

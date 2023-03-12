@@ -8,33 +8,59 @@
             <div class="field-contain">
               <p class="field-name">Email</p>
 
-              <v-text-field v-model="email" label="Masukkan Alamat Email" outlined solo hide-details></v-text-field>
+              <v-text-field
+                v-model="email"
+                label="Masukkan Alamat Email"
+                outlined
+                solo
+                hide-details
+              ></v-text-field>
             </div>
           </v-col>
           <v-col cols="12" md="5">
             <div class="field-contain">
               <p class="field-name">Peran</p>
 
-              <v-select :items="roles" label="Peran" outlined multiple solo v-model="selectedRoles" hide-details></v-select>
+              <v-select
+                :items="roles"
+                label="Peran"
+                outlined
+                multiple
+                solo
+                v-model="selectedRoles"
+                hide-details
+              ></v-select>
             </div>
           </v-col>
           <v-col cols="4" md="2" class="d-flex align-end">
-            <v-btn color="primary" elevation="2" class="add-btn" @click="postAddStaff">Tambah</v-btn>
+            <v-btn
+              color="primary"
+              elevation="2"
+              class="add-btn"
+              @click="postAddStaff"
+              >Tambah</v-btn
+            >
           </v-col>
         </v-row>
       </div>
     </v-card>
 
     <div class="staff-cards mt-4">
-      <v-card v-for="(staffData, i) in staffDatas" :key="i" class="rounded-lg elevation-1 d-flex px-3 py-3 staff-card">
+      <v-card
+        v-for="(staffData, i) in staffDatas"
+        :key="i"
+        class="rounded-lg elevation-1 d-flex px-3 py-3 staff-card"
+      >
         <div class="left-section pr-4">
-          <p class="username">{{ staffData.name }}</p>
+          <p class="username">{{ staffData.staff[i].name }}</p>
           <div class="wrap">
-            <v-chip v-for="(role, i) in staffData.roleNames" :key="i">{{ role }}</v-chip>
+            <v-chip v-for="(role, i) in staffData.roleNames" :key="i">{{
+              role
+            }}</v-chip>
           </div>
         </div>
 
-        <p class="staff-email ml-auto">{{ staffData.email }}</p>
+        <p class="staff-email ml-auto">{{ staffData.staff[i].email }}</p>
         <!-- <v-select
           :items="roles"
           label="Standard"
@@ -45,9 +71,22 @@
           class="role-select"
         ></v-select> -->
 
-        <router-link class="edit-doctor" to="/" v-if="staffData.roleNames !== dokter">Edit Dokter</router-link>
+        <router-link
+          class="edit-doctor"
+          :to="staffData.links"
+          v-if="staffData.staff[i].roleUser.includes('dokter')"
+          >Edit Dokter</router-link
+        >
 
-        <v-btn color="primary" elevation="2" outlined class="delete-btn">Hapus</v-btn>
+        <v-btn
+          color="primary"
+          elevation="2"
+          outlined
+          class="delete-btn"
+          v-if="!staffData.staff[i].roleUser.includes('petshop_owner')"
+          @click="removeStaff(staffData.staff[i].id)"
+          >Hapus</v-btn
+        >
       </v-card>
     </div>
   </section>
@@ -66,11 +105,15 @@ export default {
     finalData: [],
   }),
 
-  async mounted() {
+  async created() {
     await this.getStaffList();
   },
 
-  computed: {},
+  // watch: {
+  //   staffDatas: function () {
+  //     this.getStaffList();
+  //   },
+  // },
 
   methods: {
     async getStaffList() {
@@ -78,18 +121,29 @@ export default {
         this.localStorage = JSON.parse(localStorage.getItem("data"));
 
         const petshopID = this.localStorage.data.petshop_id;
-        const staffList = await axios.get(`${this.$api}/get-staffs/${petshopID}`);
-        const staffDatas = staffList.data.data;
+        const staffList = await axios.get(
+          `${this.$api}/get-staffs/${petshopID}`
+        );
+        const staffDatas = staffList.data;
+
         for (let i = 0; i < staffDatas.length; i++) {
-          const roles = staffDatas[i].roles;
-          const roleNames = [];
-          for (let j = 0; j < roles.length; j++) {
-            roleNames.push(roles[j].name);
+          const stafAll = staffDatas;
+          const staffAllData = stafAll[i].staff;
+          for (let j = 0; j < staffAllData.length; j++) {
+            const userRole = staffAllData[j].roles;
+            const roleUser = [];
+
+            for (let k = 0; k < userRole.length; k++) {
+              const userRoles = userRole[k];
+              roleUser.push(userRoles.name);
+            }
+            staffAllData[j].roleUser = roleUser;
           }
-          staffDatas[i].roleNames = roleNames;
         }
+
         this.staffDatas = staffDatas;
-        console.log(staffDatas);
+        this;
+        console.log("ini staffdata", this.staffDatas);
 
         // console.log(staffDatas);
       } catch (error) {
@@ -105,6 +159,18 @@ export default {
         console.log("ini staff baru", addStaff);
         // if (addStaff.status == 200) {
         // }
+        this.getStaffList();
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+    async removeStaff(id) {
+      try {
+        await axios.delete(`${this.$api}/remove-staff?user_id=${id}`);
+        // remove the staff from the staffDatas array
+        this.staffDatas = this.staffDatas.filter((staff) => staff.id !== id);
+        this.getStaffList();
       } catch (error) {
         console.log(error);
       }
