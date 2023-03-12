@@ -82,7 +82,80 @@
               </div>
             </div>
             <div v-else class="d-flex align-end justify-end">
-              <v-btn plain class="p-4 button-detail"> Detil Pesanan </v-btn>
+              <!-- <v-btn plain class="p-4 button-detail"> Detil Pesanan </v-btn> -->
+            </div>
+          </v-card>
+        </v-tab-item>
+        <v-tab-item v-for="item in items" :key="item.tab">
+          <v-card
+            v-for="(appointment, i) in appointments"
+            :key="i"
+            class="d-flex flex-row justify-space-between p-4 mb-3"
+          >
+            <div class="d-flex flex-column">
+              <div class="d-flex align-center flex-row">
+                <v-card-text
+                  class="shop-title"
+                  v-for="(petshopName, j) in appointment.petshop"
+                  :key="j"
+                  >{{ petshopName.petshop_name }}</v-card-text
+                >
+                <v-divider vertical class="shop-divider"></v-divider>
+                <div
+                  class="d-flex"
+                  v-for="(order, k) in appointment.orders"
+                  :key="k"
+                >
+                  <v-card-text class="shop-id">{{
+                    order.order_id
+                  }}</v-card-text>
+                </div>
+                <v-card-text class="shop-status">{{
+                  appointment.status
+                }}</v-card-text>
+              </div>
+              <div class="d-flex flex-grow-1">
+                <img
+                  class="product-img"
+                  :draggable="false"
+                  src="@/assets/item.png"
+                  alt="gambar"
+                  v-if="item.tab == items[1].tab"
+                />
+                <div class="flex-grow-1">
+                  <v-card-text class="product-detail-title"
+                    >{{ appointment.doctor }} | {{ appointment.date }}
+                    {{ appointment.shift }}</v-card-text
+                  >
+                  <div
+                    class="ammount"
+                    v-for="(price, i) in appointment.orders"
+                    :key="i"
+                  >
+                    <v-card-text class="product-detail-amount">
+                      {{ price.amount }}
+                    </v-card-text>
+                  </div>
+                </div>
+                <div class="flex-grow-1">
+                  <v-card-text class="clinic-detail-type"></v-card-text>
+                  <v-card-text class="clinic-detail-price"></v-card-text>
+                </div>
+              </div>
+            </div>
+            <div
+              class="d-flex flex-column align-end"
+              v-if="item.tab == items[1].tab"
+            >
+              <v-card-text class="text-end total">Total</v-card-text>
+              <v-card-text class="text-end price">s</v-card-text>
+              <!-- <div class="d-flex utility-buttons">
+                <v-btn class="track-button p-4" plain>Lacak Pesanan</v-btn>
+                <v-btn class="detail-button p-4" plain>Detil Pesanan</v-btn>
+              </div> -->
+            </div>
+            <div v-else class="d-flex align-end justify-end">
+              <!-- <v-btn plain class="p-4 button-detail"> Detil Pesanan </v-btn> -->
             </div>
           </v-card>
         </v-tab-item>
