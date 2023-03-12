@@ -99,7 +99,29 @@
 </template>
 
 <script>
-export default {};
+import Axios from "axios";
+
+export default {
+  data: () => ({
+    productDetail: [],
+  }),
+  async mounted() {
+    await this.getProductDetail();
+  },
+  methods: {
+    async getProductDetail() {
+      try {
+        const res = await Axios.get(
+          `${this.$api}/get-product/` + this.$route.params.id
+        );
+        const productDetail = res.data;
+        this.productDetail = productDetail
+      } catch (error) {
+        console.log(error);
+      }
+    },
+  },
+};
 </script>
 
 <style lang="scss">

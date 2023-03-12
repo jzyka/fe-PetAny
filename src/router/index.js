@@ -111,7 +111,7 @@ const routes = [
         component: BookAppointmentDetailView,
       },
       {
-        path: "/product",
+        path: "/product/:id",
         name: "product",
         component: ProductDetailView,
       },
