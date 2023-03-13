@@ -40,7 +40,8 @@
     <section class="slider--cards__product">
       <v-container>
         <v-row>
-          <div class="slider--cards__title">
+          <div>
+            <div class="slider--cards__title">
             <p class="slider-title">Beli Product</p>
             <!-- <router-link to="/" class="see-more">Lihat Semua</router-link> -->
           </div>
@@ -58,6 +59,7 @@
               </router-link>
             </v-slide-item>
           </v-slide-group>
+          </div>
         </v-row>
       </v-container>
     </section>
