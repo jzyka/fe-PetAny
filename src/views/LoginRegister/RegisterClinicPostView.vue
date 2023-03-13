@@ -63,7 +63,7 @@
                     "
                   >
                     <p>{{ model.label }}</p>
-                    <v-select
+                    <v-text-field
                       v-model="models[model.name]"
                       :items="province"
                       single-line
@@ -71,9 +71,9 @@
                       :label="model.label"
                       v-if="model.name == 'province'"
                       :menu-props="{ top: true, offsetY: true }"
-                    ></v-select>
+                    ></v-text-field>
 
-                    <v-select
+                    <v-text-field
                       v-model="models[model.name]"
                       :items="province"
                       single-line
@@ -81,9 +81,9 @@
                       :label="model.label"
                       v-if="model.name == 'city'"
                       :menu-props="{ top: true, offsetY: true }"
-                    ></v-select>
+                    ></v-text-field>
 
-                    <v-select
+                    <v-text-field
                       v-model="models[model.name]"
                       :items="province"
                       single-line
@@ -91,7 +91,7 @@
                       :label="model.label"
                       v-if="model.name == 'district'"
                       :menu-props="{ top: true, offsetY: true }"
-                    ></v-select>
+                    ></v-text-field>
 
                     <v-text-field
                       v-if="model.name == 'postal_code'"
@@ -303,14 +303,14 @@ section {
     justify-content: space-between;
 
     @media (max-width: $bp-sm) {
-        gap: 16px;
-        flex-direction: column; 
-      }
+      gap: 16px;
+      flex-direction: column;
+    }
     &__half {
       width: 45%;
 
       @media (max-width: $bp-sm) {
-        width: 100%; 
+        width: 100%;
       }
 
       .input-permit {
