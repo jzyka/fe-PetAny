@@ -7,15 +7,15 @@
       <div class="divisor"></div>
       <v-tabs-items v-model="tab">
         <v-tab-item v-for="item in items" :key="item.tab">
-          <v-card v-for="it in item.items" :key="it" class="d-flex flex-row justify-space-between p-4">
+          <v-card v-for="it in item.items" :key="it" class="d-flex flex-lg-row flex-column justify-space-between p-4">
             <div class="d-flex flex-column">
-              <div class="d-flex flex-row">
+              <div class="d-flex flex-lg-row flex-column shop-item">
                 <v-card-text class="shop-title">{{ it.toko.nama }}</v-card-text>
                 <v-divider vertical class="shop-divider"></v-divider>
                 <v-card-text class="shop-id">{{it.toko.id}}</v-card-text>
                 <v-card-text class="shop-status">{{it.toko.status}}</v-card-text>
               </div>
-              <div class="d-flex flex-grow-1">
+              <div class="d-flex flex-grow-1 flex-column">
                 <img class="product-img" :draggable="false" src="@/assets/item.png" alt="gambar"
                   v-if="item.tab == items[1].tab">
                 <div v-if="item.tab == items[1].tab" class="flex-grow-1">
@@ -36,7 +36,7 @@
                 <v-btn class="detail-button p-4" plain>Detil Pesanan</v-btn>
               </div>
             </div>
-            <div v-else class="d-flex align-end justify-end">
+            <div v-else class="d-flex align-end justify-lg-end">
               <v-btn plain class="p-4 button-detail">
                 Detil Pesanan
               </v-btn>
@@ -109,12 +109,22 @@ export default {
   ;
 }
 
+.shop-item {
+  @media (max-width: 1264px) {
+    gap: 0.5rem;
+  }
+}
+
 .shop-title {
   font-size: 16px;
   white-space: nowrap;
   padding: 0;
   color: $primary-color;
   font-weight: $font-weight-medium;
+
+  @media (max-width: 1264px) {
+    font-size: 32px;
+  }
 }
 
 .shop-id {
@@ -133,6 +143,11 @@ export default {
   border-radius: 5px;
   padding: 0 15px;
   margin: 0 8px;
+
+  @media (max-width: 1264px) {
+    width: fit-content;
+    margin: 0;
+  }
 }
 
 .button-detail {
@@ -193,6 +208,12 @@ export default {
 .product-img {
   aspect-ratio: 1/1;
   object-fit: fill;
+  max-width: 64px;
+
+  @media (max-width: 1264px) {
+    width: 20%;
+    max-width: none;
+  }
 }
 
 .product-detail-title {
