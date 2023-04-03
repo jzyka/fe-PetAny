@@ -4,6 +4,7 @@
     <div class="form--logreg__group">
       <p>Nama</p>
       <v-text-field
+        :error-messages="errorMessage.errors && errorMessage.errors.name"
         label="Nama"
         v-model="userName"
         single-line
@@ -13,6 +14,7 @@
     <div class="form--logreg__group">
       <p>Email</p>
       <v-text-field
+        :error-messages="errorMessage.errors && errorMessage.errors.email"
         label="Email"
         single-line
         outlined
@@ -23,6 +25,9 @@
     <div class="form--logreg__group">
       <p>Nomor HP</p>
       <v-text-field
+        :error-messages="
+          errorMessage.errors && errorMessage.errors.phone_number
+        "
         label="Nomor HP"
         single-line
         outlined
@@ -33,6 +38,7 @@
     <div class="form--logreg__group">
       <p>Password</p>
       <v-text-field
+        :error-messages="errorMessage.errors && errorMessage.errors.password"
         label="Password"
         single-line
         outlined
@@ -48,6 +54,7 @@
     <div class="form--logreg__group">
       <p>Confirm Password</p>
       <v-text-field
+        :error-messages="errorMessage.errors && errorMessage.errors.password"
         label="Password"
         single-line
         outlined
@@ -70,9 +77,7 @@
     >
     <div class="have-account">
       <p>Sudah punya akun?</p>
-      <router-link to="/register" class="register-or-login">
-        Masuk
-      </router-link>
+      <router-link to="/login" class="register-or-login"> Masuk </router-link>
     </div>
   </div>
 </template>
@@ -90,6 +95,7 @@ export default {
     phoneNum: "",
     showPassword: false,
     show4: false,
+    errorMessage: {},
     numberRules: [
       (v) => !!v || "Please fill out this field!",
       (v) => Number.isInteger(Number(v)) || "Please enter numbers only!",
@@ -132,6 +138,9 @@ export default {
         }
       } catch (error) {
         console.log(error);
+        const errorMessage = error.response.data;
+
+        this.errorMessage = errorMessage;
       }
     },
   },
