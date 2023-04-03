@@ -6,10 +6,12 @@
       <v-text-field
         label="Email"
         clearable
+        ref="email"
         single-line
         outlined
         v-model="email"
         :rules="emailRules"
+        :error-messages="errorField.errors && errorField.errors.email"
       ></v-text-field>
     </div>
     <div class="form--logreg__group">
@@ -17,6 +19,8 @@
       <v-text-field
         label="Password"
         v-model="password"
+        ref="password"
+        outlined
         single-line
         clearable
         :append-icon="show4 ? 'mdi-eye' : 'mdi-eye-off'"
@@ -24,9 +28,11 @@
         :type="show4 ? 'text' : 'password'"
         name="input-10-2"
         value=""
+        :error-messages="errorField.errors && errorField.errors.password"
         @click:append="show4 = !show4"
       ></v-text-field>
     </div>
+    <p v-if="!errorField.errors" class="error-mess">{{ errorField.message }}</p>
     <v-btn
       block
       class="text-capitalize login-btn"
@@ -57,6 +63,7 @@ export default {
       (v) => !!v || "E-mail is required",
       (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
     ],
+    errorField: {},
     rules: {
       required: (value) => !!value || "Required.",
       email: (value) => {
@@ -66,6 +73,12 @@ export default {
       },
     },
   }),
+
+  watch: {
+    name() {
+      this.errorFields = {};
+    },
+  },
 
   methods: {
     async login() {
@@ -83,7 +96,11 @@ export default {
           this.$router.push({ name: "home" });
         }
       } catch (error) {
-        console.log(error);
+        console.log(error.response.data);
+
+        const errorField = error.response.data;
+
+        this.errorField = errorField;
       }
     },
   },
@@ -162,5 +179,10 @@ export default {
       color: $black;
     }
   }
+}
+
+.error-mess {
+  font-size: 14px;
+  color: $orange-red;
 }
 </style>

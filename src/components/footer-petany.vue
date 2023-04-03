@@ -40,7 +40,7 @@
                 </div>
               </div>
 
-              <div
+              <!-- <div
                 class="footer-content"
                 v-if="localStorage.data.petshop_id == null"
               >
@@ -61,7 +61,7 @@
                 <router-link to="/petshop-profile" class="to-clinic">
                   Ke Dashboard Klinik
                 </router-link>
-              </div>
+              </div> -->
             </div>
           </v-row>
         </v-container>
@@ -158,17 +158,17 @@ footer {
           }
         }
 
-        .to-register,
-        .to-clinic {
-          text-decoration: none;
-          color: $white;
-          background-color: $primary-color;
-          padding: 10px 15px;
-          font-weight: $font-weight-medium;
-          width: fit-content;
-          border-radius: 10px;
-          font-size: 14px;
-        }
+        // .to-register,
+        // .to-clinic {
+        //   text-decoration: none;
+        //   color: $white;
+        //   background-color: $primary-color;
+        //   padding: 10px 15px;
+        //   font-weight: $font-weight-medium;
+        //   width: fit-content;
+        //   border-radius: 10px;
+        //   font-size: 14px;
+        // }
 
         .more-info {
           color: $primary-color;

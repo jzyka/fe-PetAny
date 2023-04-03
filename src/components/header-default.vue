@@ -1,36 +1,52 @@
 <template>
-  <card>
-    <header class="header-process">
-      <v-container>
-        <v-row>
-          <router-link to="/" class="logo-header"
-            ><img src="@/assets/petany-logo-dark.png" alt=""
-          /></router-link>
-          <div class="header-right" v-if="isXSmallScreenSize">
-            <v-text-field
-              append-icon="mdi-magnify"
-              label="Cari disini"
-              solo
-              hide-details
-            ></v-text-field>
-            <router-link to="/pet-list" class="to-my-pet" v-if="localStorage"
-              ><img src="@/assets/paw.png" alt="" />Peliharaan saya</router-link
-            >
-            <router-link to="/" class="btn-to cart" v-if="localStorage"
-              ><img src="@/assets/cart.png" alt=""
-            /></router-link>
-            <router-link to="/" class="btn-to notification" v-if="localStorage"
-              ><img src="@/assets/notification.png" alt=""
-            /></router-link>
-            <router-link to="/login" class="to-login" v-if="!localStorage">
-              <p class="login">Masuk/Daftar</p>
-            </router-link>
-            <router-link to="/transaction" class="profile" v-if="localStorage">
-              <!-- <img src="@/assets/user-img.png" alt="" /> -->
-              <p class="username">{{ localStorage.data.name }}</p>
-            </router-link>
-          </div>
+  <header class="header-process">
+    <v-container>
+      <v-row>
+        <router-link to="/" class="logo-header"
+          ><img src="@/assets/petany-logo-dark.png" alt=""
+        /></router-link>
+        <div class="header-right">
+          <v-text-field
+            append-icon="mdi-magnify"
+            label="Cari disini"
+            solo
+            outlined
+            class="search-all"
+            hide-details
+          ></v-text-field>
 
+          <router-link to="/pet-list" class="to-my-pet" v-if="localStorage"
+            ><img src="@/assets/paw.png" alt="" />Peliharaan</router-link
+          >
+          <!-- <router-link
+            to="/register-clinic"
+            v-if="localStorage.data.petshop_id == null"
+            class="to-register"
+            ><img src="@/assets/clinic-icon-blue.png" alt="" />
+            Klinik
+          </router-link>
+          <router-link
+            to="/petshop-profile"
+            v-if="localStorage.data.petshop_id != null"
+            class="to-clinic"
+            ><img src="@/assets/clinic-icon-blue.png" alt="" />
+            Klinik
+          </router-link> -->
+          <router-link to="/" class="btn-to cart" v-if="localStorage"
+            ><img src="@/assets/cart.png" alt=""
+          /></router-link>
+          <router-link to="/" class="btn-to notification" v-if="localStorage"
+            ><img src="@/assets/notification.png" alt=""
+          /></router-link>
+          <router-link to="/login" class="to-login" v-if="!localStorage">
+            <p class="login">Masuk/Daftar</p>
+          </router-link>
+          <router-link to="/transaction" class="profile" v-if="localStorage">
+            <!-- <img src="@/assets/user-img.png" alt="" /> -->
+            <p class="username">{{ localStorage.data.name }}</p>
+          </router-link>
+        </div>
+        <!-- 
           <v-spacer v-if="!isXSmallScreenSize"></v-spacer>
 
           <div v-if="!isXSmallScreenSize" class="d-flex">
@@ -48,9 +64,9 @@
               @click="drawer = !drawer"
             >
             </v-app-bar-nav-icon>
-          </div>
-        </v-row>
-        <v-row
+          </div> -->
+      </v-row>
+      <!-- <v-row
           v-if="!isXSmallScreenSize && searchIsActive"
           class="justify-center mt-3"
         >
@@ -63,59 +79,9 @@
               hide-details
             ></v-text-field>
           </div>
-        </v-row>
-      </v-container>
-    </header>
-    <v-navigation-drawer
-      absolute
-      v-model="drawer"
-      right
-      temporary
-      class="d-flex flex-column"
-    >
-      <v-list nav>
-        <v-list-item class="py-0 d-flex justify-end">
-          <v-btn icon flat width="30" height="30" @click="drawer = false">
-            <v-icon> mdi-close </v-icon>
-          </v-btn>
-        </v-list-item>
-        <v-list-item
-          class="py-0 d-flex mt-2 custom-profile"
-          @click="$router.push('/transaction')"
-        >
-          <img src="@/assets/user-img.png" alt="" />
-          <p class="username">John Doe</p>
-        </v-list-item>
-        <v-list-item
-          class="py-0 d-flex mt-1 custom-btn-to cart"
-          @click="$router.push('/')"
-        >
-          <div class="d-flex">
-            <img src="@/assets/cart.png" alt="" />
-            <p class="ml-2 username">Keranjang</p>
-          </div>
-        </v-list-item>
-        <v-list-item
-          class="py-0 d-flex mt-1 custom-btn-to notification"
-          @click="$router.push('/')"
-        >
-          <img src="@/assets/notification.png" alt="" />
-          <p class="ml-2 username">Notifikasi</p>
-        </v-list-item>
-        <v-list-item class="py-0 d-flex mt-1">
-          <router-link to="/pet-list" class="custom-to-my-pet">
-            <!-- <img src="@/assets/paw-dark.png" alt="" /> -->
-            Peliharaan saya
-          </router-link>
-        </v-list-item>
-        <v-list-item class="py-0 d-flex mt-1">
-          <router-link to="/login" class="custom-to-login" v-if="!localStorage">
-            <p class="login">Masuk/Daftar</p>
-          </router-link>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-  </card>
+        </v-row> -->
+    </v-container>
+  </header>
 </template>
 
 <script>
@@ -133,26 +99,26 @@ export default {
       this.$router.push({ name: "login" });
     },
   },
-  data() {
-    return {
-      drawer: false,
-      searchIsActive: false,
-    };
-  },
-  watch: {
-    isXSmallScreenSize() {
-      console.log(this.$vuetify.breakpoint);
-    },
-  },
-  computed: {
-    isXSmallScreenSize() {
-      return this.$vuetify?.breakpoint?.mdAndUp;
-    },
-  },
+  // data() {
+  //   return {
+  //     drawer: false,
+  //     searchIsActive: false,
+  //   };
+  // },
+  // watch: {
+  //   isXSmallScreenSize() {
+  //     console.log(this.$vuetify.breakpoint);
+  //   },
+  // },
+  // computed: {
+  //   isXSmallScreenSize() {
+  //     return this.$vuetify?.breakpoint?.mdAndUp;
+  //   },
+  // },
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 header {
   background-color: $white;
   box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.07);
@@ -160,6 +126,7 @@ header {
 
   .logo-header {
     margin: auto 0;
+    width: 10%;
     img {
       height: 45px;
       object-fit: contain;
@@ -170,18 +137,23 @@ header {
     display: flex;
     gap: 1rem;
     align-items: center;
-    width: 75%;
+    width: 90%;
     justify-content: flex-end;
     align-items: center;
 
-    .v-input {
+    .search-all::v-deep .v-input {
       &__control {
-        min-height: 35px !important;
+        min-height: 35px;
       }
-
       &__slot {
-        background: $anti-flash !important;
-        box-shadow: 0px 2px 4px 1px rgba(0, 0, 0, 0.15) !important;
+        min-height: 35px;
+        background: none !important;
+        box-shadow: none !important;
+
+        fieldset {
+          border-width: 1px !important;
+          border-color: #646464 !important;
+        }
       }
 
       label {
@@ -206,6 +178,20 @@ header {
 
       img {
         width: 15px;
+      }
+    }
+    .to-register,
+    .to-clinic {
+      text-decoration: none;
+      color: $primary-color;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      max-height: 35px;
+      // font-size: 14px;
+      img {
+        width: 20px;
       }
     }
 

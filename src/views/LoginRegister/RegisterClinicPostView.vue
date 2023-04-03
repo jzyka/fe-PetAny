@@ -298,8 +298,10 @@ section {
 
 .form {
   &--register-clinic {
-    display: flex;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
     justify-content: space-between;
 
     @media (max-width: $bp-sm) {
@@ -307,8 +309,6 @@ section {
       flex-direction: column;
     }
     &__half {
-      width: 45%;
-
       @media (max-width: $bp-sm) {
         width: 100%;
       }
