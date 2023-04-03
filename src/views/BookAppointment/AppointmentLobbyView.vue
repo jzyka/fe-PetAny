@@ -160,9 +160,9 @@ export default {
   async created() {
     await this.getBookedAppt();
     await this.getBookedQueue();
-    // setInterval(() => {
-    //   this.getBookedAppt();
-    // }, 10000);
+    setInterval(() => {
+      this.getBookedAppt();
+    }, 10000);
   },
 
   // computed: {

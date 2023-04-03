@@ -10,7 +10,7 @@
                 <p>{{ localStorage.data.name }}</p>
               </div>
             </router-link>
-            <router-link to="/" class="menu">Wishlist</router-link>
+            <!-- <router-link to="/" class="menu">Wishlist</router-link> -->
             <!-- <router-link to="/" class="menu">Kotak Masuk</router-link> -->
             <router-link to="/transaction" class="menu">Transaksi</router-link>
             <!-- <router-link to="/" class="menu">Status Pendaftaran</router-link> -->
