@@ -18,8 +18,8 @@
           <router-link to="/pet-list" class="to-my-pet" v-if="localStorage"
             ><img src="@/assets/paw.png" alt="" />Peliharaan</router-link
           >
-          <!-- <router-link
-            to="/register-clinic"
+          <router-link
+            to="/register-as-clinic"
             v-if="localStorage.data.petshop_id == null"
             class="to-register"
             ><img src="@/assets/clinic-icon-blue.png" alt="" />
@@ -31,7 +31,7 @@
             class="to-clinic"
             ><img src="@/assets/clinic-icon-blue.png" alt="" />
             Klinik
-          </router-link> -->
+          </router-link>
           <router-link to="/" class="btn-to cart" v-if="localStorage"
             ><img src="@/assets/cart.png" alt=""
           /></router-link>
