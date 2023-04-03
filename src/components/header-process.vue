@@ -6,12 +6,10 @@
           <router-link to="/" class="logo-header"
             ><img src="@/assets/petany-logo-dark.png" alt=""
           /></router-link>
-          <div class="header-right">
-            <router-link to="/" class="profile"
-              ><img src="@/assets/user-img.png" alt="" />
-              <p class="username">{{ localStorage.data.name }}</p>
-            </router-link>
-          </div>
+
+          <router-link to="/" class="profile ml-auto my-auto">
+            <p class="username mb-0">{{ localStorage.data.name }}</p>
+          </router-link>
         </v-row>
       </v-container>
     </header>
@@ -43,5 +41,29 @@ export default {
 }
 #app {
   margin-bottom: auto;
+}
+header {
+  background-color: $white;
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.07);
+  padding: 10px;
+
+  .logo-header {
+    margin: auto 0;
+    width: 10%;
+    img {
+      height: 45px;
+      object-fit: contain;
+    }
+  }
+  .profile {
+    display: flex;
+    gap: 10px;
+    text-decoration: none;
+
+    p {
+      color: $black;
+      margin: 0;
+    }
+  }
 }
 </style>

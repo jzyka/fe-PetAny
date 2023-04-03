@@ -30,7 +30,10 @@
                         model.name == 'petshop_email'
                       "
                       :label="model.label"
-                      single-line
+                      solo
+                      :error-messages="
+                        errorMessage.errors && errorMessage.errors[model.name]
+                      "
                       outlined
                     ></v-text-field>
                   </div>
@@ -42,7 +45,11 @@
                       v-if="model.name == 'permit'"
                       type="file"
                       multiple
+                      placeholder="File must be .pdf"
                       chips
+                      :error-messages="
+                        errorMessage.errors && errorMessage.errors[model.name]
+                      "
                       id="input-permit"
                     />
                   </div>
@@ -66,9 +73,12 @@
                     <v-text-field
                       v-model="models[model.name]"
                       :items="province"
-                      single-line
+                      solo
                       outlined
                       :label="model.label"
+                      :error-messages="
+                        errorMessage.errors && errorMessage.errors[model.name]
+                      "
                       v-if="model.name == 'province'"
                       :menu-props="{ top: true, offsetY: true }"
                     ></v-text-field>
@@ -76,7 +86,10 @@
                     <v-text-field
                       v-model="models[model.name]"
                       :items="province"
-                      single-line
+                      solo
+                      :error-messages="
+                        errorMessage.errors && errorMessage.errors[model.name]
+                      "
                       outlined
                       :label="model.label"
                       v-if="model.name == 'city'"
@@ -86,7 +99,10 @@
                     <v-text-field
                       v-model="models[model.name]"
                       :items="province"
-                      single-line
+                      solo
+                      :error-messages="
+                        errorMessage.errors && errorMessage.errors[model.name]
+                      "
                       outlined
                       :label="model.label"
                       v-if="model.name == 'district'"
@@ -96,17 +112,22 @@
                     <v-text-field
                       v-if="model.name == 'postal_code'"
                       :label="model.label"
-                      single-line
+                      solo
+                      :error-messages="
+                        errorMessage.errors && errorMessage.errors[model.name]
+                      "
                       outlined
                       v-model="models[model.name]"
                     ></v-text-field>
 
                     <v-textarea
                       color="teal"
-                      single-line
+                      solo
                       outlined
+                      :error-messages="
+                        errorMessage.errors && errorMessage.errors[model.name]
+                      "
                       :label="model.label"
-                      hide-details="true"
                       v-if="model.name == 'petshop_address'"
                       v-model="models[model.name]"
                     >
@@ -143,6 +164,7 @@ export default {
     return {
       images: [],
       data: [],
+      errorMessage: {},
       formData: [],
       models: {},
       src: "",
@@ -193,7 +215,10 @@ export default {
 
         console.log(register);
       } catch (error) {
-        console.log(error);
+        console.log(error.response);
+        const errorMessage = error.response.data;
+
+        this.errorMessage = errorMessage;
       }
     },
   },
@@ -341,5 +366,18 @@ section {
 <style lang="scss" scoped>
 ::v-deep .v-application--wrap {
   min-height: fit-content;
+}
+
+.custom-file-upload::v-deep .v-input {
+  &__slot {
+    margin-bottom: 1.5rem;
+  }
+}
+
+.custom-file-upload::v-deep .v-text-field {
+  &__details {
+    position: relative;
+    right: 4%;
+  }
 }
 </style>
