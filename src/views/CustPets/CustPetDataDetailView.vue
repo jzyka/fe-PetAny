@@ -33,14 +33,42 @@
             </v-file-input>
           </div>
           <div class="btns">
-            <v-btn
-              class="sty mr-5"
-              elevation="2"
-              @click="deleteMedicalRecordDetail"
-              >Hapus Data Kesehatan</v-btn
+            <v-dialog transition="dialog-bottom-transition" max-width="450">
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                  color="#112d4e"
+                  class="sty mr-5 white--text mt-7"
+                  v-bind="attrs"
+                  v-on="on"
+                  >Hapus Data Kesehatan</v-btn
+                >
+              </template>
+              <template v-slot:default="dialog">
+                <v-card>
+                  <v-card-text class="pt-4 black--text">
+                    Anda yakin ingin menghapus data kesehatan peliharaan anda?
+                  </v-card-text>
+                  <v-card-actions class="justify-end">
+                    <v-btn
+                      color="#112d4e"
+                      class="white--text"
+                      @click="dialog.value = false"
+                      >Close</v-btn
+                    >
+                    <v-btn
+                      outlined
+                      color="#112d4e"
+                      @click="deleteMedicalRecordDetail"
+                      >Hapus Profil Pet</v-btn
+                    >
+                  </v-card-actions>
+                </v-card>
+              </template>
+            </v-dialog>
+            <v-btn class="sty mr-5 mt-7" elevation="2">Edit Data</v-btn>
+            <v-btn :to="prevRoutePath" class="sty mt-7" elevation="2"
+              >Kembali</v-btn
             >
-            <v-btn class="sty mr-5" elevation="2">Edit Data</v-btn>
-            <v-btn :to="prevRoutePath" class="sty" elevation="2">Kembali</v-btn>
           </div>
         </div>
       </div>
