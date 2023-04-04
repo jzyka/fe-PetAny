@@ -4,7 +4,9 @@
       <v-row>
         <div class="background pa-8" style="">
           <div class="mb-5">
-            <p class="tx-add d-flex">Isi data untuk menambahkan data peliharaan</p>
+            <p class="tx-add d-flex">
+              Isi data untuk menambahkan data peliharaan
+            </p>
           </div>
           <div class="row align-center">
             <v-col cols="12" md="3" class="justify-center">
@@ -15,38 +17,110 @@
         </button> -->
 
               <div class="image-bg">
-                <v-img v-if="imagePreviewURL" :src="imagePreviewURL" aspect-ratio="1" cover class="rounded-lg"></v-img>
+                <v-img
+                  v-if="imagePreviewURL"
+                  :src="imagePreviewURL"
+                  aspect-ratio="1"
+                  cover
+                  class="rounded-lg"
+                ></v-img>
               </div>
-              <v-file-input justify-center label="File input" v-model="imageData" @change="onFileChange" prepend-icon="Pilih profil" hide-input class="image-input"></v-file-input>
+              <v-file-input
+                justify-center
+                label="File input"
+                v-model="imageData"
+                @change="onFileChange"
+                prepend-icon="Pilih profil"
+                hide-input
+                class="image-input"
+              ></v-file-input>
+              <p class="img-error">
+                {{ errorMessage.errors && errorMessage.errors.pet_image[0] }}
+              </p>
             </v-col>
             <v-col cols="12" md="9">
               <v-row>
                 <v-col cols="12" md="6">
                   <p class="tx">Nama Hewan</p>
                   <div class="">
-                    <v-text-field class="input-contain" solo v-model="petName" background-color="#F1F1F1"></v-text-field>
+                    <v-text-field
+                      class="input-contain"
+                      solo
+                      v-model="petName"
+                      :error-messages="
+                        errorMessage.errors && errorMessage.errors.pet_name
+                      "
+                      background-color="#F1F1F1"
+                    ></v-text-field>
                   </div>
                   <p class="tx">Usia</p>
                   <div class="">
-                    <v-text-field class="input-contain" solo v-model="petAge" background-color="#F1F1F1"></v-text-field>
+                    <v-text-field
+                      class="input-contain"
+                      solo
+                      v-model="petAge"
+                      :error-messages="
+                        errorMessage.errors && errorMessage.errors.age
+                      "
+                      suffix="Tahun"
+                      hint="Hanya gunakan angka dan . sebagai desimal"
+                      background-color="#F1F1F1"
+                    ></v-text-field>
                   </div>
                   <p class="tx">Alergi</p>
                   <div class="">
-                    <v-text-field class="input-contain" solo v-model="petAllergies" background-color="#F1F1F1"></v-text-field>
+                    <v-text-field
+                      class="input-contain"
+                      solo
+                      v-model="petAllergies"
+                      :error-messages="
+                        errorMessage.errors && errorMessage.errors.allergies
+                      "
+                      hint="Opsional"
+                      background-color="#F1F1F1"
+                    ></v-text-field>
                   </div>
                 </v-col>
                 <v-col cols="12" md="6">
                   <p class="tx">Jenis Hewan</p>
                   <div class="">
-                    <v-text-field class="input-contain" solo v-model="petGenus" background-color="#F1F1F1"></v-text-field>
+                    <v-text-field
+                      class="input-contain"
+                      solo
+                      v-model="petGenus"
+                      :error-messages="
+                        errorMessage.errors && errorMessage.errors.pet_genus
+                      "
+                      hint="contoh: anjing, kucing, ayam"
+                      background-color="#F1F1F1"
+                    ></v-text-field>
                   </div>
                   <p class="tx">Ras</p>
                   <div class="">
-                    <v-text-field class="input-contain" solo v-model="petSpecies" background-color="#F1F1F1"></v-text-field>
+                    <v-text-field
+                      class="input-contain"
+                      solo
+                      v-model="petSpecies"
+                      :error-messages="
+                        errorMessage.errors && errorMessage.errors.pet_species
+                      "
+                      hint="contoh: persia, siberian husky"
+                      background-color="#F1F1F1"
+                    ></v-text-field>
                   </div>
                   <p class="tx">Berat Badan</p>
                   <div class="">
-                    <v-text-field class="input-contain" solo v-model="petWeight" background-color="#F1F1F1"></v-text-field>
+                    <v-text-field
+                      class="input-contain"
+                      solo
+                      v-model="petWeight"
+                      :error-messages="
+                        errorMessage.errors && errorMessage.errors.weight
+                      "
+                      suffix="Kg"
+                      hint="Gunakan . untuk desimal e.g: 2.5"
+                      background-color="#F1F1F1"
+                    ></v-text-field>
                   </div>
                 </v-col>
               </v-row>
@@ -54,7 +128,17 @@
           </div>
           <div>
             <div class="btns pt-5">
-              <v-btn class="crs" block elevation="2" large mdi-plus tile @submit.prevent @click="createPet">Buat profil peliharaan</v-btn>
+              <v-btn
+                class="crs"
+                block
+                elevation="2"
+                large
+                mdi-plus
+                tile
+                @submit.prevent
+                @click="createPet"
+                >Buat profil peliharaan</v-btn
+              >
             </div>
           </div>
         </div>
@@ -79,6 +163,7 @@ export default {
     petWeight: "",
     imageData: "",
     models: {},
+    errorMessage: {},
     vModel: [
       {
         id: 1,
@@ -155,6 +240,9 @@ export default {
         }
       } catch (error) {
         console.log(error);
+        const errorMessage = error.response.data;
+
+        this.errorMessage = errorMessage;
       }
     },
   },
@@ -191,6 +279,13 @@ export default {
     justify-content: center;
     text-align: center;
   }
+}
+.img-error {
+  width: 100%;
+  text-align: center;
+  margin: auto;
+  font-size: 12px;
+  color: $orange-red;
 }
 .tx {
   font-size: 16px;

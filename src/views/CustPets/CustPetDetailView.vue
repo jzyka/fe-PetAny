@@ -19,12 +19,35 @@
               <router-link to="/" class="to-edit"
                 >Edit Profil Peliharaan</router-link
               >
-              <v-btn
-                  class="sty"
-                  elevation="2"
-                  @click="deletePetDetail"
-                  >Hapus Pet</v-btn
+              <v-dialog transition="dialog-bottom-transition" max-width="450">
+                <template v-slot:activator="{ on, attrs }">
+                  <v-btn
+                    color="#112d4e"
+                    class="white--text mt-4"
+                    v-bind="attrs"
+                    v-on="on"
+                    >Hapus Profil Peliharaan</v-btn
                   >
+                </template>
+                <template v-slot:default="dialog">
+                  <v-card>
+                    <v-card-text class="pt-4 black--text">
+                      Anda yakin ingin menghapus profil peliharaan anda?
+                    </v-card-text>
+                    <v-card-actions class="justify-end">
+                      <v-btn
+                        color="#112d4e"
+                        class="white--text"
+                        @click="dialog.value = false"
+                        >Close</v-btn
+                      >
+                      <v-btn outlined color="#112d4e" @click="deletePetDetail"
+                        >Hapus Profil Pet</v-btn
+                      >
+                    </v-card-actions>
+                  </v-card>
+                </template>
+              </v-dialog>
             </div>
             <v-col cols="9">
               <v-row>
@@ -64,21 +87,35 @@
               <p class="tx mb-2 mt-4 medrec-title">Data Kesehatan</p>
             </div>
             <div class="mt-4">
-              <router-link :to="petDetail.links.medicalrecord" class="route-link">
+              <router-link
+                :to="petDetail.links.medicalrecord"
+                class="route-link"
+              >
                 <div class="btns">
-                    <v-btn absoluteclass="crs" block elevation="2" fab mdi-plus tile>
-                      <v-icon>mdi-plus</v-icon>
-                    </v-btn>
+                  <v-btn
+                    absoluteclass="crs"
+                    block
+                    elevation="2"
+                    fab
+                    mdi-plus
+                    tile
+                  >
+                    <v-icon>mdi-plus</v-icon>
+                  </v-btn>
                 </div>
               </router-link>
-                <v-card class="card--medrec mt-2 rounded-3 d-flex" v-for="medicalRecord in petDetail.medical_record" :key="medicalRecord.id">
-                  <router-link :to="medicalRecord.links.self" class="route-link">
-                    <v-row class="medrec-data col-12">
-                        <p class="mb-0">{{ medicalRecord.title }}</p>                        
-                        <p class="mb-0">{{ medicalRecord.date }}</p>
-                    </v-row>
-                  </router-link>
-                </v-card>
+              <v-card
+                class="card--medrec mt-2 rounded-3 d-flex"
+                v-for="medicalRecord in petDetail.medical_record"
+                :key="medicalRecord.id"
+              >
+                <router-link :to="medicalRecord.links.self" class="route-link">
+                  <v-row class="medrec-data col-12">
+                    <p class="mb-0">{{ medicalRecord.title }}</p>
+                    <p class="mb-0">{{ medicalRecord.date }}</p>
+                  </v-row>
+                </router-link>
+              </v-card>
             </div>
           </div>
         </div>
@@ -104,7 +141,7 @@ export default {
           `${this.$api}/get-pet/` + this.$route.params.id
         );
         const petDetail = res.data;
-        this.petDetail = petDetail
+        this.petDetail = petDetail;
       } catch (error) {
         console.log(error);
       }
@@ -123,7 +160,6 @@ export default {
       }
     },
   },
-  
 };
 </script>
 
@@ -158,7 +194,7 @@ export default {
   }
 }
 
-.medrec-data{
+.medrec-data {
   justify-content: space-between;
   margin: 0px;
   width: 100%;
@@ -188,7 +224,7 @@ export default {
 }
 
 .route-link {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 .to-edit {
