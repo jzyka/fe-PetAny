@@ -5,13 +5,16 @@
         <v-container>
           <p class="tx-add">Tambah data kesehatan Pablo</p>
           <div class="row">
-            <v-col cols="12" md="6">
+            <v-col cols="12">
               <p class="tx">Judul</p>
               <div class="">
                 <v-text-field
                   class="input-contain"
                   solo
                   v-model="medRecTitle"
+                  :error-messages="
+                    errorMessage.errors && errorMessage.errors.title
+                  "
                   background-color="#F1F1F1"
                 ></v-text-field>
               </div>
@@ -21,6 +24,9 @@
                   class="input-contain"
                   solo
                   v-model="medRecDescription"
+                  :error-messages="
+                    errorMessage.errors && errorMessage.errors.description
+                  "
                   background-color="#F1F1F1"
                 ></v-textarea>
               </div>
@@ -30,11 +36,14 @@
                   class="input-contain"
                   solo
                   v-model="medRecTreatment"
+                  :error-messages="
+                    errorMessage.errors && errorMessage.errors.treatment
+                  "
                   background-color="#F1F1F1"
                 ></v-text-field>
               </div>
             </v-col>
-            <v-col cols="12" md="6">
+            <v-col cols="12">
               <p class="tx">Tanggal</p>
               <div class="">
                 <v-menu
@@ -66,6 +75,10 @@
               <div class="">
                 <v-file-input
                   solo
+                  placeholder="File must be jpg or png"
+                  :error-messages="
+                    errorMessage.errors && errorMessage.errors.attachment
+                  "
                   v-model="medRecAttachment"
                   background-color="#F1F1F1"
                 >
@@ -73,7 +86,7 @@
               </div>
               <div class="btns">
                 <v-btn
-                  class="sty"
+                  class="sty mt-0"
                   @submit.prevent
                   @click="createMedRec"
                   elevation="2"
@@ -93,7 +106,9 @@ import axios from "axios";
 
 export default {
   data: () => ({
-    date: new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().substr(0, 10),
+    date: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
+      .toISOString()
+      .substr(0, 10),
     menu: false,
     modal: false,
     menu2: false,
@@ -102,6 +117,7 @@ export default {
     medRecTreatment: "",
     medRecAttachment: [],
     models: {},
+    errorMessage: {},
     vModel: [
       {
         id: 1,
@@ -142,7 +158,8 @@ export default {
 
         const res = await axios({
           method: "post",
-          url: `${this.$api}/add-medicalrecord?pet_id=` + this.$route.query.pet_id,
+          url:
+            `${this.$api}/add-medicalrecord?pet_id=` + this.$route.query.pet_id,
           data: formData,
           headers: {
             "Content-Type": `multipart/form-data;`,
@@ -154,6 +171,9 @@ export default {
         }
       } catch (error) {
         console.log(error);
+        const errorMessage = error.response.data;
+
+        this.errorMessage = errorMessage;
       }
     },
   },
