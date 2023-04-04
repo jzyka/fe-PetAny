@@ -5,13 +5,16 @@
         <v-container>
           <p class="tx-add">Tambah data kesehatan Pablo</p>
           <div class="row">
-            <v-col cols="12" md="6">
+            <v-col cols="12">
               <p class="tx">Judul</p>
               <div class="">
                 <v-text-field
                   class="input-contain"
                   solo
                   v-model="medRecTitle"
+                  :error-messages="
+                    errorMessage.errors && errorMessage.errors.title
+                  "
                   background-color="#F1F1F1"
                 ></v-text-field>
               </div>
@@ -21,6 +24,9 @@
                   class="input-contain"
                   solo
                   v-model="medRecDescription"
+                  :error-messages="
+                    errorMessage.errors && errorMessage.errors.descripion
+                  "
                   background-color="#F1F1F1"
                 ></v-textarea>
               </div>
@@ -30,11 +36,14 @@
                   class="input-contain"
                   solo
                   v-model="medRecTreatment"
+                  :error-messages="
+                    errorMessage.errors && errorMessage.errors.treatment
+                  "
                   background-color="#F1F1F1"
                 ></v-text-field>
               </div>
             </v-col>
-            <v-col cols="12" md="6">
+            <v-col cols="12">
               <p class="tx">Tanggal</p>
               <div class="">
                 <v-menu
@@ -67,13 +76,16 @@
                 <v-file-input
                   solo
                   v-model="medRecAttachment"
+                  :error-messages="
+                    errorMessage.errors && errorMessage.errors.attachment
+                  "
                   background-color="#F1F1F1"
                 >
                 </v-file-input>
               </div>
               <div class="btns">
                 <v-btn
-                  class="sty"
+                  class="sty mt-4"
                   @submit.prevent
                   @click="createMedRec"
                   elevation="2"
@@ -103,6 +115,7 @@ export default {
     medRecDescription: "",
     medRecTreatment: "",
     medRecAttachment: [],
+    errorMessage: {},
     models: {},
     vModel: [
       {
@@ -157,6 +170,9 @@ export default {
         }
       } catch (error) {
         console.log(error);
+        const errorMessage = error.response.data;
+
+        this.errorMessage = errorMessage;
       }
     },
   },
