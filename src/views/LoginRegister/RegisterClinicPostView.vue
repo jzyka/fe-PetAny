@@ -140,6 +140,13 @@
                     </v-textarea>
                   </div>
                 </div>
+
+                <v-text-field
+                  v-model="location"
+                  label="Location"
+                ></v-text-field>
+
+                <div id="mapid" style="height: 300px"></div>
               </div>
             </div>
 
@@ -158,6 +165,9 @@
 
 <script>
 import Axios from "axios";
+import L from "leaflet";
+import "leaflet-control-geocoder";
+import "leaflet-control-geocoder/dist/Control.Geocoder.css";
 export default {
   name: "RegisterClinic",
   data() {
@@ -168,13 +178,93 @@ export default {
       formData: [],
       models: {},
       src: "",
+      location: "",
       province: ["Foo", "Bar", "Fizz", "Buzz"],
     };
   },
 
   async mounted() {
     await this.getFormData();
+
+    const mymap = L.map("mapid").setView(
+      [-6.175781231550431, -253.18549347342923],
+      5
+    );
+
+    // Add a tile layer to the map
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution:
+        'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors',
+      maxZoom: 19,
+    }).addTo(mymap);
+
+    // Add a marker to the map
+    let marker = L.marker([-6.175781231550431, -253.18549347342923]).addTo(
+      mymap
+    );
+
+    // Add an event listener to update the marker's position when the user clicks on the map
+    mymap.on(
+      "click",
+      function (e) {
+        marker.setLatLng(e.latlng);
+        // Set the value of the text field to the new coordinates
+        this.location = e.latlng.lat + "," + e.latlng.lng;
+      }.bind(this)
+    );
+
+    // L.Control.geocoder({
+    //   position: "topright",
+    //   placeholder: "Search address...",
+    //   defaultMarkGeocode: false,
+    //   collapsed: true,
+    //   showResultIcons: true,
+    //   errorMessage: "Nothing found.",
+    //   geocoder: L.Control.Geocoder.nominatim({
+    //     geocodingQueryParams: {
+    //       countrycodes: "id", // limit search to US addresses
+    //     },
+    //   }),
+    // }).addTo(mymap);
+
+    // geocoder.on("markgeocode", function (event) {
+    //   const { name, center } = event.geocode;
+    //   const { lat, lng } = center;
+    //   console.log(`Selected address: ${name}`);
+    //   console.log(`Latitude: ${lat}, Longitude: ${lng}`);
+
+    //   // Move the map view to the selected location
+    //   mymap.setView([lat, lng], 15);
+    // });
+
+    L.Control.geocoder({
+      position: "topleft",
+      placeholder: "Search for an address...",
+      defaultMarkGeocode: false,
+      geocoder: L.Control.Geocoder.nominatim({
+        geocodingQueryParams: {
+          countrycodes: "ID",
+        },
+      }),
+      collapsed: true,
+    })
+      .on("markgeocode", function (e) {
+        console.log("markgeocode event triggered", e);
+      })
+      .addTo(mymap);
+
+    mymap.on("markgeocode", (event) => {
+      console.log(mymap === this.mymap); // should output `true`
+      const { name, center } = event.geocode;
+      const { lat, lng } = center;
+
+      console.log(`Selected address: ${name}`);
+      console.log(`Latitude: ${lat}, Longitude: ${lng}`);
+
+      mymap.setView([lat, lng], 14);
+    });
   },
+
   methods: {
     async getFormData() {
       try {

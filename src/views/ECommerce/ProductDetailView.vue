@@ -215,7 +215,7 @@ export default {
 .btn-width {
   width: 10%;
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
 }
 
 .quantity {
