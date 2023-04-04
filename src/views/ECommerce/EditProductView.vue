@@ -4,19 +4,22 @@
       <v-container>
         <v-row>
           <div class="kotak">
-            <div class="row pb-5">
+            <div class="pb-5">
               <router-link to="/clinic-product-list" class="back">
                 <v-img src="@/assets/left-arrow.png" max-width="25px"></v-img>
               </router-link>
               <p class="text-add">Tambah Produk</p>
             </div>
-            <div class="row form-items">
-              <div class="col-6">
+            <div class="form-items">
+              <div class="mb-4">
                 <p>Nama Produk</p>
                 <div class="">
                   <v-text-field
                     class="input-contain"
                     solo
+                    :error-messages="
+                      errorMessage.errors && errorMessage.errors.name
+                    "
                     v-model="name"
                     background-color="#F1F1F1"
                   ></v-text-field>
@@ -26,17 +29,25 @@
                   <v-textarea
                     class="input-contain"
                     solo
+                    :error-messages="
+                      errorMessage.errors && errorMessage.errors.descripion
+                    "
                     v-model="description"
                     background-color="#F1F1F1"
                   ></v-textarea>
                 </div>
               </div>
-              <div class="col-6">
+              <div>
                 <p>Harga</p>
                 <div class="">
                   <v-text-field
                     class="input-contain"
                     solo
+                    prefix="Rp"
+                    hint="tanpa titik (contoh: 999999)"
+                    :error-messages="
+                      errorMessage.errors && errorMessage.errors.price
+                    "
                     v-model="price"
                     background-color="#F1F1F1"
                   ></v-text-field>
@@ -46,6 +57,10 @@
                   <v-text-field
                     class="input-contain"
                     solo
+                    hint="Hanya gunakan angka"
+                    :error-messages="
+                      errorMessage.errors && errorMessage.errors.stock
+                    "
                     v-model="stock"
                     background-color="#F1F1F1"
                   ></v-text-field>
@@ -56,6 +71,10 @@
                     class="input-contain"
                     accept="image/*"
                     solo
+                    placeholder="png or jpg only"
+                    :error-messages="
+                      errorMessage.errors && errorMessage.errors.image
+                    "
                     v-model="image"
                     background-color="#F1F1F1"
                   ></v-file-input>
@@ -83,6 +102,7 @@ export default {
       price: "",
       stock: "",
       image: null,
+      errorMessage: {},
     };
   },
 
@@ -116,6 +136,9 @@ export default {
         }
       } catch (error) {
         console.log(error);
+        const errorMessage = error.response.data;
+
+        this.errorMessage = errorMessage;
       }
     },
   },

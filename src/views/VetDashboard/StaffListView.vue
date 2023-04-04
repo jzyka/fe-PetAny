@@ -12,8 +12,8 @@
                 v-model="email"
                 label="Masukkan Alamat Email"
                 outlined
+                :error-messages="errorMessage"
                 solo
-                hide-details
               ></v-text-field>
             </div>
           </v-col>
@@ -28,7 +28,6 @@
                 multiple
                 solo
                 v-model="selectedRoles"
-                hide-details
               ></v-select>
             </div>
           </v-col>
@@ -36,7 +35,7 @@
             <v-btn
               color="primary"
               elevation="2"
-              class="add-btn"
+              class="add-btn m-auto"
               @click="postAddStaff"
               >Tambah</v-btn
             >
@@ -103,6 +102,7 @@ export default {
     email: "",
     staffDatas: [],
     finalData: [],
+    errorMessage: "",
   }),
 
   async created() {
@@ -161,7 +161,10 @@ export default {
         // }
         this.getStaffList();
       } catch (error) {
-        console.log(error);
+        console.log(error.response);
+        const errorMessage = error.response.data.error;
+
+        this.errorMessage = errorMessage;
       }
     },
 
