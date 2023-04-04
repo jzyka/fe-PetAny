@@ -31,11 +31,14 @@
                 block
                 v-model="clinic.petshop_name"
                 hide-details
+                :error-messages="
+                  errorMessage.errors && errorMessage.errors.petshop_name
+                "
                 class="mb-3 mid-input"
               ></v-text-field>
               <v-text-field
                 label="Alamat"
-                placeholder="Alamat solat"
+                placeholder="Alamat"
                 outlined
                 block
                 disabled
@@ -108,39 +111,36 @@
                 </div>
               </div>
             </div>
+          </div>
 
-            <div class="post-btn">
-              <v-btn
-                class="crs"
-                block
-                elevation="2"
-                large
-                mdi-plus
-                tile
-                v-if="data != 0"
-                @submit.prevent
-                @click="
-                  editOperational();
-                  postClinicData();
-                "
-                >Simpan Profil</v-btn
-              >
-              <v-btn
-                class="crs"
-                block
-                elevation="2"
-                large
-                mdi-plus
-                tile
-                v-else
-                @submit.prevent
-                @click="
-                  postInitOperational();
-                  postClinicData();
-                "
-                >Simpan Profil</v-btn
-              >
-            </div>
+          <div class="form-contain mt-4">
+            <p class="form-title mb-1">Deskripsi Toko</p>
+            <v-textarea
+              label="Deskripsi Klinik"
+              class="form-clinic"
+              v-model="clinic.description"
+              counter
+              maxlength="300"
+              full-width
+              solo
+              outlined
+            ></v-textarea>
+          </div>
+
+          <div class="form-contain mt-4">
+            <p class="form-title mb-1">Link Toko</p>
+            <v-text-field
+              label="Maksimal 1 link"
+              class="form-clinic"
+              full-width
+              solo
+              v-model="clinic.website"
+              :error-messages="
+                errorMessage.errors && errorMessage.errors.website
+              "
+              block
+              outlined
+            ></v-text-field>
           </div>
 
           <div class="operational-hour" v-if="data != 0">
@@ -304,32 +304,37 @@
               </template>
             </v-data-table>
           </div>
-
-          <div class="form-contain mt-4">
-            <p class="form-title mb-1">Deskripsi Toko</p>
-            <v-textarea
-              label="Deskripsi Klinik"
-              class="form-clinic"
-              v-model="clinic.description"
-              counter
-              maxlength="300"
-              full-width
-              solo
-              outlined
-            ></v-textarea>
-          </div>
-
-          <div class="form-contain mt-4">
-            <p class="form-title mb-1">Link Toko</p>
-            <v-text-field
-              label="Maksimal 1 link"
-              class="form-clinic"
-              full-width
-              solo
-              v-model="clinic.website"
+          <div class="post-btn">
+            <v-btn
+              class="crs"
               block
-              outlined
-            ></v-text-field>
+              elevation="2"
+              large
+              mdi-plus
+              tile
+              v-if="data != 0"
+              @submit.prevent
+              @click="
+                editOperational();
+                postClinicData();
+              "
+              >Simpan Profil</v-btn
+            >
+            <v-btn
+              class="crs"
+              block
+              elevation="2"
+              large
+              mdi-plus
+              tile
+              v-else
+              @submit.prevent
+              @click="
+                postInitOperational();
+                postClinicData();
+              "
+              >Simpan Profil</v-btn
+            >
           </div>
         </div>
       </v-container>
@@ -350,6 +355,7 @@ export default {
     formData: [],
     jamTutup: [],
     clinic: [],
+    errorMessage: {},
     operational_hour: [
       {
         is_open: false,
@@ -429,27 +435,6 @@ export default {
     async postClinicData() {
       try {
         const petshopID = this.localStorage.data.petshop_id;
-
-        // const res = await axios.post(
-        //   `${this.$api}/update-petshop/${petshopID}`,
-        //   {
-        //     petshop_name: this.clinic.petshop_name,
-        //     petshop_image: this.clinic.petshop_image,
-        //     petshop_address: this.clinic.petshop_address,
-        //     description: this.clinic.description,
-        //     website: this.clinic.website,
-        //     category: this.clinic.category,
-        //   }
-        // );
-
-        // let obj = {
-        //   petshop_name: this.clinic.petshop_name,
-        //   petshop_image: this.clinic.petshop_image,
-        //   petshop_address: this.clinic.petshop_address,
-        //   description: this.clinic.description,
-        //   website: this.clinic.website,
-        //   category: this.clinic.category,
-        // };
         let obj = this.clinic;
 
         let data = new FormData();
@@ -485,6 +470,9 @@ export default {
         }
       } catch (error) {
         console.log(error);
+        const errorMessage = error.response.data;
+
+        this.errorMessage = errorMessage;
       }
     },
     async postInitOperational() {
@@ -503,6 +491,9 @@ export default {
         }
       } catch (error) {
         console.log(error);
+        const errorMessage = error.response.data;
+
+        this.errorMessage = errorMessage;
       }
     },
     async editOperational() {
@@ -615,7 +606,7 @@ export default {
     }
 
     .middle-inputs {
-      width: 65%;
+      width: 90%;
 
       .mid-input::v-deep .v-input__slot {
         min-height: 40px;
@@ -642,6 +633,7 @@ export default {
       .checkbox-contain {
         display: flex;
         gap: 10px;
+        flex-wrap: wrap;
 
         .check-services::v-deep .v-input__slot {
           width: fit-content;
@@ -655,18 +647,19 @@ export default {
         }
       }
     }
+  }
+}
 
-    .post-btn {
-      width: 15%;
-      margin-left: auto;
+.post-btn {
+  width: 15%;
+  margin-top: 2rem;
+  margin-left: auto;
 
-      .crs {
-        background-color: $primary-color !important;
-        color: $white !important;
-        text-transform: capitalize;
-        border-radius: 7px;
-      }
-    }
+  .crs {
+    background-color: $primary-color !important;
+    color: $white !important;
+    text-transform: capitalize;
+    border-radius: 7px;
   }
 }
 </style>
