@@ -101,6 +101,7 @@ export default {
       description: "",
       price: "",
       stock: "",
+
       image: null,
       errorMessage: {},
     };
