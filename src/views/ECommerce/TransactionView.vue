@@ -1,19 +1,16 @@
 <template>
   <v-app>
     <v-card class="content" flat>
-      <v-tabs class="tabs-header" background-color="transparent" v-model="tab">
-        <v-tab
-          flat
-          solo
-          class="tab-item"
-          v-for="item in items"
-          :key="item.tab"
-          >{{ item.tab }}</v-tab
-        >
+      <v-tabs
+        v-model="tabs"
+        class="tabs-header mb-4"
+        background-color="transparent"
+      >
+        <v-tab v-for="item in items" :key="item"> {{ item }} </v-tab>
       </v-tabs>
-      <div class="divisor"></div>
-      <v-tabs-items v-model="tab" class="tabs-all">
-        <v-tab-item v-for="item in items" :key="item.tab">
+
+      <v-tabs-items v-model="tabs" class="tabs-all">
+        <v-tab-item class="appointment-request">
           <v-card
             v-for="(appointment, i) in appointments"
             :key="i"
@@ -42,13 +39,6 @@
                 }}</v-card-text>
               </div>
               <div class="d-flex flex-grow-1">
-                <img
-                  class="product-img"
-                  :draggable="false"
-                  src="@/assets/item.png"
-                  alt="gambar"
-                  v-if="item.tab == items[1].tab"
-                />
                 <div class="flex-grow-1">
                   <v-card-text class="product-detail-title"
                     >{{ appointment.doctor }} | {{ appointment.date }}
@@ -70,95 +60,65 @@
                 </div>
               </div>
             </div>
-            <div
-              class="d-flex flex-column align-end"
-              v-if="item.tab == items[1].tab"
-            >
-              <v-card-text class="text-end total">Total</v-card-text>
-              <v-card-text class="text-end price">s</v-card-text>
-              <div class="d-flex utility-buttons">
-                <v-btn class="track-button p-4" plain>Lacak Pesanan</v-btn>
-                <v-btn class="detail-button p-4" plain>Detil Pesanan</v-btn>
-              </div>
-            </div>
-            <div v-else class="d-flex align-end justify-end">
-              <!-- <v-btn plain class="p-4 button-detail"> Detil Pesanan </v-btn> -->
-            </div>
           </v-card>
         </v-tab-item>
-        <v-tab-item v-for="item in items" :key="item.tab">
-          <v-card
-            v-for="(appointment, i) in appointments"
-            :key="i"
-            class="d-flex flex-row justify-space-between p-4 mb-3"
-          >
-            <div class="d-flex flex-column">
-              <div class="d-flex align-center flex-row">
-                <v-card-text
-                  class="shop-title"
-                  v-for="(petshopName, j) in appointment.petshop"
-                  :key="j"
-                  >{{ petshopName.petshop_name }}</v-card-text
-                >
-                <v-divider vertical class="shop-divider"></v-divider>
-                <div
-                  class="d-flex"
-                  v-for="(order, k) in appointment.orders"
-                  :key="k"
-                >
-                  <v-card-text class="shop-id">{{
-                    order.order_id
-                  }}</v-card-text>
-                </div>
+        <v-card
+          v-for="(product, i) in products"
+          :key="i"
+          class="d-flex flex-row justify-space-between p-4 mb-3"
+        >
+          <div class="d-flex flex-column">
+            <div class="d-flex align-center flex-row">
+              <v-card-text
+                class="shop-title"
+                v-for="(petshopName, j) in product.petshop"
+                :key="j"
+                >{{ petshopName.petshop_name }}</v-card-text
+              >
+              <v-divider vertical class="shop-divider"></v-divider>
+              <div class="d-flex" v-for="(order, k) in product.orders" :key="k">
+                <v-card-text class="shop-id">{{ order.order_id }}</v-card-text>
                 <v-card-text class="shop-status">{{
-                  appointment.status
+                  order.status
                 }}</v-card-text>
               </div>
-              <div class="d-flex flex-grow-1">
-                <img
-                  class="product-img"
-                  :draggable="false"
-                  src="@/assets/item.png"
-                  alt="gambar"
-                  v-if="item.tab == items[1].tab"
-                />
-                <div class="flex-grow-1">
-                  <v-card-text class="product-detail-title"
-                    >{{ appointment.doctor }} | {{ appointment.date }}
-                    {{ appointment.shift }}</v-card-text
-                  >
-                  <div
-                    class="ammount"
-                    v-for="(price, i) in appointment.orders"
-                    :key="i"
-                  >
-                    <v-card-text class="product-detail-amount">
-                      {{ price.amount }}
-                    </v-card-text>
-                  </div>
-                </div>
-                <div class="flex-grow-1">
-                  <v-card-text class="clinic-detail-type"></v-card-text>
-                  <v-card-text class="clinic-detail-price"></v-card-text>
+            </div>
+            <div class="d-flex flex-grow-1">
+              <v-img
+                class="product-img rounded-lg mr-4"
+                :draggable="false"
+                :src="product.image"
+                alt="gambar"
+                max-width="100px"
+                aspect-ratio="1"
+                contain
+              />
+              <div class="flex-grow-1">
+                <v-card-text class="product-detail-title">{{
+                  product.name
+                }}</v-card-text>
+                <div class="ammount">
+                  <v-card-text class="product-detail-amount">
+                    Qty: {{ product.quantity }}
+                  </v-card-text>
                 </div>
               </div>
             </div>
-            <div
-              class="d-flex flex-column align-end"
-              v-if="item.tab == items[1].tab"
-            >
-              <v-card-text class="text-end total">Total</v-card-text>
-              <v-card-text class="text-end price">s</v-card-text>
-              <!-- <div class="d-flex utility-buttons">
-                <v-btn class="track-button p-4" plain>Lacak Pesanan</v-btn>
-                <v-btn class="detail-button p-4" plain>Detil Pesanan</v-btn>
-              </div> -->
+          </div>
+          <div class="d-flex flex-column align-end">
+            <v-card-text class="text-end total">Total</v-card-text>
+            <v-card-text class="text-end price">{{
+              product.amount
+            }}</v-card-text>
+            <div class="d-flex utility-buttons">
+              <v-btn class="track-button" plain>Lacak Pesanan</v-btn>
+              <v-btn class="detail-button" plain>Detil Pesanan</v-btn>
             </div>
-            <div v-else class="d-flex align-end justify-end">
-              <!-- <v-btn plain class="p-4 button-detail"> Detil Pesanan </v-btn> -->
-            </div>
-          </v-card>
-        </v-tab-item>
+          </div>
+          <div class="d-flex align-end justify-end">
+            <!-- <v-btn plain class="p-4 button-detail"> Detil Pesanan </v-btn> -->
+          </div>
+        </v-card>
       </v-tabs-items>
     </v-card>
   </v-app>
@@ -174,22 +134,17 @@ export default {
       //   style: "currency",
       //   currency: "IDR",
       // }),
-      items: [
-        {
-          tab: "Transaksi Klinik",
-        },
-        {
-          tab: "Transaksi Produk",
-        },
-      ],
-      tab: null,
+      items: ["Transaksi Klinik", "Transaksi Produk"],
+      tabs: null,
 
       appointments: [],
+      products: [],
     };
   },
 
   async created() {
     await this.getBookedAppt();
+    await this.getProductTrs();
   },
 
   methods: {
@@ -201,6 +156,19 @@ export default {
         const appointments = appointmentAll.data;
         this.appointments = appointments;
         console.log(this.appointments);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+    async getProductTrs() {
+      try {
+        const productAll = await axios.get(
+          `${this.$api}/get-user-product-transaction`
+        );
+        const products = productAll.data;
+        this.products = products;
+        console.log(this.products);
       } catch (error) {
         console.log(error);
       }
