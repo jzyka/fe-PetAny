@@ -119,8 +119,7 @@
                       outlined
                       v-model="models[model.name]"
                     ></v-text-field>
-
-                    <v-textarea
+                    <v-text-field
                       color="teal"
                       solo
                       outlined
@@ -129,24 +128,14 @@
                       "
                       :label="model.label"
                       v-if="model.name == 'petshop_address'"
-                      v-model="models[model.name]"
-                    >
-                      <template v-slot:label>
-                        <div>
-                          Detil alamat
-                          <small>(Nama jalan, blok, nomor bangunan)</small>
-                        </div>
-                      </template>
-                    </v-textarea>
+                      v-model="petshop_address"
+                    ></v-text-field>
                   </div>
                 </div>
 
-                <v-text-field
-                  v-model="location"
-                  label="Location"
-                ></v-text-field>
-
-                <div id="mapid" style="height: 300px"></div>
+                <div id="mapid" style="height: 300px">
+                  <v-geosearch :options="geosearchOptions"></v-geosearch>
+                </div>
               </div>
             </div>
 
@@ -168,6 +157,7 @@ import Axios from "axios";
 import L from "leaflet";
 import "leaflet-control-geocoder";
 import "leaflet-control-geocoder/dist/Control.Geocoder.css";
+import { OpenStreetMapProvider } from "leaflet-geosearch";
 export default {
   name: "RegisterClinic",
   data() {
@@ -178,8 +168,9 @@ export default {
       formData: [],
       models: {},
       src: "",
-      location: "",
+      petshop_address: "",
       province: ["Foo", "Bar", "Fizz", "Buzz"],
+      provider: new OpenStreetMapProvider(),
     };
   },
 
@@ -187,8 +178,8 @@ export default {
     await this.getFormData();
 
     const mymap = L.map("mapid").setView(
-      [-6.175781231550431, -253.18549347342923],
-      5
+      [-6.175781231550431, 106.82724098708343],
+      13
     );
 
     // Add a tile layer to the map
@@ -198,49 +189,24 @@ export default {
       maxZoom: 19,
     }).addTo(mymap);
 
-    // Add a marker to the map
-    let marker = L.marker([-6.175781231550431, -253.18549347342923]).addTo(
-      mymap
-    );
+    let marker = null;
 
-    // Add an event listener to update the marker's position when the user clicks on the map
-    mymap.on(
-      "click",
-      function (e) {
-        marker.setLatLng(e.latlng);
-        // Set the value of the text field to the new coordinates
-        this.location = e.latlng.lat + "," + e.latlng.lng;
-      }.bind(this)
-    );
+    // Add an event listener to update the marker's position and reverse geocode the petshop_address when the user clicks on the map
+    mymap.on("click", async (e) => {
+      if (marker) mymap.removeLayer(marker);
 
-    // L.Control.geocoder({
-    //   position: "topright",
-    //   placeholder: "Search address...",
-    //   defaultMarkGeocode: false,
-    //   collapsed: true,
-    //   showResultIcons: true,
-    //   errorMessage: "Nothing found.",
-    //   geocoder: L.Control.Geocoder.nominatim({
-    //     geocodingQueryParams: {
-    //       countrycodes: "id", // limit search to US addresses
-    //     },
-    //   }),
-    // }).addTo(mymap);
-
-    // geocoder.on("markgeocode", function (event) {
-    //   const { name, center } = event.geocode;
-    //   const { lat, lng } = center;
-    //   console.log(`Selected address: ${name}`);
-    //   console.log(`Latitude: ${lat}, Longitude: ${lng}`);
-
-    //   // Move the map view to the selected location
-    //   mymap.setView([lat, lng], 15);
-    // });
+      marker = L.marker(e.latlng).addTo(mymap);
+      const result = await this.reverseGeocode(e.latlng);
+      if (result && result.display_name) {
+        this.petshop_address = result.display_name;
+      } else {
+        this.petshop_address = e.latlng.lat + "," + e.latlng.lng;
+      }
+    });
 
     L.Control.geocoder({
       position: "topleft",
       placeholder: "Search for an address...",
-      defaultMarkGeocode: false,
       geocoder: L.Control.Geocoder.nominatim({
         geocodingQueryParams: {
           countrycodes: "ID",
@@ -250,22 +216,32 @@ export default {
     })
       .on("markgeocode", function (e) {
         console.log("markgeocode event triggered", e);
+        if (marker) mymap.removeLayer(marker);
+        marker = L.marker(e.geocode.center).addTo(mymap);
       })
       .addTo(mymap);
 
-    mymap.on("markgeocode", (event) => {
-      console.log(mymap === this.mymap); // should output `true`
+    mymap.on("markgeocode", async (event) => {
       const { name, center } = event.geocode;
-      const { lat, lng } = center;
-
       console.log(`Selected address: ${name}`);
-      console.log(`Latitude: ${lat}, Longitude: ${lng}`);
-
-      mymap.setView([lat, lng], 14);
+      console.log(`Latitude: ${center.lat}, Longitude: ${center.lng}`);
+      const result = await this.reverseGeocode(center);
+      if (result && result.display_name) {
+        this.petshop_address = result.display_name;
+      } else {
+        this.petshop_address = `${center.lat},${center.lng}`;
+      }
     });
   },
 
   methods: {
+    async reverseGeocode(latlng) {
+      const response = await fetch(
+        `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latlng.lat}&lon=${latlng.lng}`
+      );
+      const data = await response.json();
+      return data;
+    },
     async getFormData() {
       try {
         const formData = await Axios.get(`${this.$api}/petshop-form`);
@@ -287,6 +263,10 @@ export default {
             data.append(`${key}`, obj[key]);
           }
         }
+
+        // Append petshop_address to the request data
+        data.append("petshop_address", obj.petshop_address);
+
         const register = await Axios({
           method: "post",
           url: `${this.$api}/create-petshop`,
