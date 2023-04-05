@@ -19,7 +19,7 @@
                       model.name !== 'district'
                     "
                   >
-                    <p>{{ model.label }}</p>
+                    <p class="reqd">{{ model.label }}</p>
                     <v-text-field
                       v-model="models[model.name]"
                       v-if="
@@ -69,7 +69,7 @@
                       model.name !== 'permit'
                     "
                   >
-                    <p>{{ model.label }}</p>
+                    <p class="reqd">{{ model.label }}</p>
                     <v-text-field
                       v-model="models[model.name]"
                       :items="province"
@@ -296,6 +296,12 @@ export default {
 </script>
 
 <style lang="scss">
+.reqd {
+  &::after {
+    content: "*";
+    color: $orange-red;
+  }
+}
 section {
   &.register-clinic-form {
     padding: 40px;

@@ -41,7 +41,7 @@
             <v-col cols="12" md="9">
               <v-row>
                 <v-col cols="12" md="6">
-                  <p class="tx">Nama Hewan</p>
+                  <p class="tx reqd">Nama Hewan</p>
                   <div class="">
                     <v-text-field
                       class="input-contain"
@@ -53,7 +53,7 @@
                       background-color="#F1F1F1"
                     ></v-text-field>
                   </div>
-                  <p class="tx">Usia</p>
+                  <p class="tx reqd">Usia</p>
                   <div class="">
                     <v-text-field
                       class="input-contain"
@@ -95,7 +95,7 @@
                       background-color="#F1F1F1"
                     ></v-text-field>
                   </div>
-                  <p class="tx">Ras</p>
+                  <p class="tx reqd">Ras</p>
                   <div class="">
                     <v-text-field
                       class="input-contain"
@@ -108,7 +108,7 @@
                       background-color="#F1F1F1"
                     ></v-text-field>
                   </div>
-                  <p class="tx">Berat Badan</p>
+                  <p class="tx reqd">Berat Badan</p>
                   <div class="">
                     <v-text-field
                       class="input-contain"

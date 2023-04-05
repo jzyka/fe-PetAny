@@ -6,7 +6,7 @@
           <p class="tx-add">Tambah data kesehatan Pablo</p>
           <div class="row">
             <v-col cols="12">
-              <p class="tx">Judul</p>
+              <p class="tx reqd">Judul</p>
               <div class="">
                 <v-text-field
                   class="input-contain"
@@ -18,7 +18,7 @@
                   background-color="#F1F1F1"
                 ></v-text-field>
               </div>
-              <p class="tx">Deskripsi</p>
+              <p class="tx reqd">Deskripsi</p>
               <div>
                 <v-textarea
                   class="input-contain"
@@ -30,7 +30,7 @@
                   background-color="#F1F1F1"
                 ></v-textarea>
               </div>
-              <p class="tx">Pengobatan</p>
+              <p class="tx reqd">Pengobatan</p>
               <div class="">
                 <v-text-field
                   class="input-contain"
@@ -44,7 +44,7 @@
               </div>
             </v-col>
             <v-col cols="12">
-              <p class="tx">Tanggal</p>
+              <p class="tx reqd">Tanggal</p>
               <div class="">
                 <v-menu
                   v-model="menu2"
