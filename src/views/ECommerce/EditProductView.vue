@@ -12,7 +12,7 @@
             </div>
             <div class="form-items">
               <div class="mb-4">
-                <p>Nama Produk</p>
+                <p class="reqd">Nama Produk</p>
                 <div class="">
                   <v-text-field
                     class="input-contain"
@@ -24,7 +24,7 @@
                     background-color="#F1F1F1"
                   ></v-text-field>
                 </div>
-                <p>Deskripsi Produk</p>
+                <p class="reqd">Deskripsi Produk</p>
                 <div>
                   <v-textarea
                     class="input-contain"
@@ -38,7 +38,7 @@
                 </div>
               </div>
               <div>
-                <p>Harga</p>
+                <p class="reqd">Harga</p>
                 <div class="">
                   <v-text-field
                     class="input-contain"
@@ -52,7 +52,7 @@
                     background-color="#F1F1F1"
                   ></v-text-field>
                 </div>
-                <p>Stok</p>
+                <p class="reqd">Stok</p>
                 <div class="">
                   <v-text-field
                     class="input-contain"
@@ -65,7 +65,7 @@
                     background-color="#F1F1F1"
                   ></v-text-field>
                 </div>
-                <p>Foto Produk</p>
+                <p class="reqd">Foto Produk</p>
                 <div>
                   <v-file-input
                     class="input-contain"

@@ -108,39 +108,33 @@
                 </div>
               </div>
             </div>
+          </div>
 
-            <div class="post-btn">
-              <v-btn
-                class="crs"
-                block
-                elevation="2"
-                large
-                mdi-plus
-                tile
-                v-if="data != 0"
-                @submit.prevent
-                @click="
-                  editOperational();
-                  postClinicData();
-                "
-                >Simpan Profil</v-btn
-              >
-              <v-btn
-                class="crs"
-                block
-                elevation="2"
-                large
-                mdi-plus
-                tile
-                v-else
-                @submit.prevent
-                @click="
-                  postInitOperational();
-                  postClinicData();
-                "
-                >Simpan Profil</v-btn
-              >
-            </div>
+          <div class="form-contain mt-4">
+            <p class="form-title mb-1">Deskripsi Toko</p>
+            <v-textarea
+              label="Deskripsi Klinik"
+              class="form-clinic"
+              v-model="clinic.description"
+              counter
+              maxlength="300"
+              full-width
+              solo
+              outlined
+            ></v-textarea>
+          </div>
+
+          <div class="form-contain mt-4">
+            <p class="form-title mb-1">Link Toko</p>
+            <v-text-field
+              label="Maksimal 1 link"
+              class="form-clinic"
+              full-width
+              solo
+              v-model="clinic.website"
+              block
+              outlined
+            ></v-text-field>
           </div>
 
           <div class="operational-hour" v-if="data != 0">
@@ -304,32 +298,37 @@
               </template>
             </v-data-table>
           </div>
-
-          <div class="form-contain mt-4">
-            <p class="form-title mb-1">Deskripsi Toko</p>
-            <v-textarea
-              label="Deskripsi Klinik"
-              class="form-clinic"
-              v-model="clinic.description"
-              counter
-              maxlength="300"
-              full-width
-              solo
-              outlined
-            ></v-textarea>
-          </div>
-
-          <div class="form-contain mt-4">
-            <p class="form-title mb-1">Link Toko</p>
-            <v-text-field
-              label="Maksimal 1 link"
-              class="form-clinic"
-              full-width
-              solo
-              v-model="clinic.website"
+          <div class="post-btn">
+            <v-btn
+              class="crs"
               block
-              outlined
-            ></v-text-field>
+              elevation="2"
+              large
+              mdi-plus
+              tile
+              v-if="data != 0"
+              @submit.prevent
+              @click="
+                editOperational();
+                postClinicData();
+              "
+              >Simpan Profil</v-btn
+            >
+            <v-btn
+              class="crs"
+              block
+              elevation="2"
+              large
+              mdi-plus
+              tile
+              v-else
+              @submit.prevent
+              @click="
+                postInitOperational();
+                postClinicData();
+              "
+              >Simpan Profil</v-btn
+            >
           </div>
         </div>
       </v-container>
@@ -580,6 +579,19 @@ export default {
 ::v-deep .v-data-table__wrapper {
   border-radius: 8px 8px 0 0;
 }
+
+.post-btn {
+  width: 15%;
+  margin-left: auto;
+  margin-top: 2rem;
+
+  .crs {
+    background-color: $primary-color !important;
+    color: $white !important;
+    text-transform: capitalize;
+    border-radius: 7px;
+  }
+}
 .create-profile-contain {
   box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.1);
   background-color: $white;
@@ -615,7 +627,7 @@ export default {
     }
 
     .middle-inputs {
-      width: 65%;
+      width: 90%;
 
       .mid-input::v-deep .v-input__slot {
         min-height: 40px;
@@ -641,6 +653,7 @@ export default {
 
       .checkbox-contain {
         display: flex;
+        flex-wrap: wrap;
         gap: 10px;
 
         .check-services::v-deep .v-input__slot {
@@ -653,18 +666,6 @@ export default {
             font-size: 14px;
           }
         }
-      }
-    }
-
-    .post-btn {
-      width: 15%;
-      margin-left: auto;
-
-      .crs {
-        background-color: $primary-color !important;
-        color: $white !important;
-        text-transform: capitalize;
-        border-radius: 7px;
       }
     }
   }

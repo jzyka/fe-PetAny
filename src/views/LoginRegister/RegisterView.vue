@@ -2,7 +2,7 @@
   <div class="form--logreg">
     <p class="title-form">Daftar</p>
     <div class="form--logreg__group">
-      <p>Nama</p>
+      <p class="reqd">Nama</p>
       <v-text-field
         :error-messages="errorMessage.errors && errorMessage.errors.name"
         label="Nama"
@@ -12,7 +12,7 @@
       ></v-text-field>
     </div>
     <div class="form--logreg__group">
-      <p>Email</p>
+      <p class="reqd">Email</p>
       <v-text-field
         :error-messages="errorMessage.errors && errorMessage.errors.email"
         label="Email"
@@ -23,7 +23,7 @@
       ></v-text-field>
     </div>
     <div class="form--logreg__group">
-      <p>Nomor HP</p>
+      <p class="reqd">Nomor HP</p>
       <v-text-field
         :error-messages="
           errorMessage.errors && errorMessage.errors.phone_number
@@ -36,7 +36,7 @@
       ></v-text-field>
     </div>
     <div class="form--logreg__group">
-      <p>Password</p>
+      <p class="reqd">Password</p>
       <v-text-field
         :error-messages="errorMessage.errors && errorMessage.errors.password"
         label="Password"
@@ -52,7 +52,7 @@
       ></v-text-field>
     </div>
     <div class="form--logreg__group">
-      <p>Confirm Password</p>
+      <p class="reqd">Confirm Password</p>
       <v-text-field
         :error-messages="errorMessage.errors && errorMessage.errors.password"
         label="Password"
