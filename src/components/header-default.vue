@@ -5,7 +5,7 @@
         <router-link to="/" class="logo-header"
           ><img src="@/assets/petany-logo-dark.png" alt=""
         /></router-link>
-        <div class="header-right">
+        <div class="header-right" v-if="!localStorage">
           <v-text-field
             append-icon="mdi-magnify"
             label="Cari disini"
@@ -15,33 +15,44 @@
             hide-details
           ></v-text-field>
 
-          <router-link to="/pet-list" class="to-my-pet" v-if="localStorage"
-            ><img src="@/assets/paw.png" alt="" />Peliharaan</router-link
-          >
-          <router-link
-            to="/register-as-clinic"
-            v-if="localStorage.data.petshop_id == null"
-            class="to-register"
-            ><img src="@/assets/clinic-icon-blue.png" alt="" />
-            Klinik
-          </router-link>
-          <router-link
-            to="/petshop-profile"
-            v-if="localStorage.data.petshop_id != null"
-            class="to-clinic"
-            ><img src="@/assets/clinic-icon-blue.png" alt="" />
-            Klinik
-          </router-link>
-          <router-link to="/" class="btn-to cart" v-if="localStorage"
-            ><img src="@/assets/cart.png" alt=""
-          /></router-link>
-          <router-link to="/" class="btn-to notification" v-if="localStorage"
-            ><img src="@/assets/notification.png" alt=""
-          /></router-link>
-          <router-link to="/login" class="to-login" v-if="!localStorage">
+          <div v-if="!petShopId">
+            <router-link to="/register-as-clinic" class="to-register"
+              ><img src="@/assets/clinic-icon-blue.png" alt="" />
+              Klinik
+            </router-link>
+          </div>
+
+          <router-link to="/login" class="to-login">
             <p class="login">Masuk/Daftar</p>
           </router-link>
-          <router-link to="/transaction" class="profile" v-if="localStorage">
+        </div>
+
+        <div class="header-right" v-if="localStorage">
+          <v-text-field
+            append-icon="mdi-magnify"
+            label="Cari disini"
+            solo
+            outlined
+            class="search-all"
+            hide-details
+          ></v-text-field>
+
+          <router-link to="/pet-list" class="to-my-pet"
+            ><img src="@/assets/paw.png" alt="" />Peliharaan</router-link
+          >
+
+          <router-link to="/petshop-profile" v-if="petShopId" class="to-clinic"
+            ><img src="@/assets/clinic-icon-blue.png" alt="" />
+            Klinik
+          </router-link>
+          <router-link to="/" class="btn-to cart"
+            ><img src="@/assets/cart.png" alt=""
+          /></router-link>
+          <router-link to="/" class="btn-to notification"
+            ><img src="@/assets/notification.png" alt=""
+          /></router-link>
+
+          <router-link to="/transaction" class="profile">
             <!-- <img src="@/assets/user-img.png" alt="" /> -->
             <p class="username">{{ localStorage.data.name }}</p>
           </router-link>
@@ -86,12 +97,19 @@
 
 <script>
 export default {
+  data: () => ({
+    localStorage: null,
+    petShopId: null,
+  }),
   created() {
     this.getLocalStorage();
+    console.log(this.localStorage.data.petshop_id);
   },
   methods: {
     getLocalStorage() {
       this.localStorage = JSON.parse(localStorage.getItem("data"));
+      this.petShopId = this.localStorage.data.petshop_id;
+      console.log(this.petShopId);
     },
 
     logout() {
