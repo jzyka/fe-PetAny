@@ -4,7 +4,13 @@
       <div class="wrapper pa-5">
         <v-row>
           <v-col cols="12" md="6" class="d-flex justify-center">
-            <v-img :src="productDetail.image" max-width="65%" contain></v-img>
+            <v-img
+              :src="productDetail.image"
+              max-width="95%"
+              class="shadow py-4"
+              contain
+              aspect-ratio="4 / 3"
+            ></v-img>
           </v-col>
           <v-col cols="12" md="6">
             <!-- Nama Produk -->
@@ -221,5 +227,10 @@ export default {
 .quantity {
   width: 15%;
   margin-left: auto;
+}
+
+.shadow {
+  box-shadow: 0px 6.19186px 12.3837px 6.19186px rgba(0, 0, 0, 0.05);
+  border-radius: 20px;
 }
 </style>
