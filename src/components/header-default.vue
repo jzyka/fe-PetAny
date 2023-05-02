@@ -45,6 +45,13 @@
             ><img src="@/assets/clinic-icon-blue.png" alt="" />
             Klinik
           </router-link>
+          <router-link
+            to="/register-as-clinic"
+            v-if="!petShopId"
+            class="to-clinic"
+            ><img src="@/assets/clinic-icon-blue.png" alt="" />
+            Klinik
+          </router-link>
           <router-link to="/" class="btn-to cart"
             ><img src="@/assets/cart.png" alt=""
           /></router-link>
